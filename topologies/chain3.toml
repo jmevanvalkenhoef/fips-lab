@@ -1,0 +1,5 @@
+# Three nodes in a line: a — b — c.
+# a and c are not peers, so a <-> c traffic must be routed through b.
+
+nodes = ["a", "b", "c"]
+links = [["a", "b"], ["b", "c"]]
