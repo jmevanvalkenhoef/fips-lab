@@ -1,29 +1,45 @@
 #!/usr/bin/env python3
 """Poll every lab node's control socket and stream mesh snapshots to browsers.
 
-Runs in its own container next to the nodes. Each node's /run/fips is
-bind-mounted at /sockets/<node>, so the collector talks to the control
-sockets directly instead of exec'ing into containers.
+Runs in its own container next to the nodes, with the repo mounted at its
+host path. Each node's /run/fips is bind-mounted from generated/<topology>/run,
+so the collector talks to the control sockets directly instead of exec'ing
+into containers.
 
-    GET /           the visualization (static files from /web)
-    GET /snapshot   the latest snapshot as JSON
-    GET /events     a Server-Sent Events stream of snapshots, one per poll
+    GET  /           the visualization (static files from web/)
+    GET  /snapshot   the latest snapshot as JSON
+    GET  /events     a Server-Sent Events stream of snapshots, one per poll
+    POST /action     run a fault: {"action": "cut", "a": "a", "b": "b"}, ...
 
-Standard library only, so the image needs nothing installed.
+Actions go through lab/lab.py, the same functions the CLI uses, and act on
+Docker through the mounted socket. That is root-equivalent on the host, so the
+port is bound to localhost and /action only takes JSON from this page's own
+origin; a JSON content type forces a CORS preflight, which is never answered.
+
+Standard library only; the image adds just the Docker CLI.
 """
 
 import json
 import os
 import socket
+import subprocess
+import sys
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
-LAB = Path(os.environ.get("LAB_DIR", "/lab"))
-SOCKETS = Path(os.environ.get("SOCKETS_DIR", "/sockets"))
-WEB = Path(os.environ.get("WEB_DIR", "/web"))
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "lab"))
+import lab  # noqa: E402
+import topology  # noqa: E402
+
+TOPOLOGY = os.environ["TOPOLOGY"]
+TOPO = topology.load(ROOT, TOPOLOGY)
+LAB = ROOT / "generated" / TOPOLOGY
+SOCKETS = LAB / "run"
+WEB = ROOT / "web"
 PORT = int(os.environ.get("PORT", "8080"))
 INTERVAL = float(os.environ.get("POLL_INTERVAL", "1.0"))
 
@@ -63,7 +79,9 @@ def read_json(name, default):
 def snapshot(pool):
     meta = read_json("nodes.json", {})
     links = read_json("links.json", [])
-    cut = set(read_json("linkstate.json", {}).get("cut", []))
+    lab_state = lab.read_labstate(TOPO)
+    cut = set(lab_state["cut"])
+    stopped = set(lab_state["stopped"])
     state = {node: (tree, peers) for node, tree, peers in pool.map(poll_node, meta)}
 
     nodes = []
@@ -74,6 +92,7 @@ def snapshot(pool):
             "npub": info["npub"],
             "ipv6": info["ipv6"],
             "up": tree is not None,
+            "stopped": node in stopped,  # killed by the lab
             "is_root": bool(tree and tree["is_root"]),
             "depth": tree["depth"] if tree else None,
             "parent": tree["parent_display_name"] if tree else None,
@@ -98,6 +117,7 @@ def snapshot(pool):
             "a": a,
             "b": b,
             "cut": link["id"] in cut,      # what the lab did to the wire
+            "netem": lab_state["netem"].get(str(link["id"])),  # explicit impairment, or None for default
             "fips_up": view is not None,   # what FIPS currently believes
             "tree": bool(view and (view["is_parent"] or view["is_child"])),
             "srtt_ms": mmp.get("srtt_ms"),
@@ -106,7 +126,54 @@ def snapshot(pool):
             "bytes": stats.get("bytes_sent", 0) + stats.get("bytes_recv", 0),
         })
 
-    return {"topology": os.environ.get("TOPOLOGY", ""), "t": time.time(), "nodes": nodes, "links": out_links}
+    return {
+        "topology": TOPOLOGY,
+        "t": time.time(),
+        "default_netem": TOPO.netem,
+        "nodes": nodes,
+        "links": out_links,
+    }
+
+
+def link_of(body):
+    return TOPO.link(str(body.get("a")), str(body.get("b")))
+
+
+def run_action(body):
+    """Run one fault; returns a short description of what was done."""
+    action = body.get("action")
+    if action == "cut":
+        link = link_of(body)
+        lab.cut(TOPO, link)
+        return f"cut {link.a}—{link.b}"
+    if action == "heal":
+        link = link_of(body)
+        lab.heal(TOPO, link)
+        return f"healed {link.a}—{link.b}"
+    if action == "netem":
+        link = link_of(body)
+        params = body.get("params")
+        if params is not None and not isinstance(params, dict):
+            raise lab.LabError("params must be an object or null")
+        lab.set_netem(TOPO, link, params)
+        shown = lab.netem_args(TOPO.netem if params is None else params)
+        return f"{link.a}—{link.b}: {' '.join(shown) or 'no impairment'}"
+    if action == "kill":
+        lab.kill(TOPO, str(body.get("node")))
+        return f"killed {body['node']}"
+    if action == "start":
+        lab.start(TOPO, str(body.get("node")))
+        return f"started {body['node']}"
+    if action == "partition":
+        nodes = body.get("nodes")
+        if not isinstance(nodes, list):
+            raise lab.LabError("partition needs a list of nodes")
+        crossing = lab.partition(TOPO, [str(n) for n in nodes])
+        return f"partitioned {{{', '.join(nodes)}}}: cut {len(crossing)} links"
+    if action == "reset":
+        lab.reset(TOPO)
+        return "reset: all nodes running, all links up"
+    raise lab.LabError(f"unknown action: {action}")
 
 
 class Feed:
@@ -166,6 +233,34 @@ class Handler(SimpleHTTPRequestHandler):
                 pass
         else:
             super().do_GET()
+
+    def do_POST(self):
+        if self.path != "/action":
+            return self.reply(404, {"ok": False, "error": "not found"})
+        origin = self.headers.get("Origin")
+        if origin is not None and origin != f"http://{self.headers.get('Host')}":
+            return self.reply(403, {"ok": False, "error": "cross-origin request refused"})
+        if self.headers.get("Content-Type", "").split(";")[0].strip() != "application/json":
+            return self.reply(415, {"ok": False, "error": "send application/json"})
+        try:
+            body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
+            if not isinstance(body, dict):
+                raise ValueError("expected a JSON object")
+            message = run_action(body)
+        except (lab.LabError, ValueError) as err:
+            return self.reply(400, {"ok": False, "error": str(err)})
+        except subprocess.CalledProcessError as err:
+            return self.reply(500, {"ok": False, "error": (err.stderr or str(err)).strip()})
+        print(f"action: {message}", flush=True)
+        self.reply(200, {"ok": True, "message": message})
+
+    def reply(self, code, payload):
+        body = json.dumps(payload).encode()
+        self.send_response(code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
 
     def log_message(self, format, *args):
         pass  # one SSE stream per open tab would flood the log

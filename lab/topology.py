@@ -75,7 +75,7 @@ class Topology:
         for link in self.links:
             if {link.a, link.b} == {a, b}:
                 return link
-        sys.exit(f"no link between {a} and {b}")
+        raise ValueError(f"no link between {a} and {b}")
 
     def links_of(self, node):
         return [link for link in self.links if node in (link.a, link.b)]

@@ -1,0 +1,34 @@
+# Cut one link and time how long until traffic flows the other way round,
+# then heal it and time how long until FIPS re-establishes the link.
+# On a ring, a and b have exactly one alternative path (via f, e, d, c).
+
+topology = "ring6"
+repeat = 3
+settle = 15
+
+[[steps]]
+do = "cut"
+link = ["a", "b"]
+
+[[steps]]
+do = "wait_reachable"
+from = "a"
+to = "b"
+timeout = 90
+record = "reroute_s"
+
+[[steps]]
+do = "wait_link_dead"
+link = ["a", "b"]
+timeout = 90
+record = "declared_dead_s"
+
+[[steps]]
+do = "heal"
+link = ["a", "b"]
+
+[[steps]]
+do = "wait_link_up"
+link = ["a", "b"]
+timeout = 180
+record = "relink_s"

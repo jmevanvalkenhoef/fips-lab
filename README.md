@@ -19,8 +19,13 @@ python3 lab/lab.py status ring6                 # spanning tree + per-link RTT/l
 python3 lab/lab.py netem ring6 a b delay=80ms loss=5%
 python3 lab/lab.py cut ring6 a b                # ...and watch traffic reroute
 python3 lab/lab.py heal ring6 a b
+python3 lab/lab.py kill ring6 e                 # crash a node; start brings it back
+python3 lab/lab.py partition ring6 a b          # cut every link between {a, b} and the rest
+python3 lab/lab.py reset ring6                  # everything back to the topology's defaults
 python3 lab/lab.py down ring6
 ```
+
+Only one topology runs at a time (the collector owns port 8080).
 
 Topologies live in `topologies/*.toml`: explicit node and link lists, or generated (chain, ring, grid, random), with optional default netem and FIPS config overrides. See `lab/topology.py`. Each link is its own Docker network, so impairments and cuts hit exactly one link. Generated configs and keys go to `generated/` (git-ignored). The control sockets under `generated/<topology>/run/` are created by root inside the containers, so removing `generated/` needs `sudo`.
 
@@ -35,6 +40,19 @@ Topologies live in `topologies/*.toml`: explicit node and link lists, or generat
 - an event log: cuts, heals, links declared dead (with the time since the cut), parent and root changes
 
 D3 is vendored in `web/vendor/`, so the lab runs fully offline.
+
+The same faults are available in the browser: click a link to cut, heal or impair it (slow, lossy, flaky, narrow), click a node to kill or start it, shift-click nodes and press *partition* to split the mesh, *reset lab* to undo everything. The collector runs them through `lab/lab.py` with the host's Docker socket mounted, which is root-equivalent on the host: its port is bound to localhost, and `/action` only accepts JSON from the page's own origin.
+
+## Scenarios
+
+A scenario is a scripted fault sequence with measurements, repeated N times:
+
+```sh
+python3 lab/scenario.py cut-reroute                        # scenarios/cut-reroute.toml on ring6
+python3 lab/scenario.py cut-reroute --topology ring6-fast  # same steps, other topology
+```
+
+Steps are actions (`cut`, `heal`, `netem`, `kill`, `start`, `partition`, `reset`, `sleep`) and waits (`wait_reachable`, `wait_unreachable`, `wait_link_dead`, `wait_link_up`); a wait with `record` stores the seconds since the last action. A wait that times out is kept as a censored measurement, not dropped. Each run writes `experiments/runs/<time>-<scenario>-<topology>/` with the scenario, metadata (topology, image, git commit), an event log, `measurements.csv` and the collector's per-second snapshots.
 
 ## Layout
 

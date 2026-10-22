@@ -23,6 +23,8 @@ const healSeen = new Map();
 let prev = null;
 let selected = null;
 let lastMessage = 0;
+const group = new Set();   // nodes chosen for one side of a partition
+let popLink = null;        // link id whose popover is open
 
 // 0 = healthy, 1 = bad. RTT and loss on a scale that suits WAN-ish lab links.
 const clamp01 = (x) => Math.max(0, Math.min(1, x));
@@ -110,11 +112,12 @@ function apply(snap) {
   render();
   renderStats(snap);
   renderDetail();
+  renderPopover();
 }
 
 // ── Rendering ──────────────────────────────────────────────────────────
 
-let linkSel, labelSel, metricSel, nodeSel;
+let linkSel, labelSel, metricSel, impairSel, nodeSel;
 
 function render() {
   const data = [...links.values()];
@@ -122,7 +125,12 @@ function render() {
   linkSel = linkLayer.selectAll("g.l").data(data, (d) => d.id).join((enter) => {
     const g = enter.append("g").attr("class", "l");
     g.append("line").attr("class", "link");
-    g.append("line").attr("class", "link-hit").append("title");
+    g.append("line").attr("class", "link-hit")
+      .on("click", (event, d) => {
+        event.stopPropagation();
+        openPopover(event, d);
+      })
+      .append("title");
     return g;
   });
   linkSel.select(".link")
@@ -137,10 +145,15 @@ function render() {
     .data(data.filter((d) => d.fips_up), (d) => d.id)
     .join("text").attr("class", "link-metric")
     .text((d) => `${(d.srtt_ms ?? 0).toFixed(1)} ms · ${((d.loss ?? 0) * 100).toFixed(1)}%`);
+  impairSel = labelLayer.selectAll("text.link-impair")
+    .data(data.filter((d) => d.netem), (d) => d.id)
+    .join("text").attr("class", "link-impair")
+    .text((d) => describeNetem(d.netem) || "no impairment");
 
   nodeSel = nodeLayer.selectAll("g.node").data([...nodes.values()], (d) => d.id).join((enter) => {
     const g = enter.append("g").attr("class", "node").call(drag);
     g.append("circle").attr("class", "halo").attr("r", 26);
+    g.append("circle").attr("class", "group-ring").attr("r", 22);
     g.append("circle").attr("class", "crown").attr("r", 18);
     g.append("circle").attr("class", "core").attr("r", 11);
     g.append("text").attr("class", "name");
@@ -148,6 +161,10 @@ function render() {
     g.append("text").attr("class", "depth").attr("x", 15).attr("y", -13);
     g.on("click", (event, d) => {
       event.stopPropagation();
+      if (event.shiftKey) {
+        toggleGroup(d.id);
+        return;
+      }
       selected = selected === d.id ? null : d.id;
       renderDetail();
     });
@@ -156,6 +173,8 @@ function render() {
   nodeSel
     .classed("root", (d) => d.is_root)
     .classed("down", (d) => !d.up)
+    .classed("stopped", (d) => d.stopped)
+    .classed("grouped", (d) => group.has(d.id))
     .classed("selected", (d) => d.id === selected);
   nodeSel.select(".name").text((d) => d.id);
   nodeSel.select(".npub").text((d) => shortNpub(d.npub));
@@ -173,7 +192,8 @@ function positionGraph() {
     .attr("x", (d) => (d.source.x + d.target.x) / 2)
     .attr("y", (d) => (d.source.y + d.target.y) / 2 + dy);
   mid(labelSel, -6);
-  mid(metricSel, 12);
+  mid(impairSel, 12);
+  mid(metricSel, 24);
   nodeSel.attr("transform", (d) => `translate(${d.x},${d.y})`);
 }
 
@@ -261,6 +281,8 @@ function logChanges(before, after) {
   for (const n of after.nodes) {
     const o = was(before.nodes, n.id);
     if (!o) continue;
+    if (!o.stopped && n.stopped) log(t, `<b>${n.id}</b> killed by lab`, "bad");
+    if (o.stopped && !n.stopped) log(t, `<b>${n.id}</b> started by lab`, "ok");
     if (o.up && !n.up) log(t, `<b>${n.id}</b> node down`, "bad");
     if (!o.up && n.up) log(t, `<b>${n.id}</b> node up`, "ok");
     if (n.up && n.is_root && !o.is_root) log(t, `<b>${n.id}</b> is now the tree root`, "warn");
@@ -273,6 +295,11 @@ function logChanges(before, after) {
     const o = was(before.links, l.id);
     if (!o) continue;
     const name = `<b>${l.a}—${l.b}</b>`;
+    if (JSON.stringify(o.netem) !== JSON.stringify(l.netem)) {
+      log(t, l.netem
+        ? `${name} impaired: ${describeNetem(l.netem) || "no impairment"}`
+        : `${name} back to default`, "warn");
+    }
     if (!o.cut && l.cut) {
       cutSeen.set(l.id, { at: t, exact: true });
       log(t, `${name} cut by lab`, "bad");
@@ -340,7 +367,125 @@ function renderDetail() {
   ];
   document.getElementById("detail-body").innerHTML =
     rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
+  buttons(document.getElementById("detail-actions"), [
+    n.stopped
+      ? ["start", () => act({ action: "start", node: n.id })]
+      : ["kill", () => act({ action: "kill", node: n.id }), "danger"],
+    [group.has(n.id) ? "remove from group" : "add to group", () => toggleGroup(n.id)],
+  ]);
 }
+
+// ── Controls ───────────────────────────────────────────────────────────
+
+// Presets keep the topology's default delay unless they set their own, so a
+// "lossy" link differs from its neighbours in loss only.
+const PRESETS = [
+  ["slow", { delay: "150ms", jitter: "20ms" }],
+  ["lossy", { loss: "5%" }],
+  ["flaky", { loss: "20%" }],
+  ["narrow", { rate: "256kbit" }],
+];
+
+function presetParams(preset) {
+  const base = prev?.default_netem || {};
+  const keep = preset.delay ? {} : { delay: base.delay, jitter: base.jitter };
+  return Object.fromEntries(Object.entries({ ...keep, ...preset }).filter(([, v]) => v != null));
+}
+
+function openPopover(event, d) {
+  popLink = d.id;
+  const pop = document.getElementById("popover");
+  pop.hidden = false;
+  renderPopover();
+  const { innerWidth: w, innerHeight: h } = window;
+  const rect = pop.getBoundingClientRect();
+  pop.style.left = `${Math.min(event.clientX + 12, w - rect.width - 12)}px`;
+  pop.style.top = `${Math.min(event.clientY + 12, h - rect.height - 12)}px`;
+}
+
+function closePopover() {
+  popLink = null;
+  document.getElementById("popover").hidden = true;
+}
+
+function renderPopover() {
+  const l = popLink != null && links.get(popLink);
+  if (!l) return;
+  document.getElementById("pop-title").textContent = `link ${l.a}—${l.b}`;
+  const wire = l.cut ? "cut" : "connected";
+  const fips = l.fips_up ? `up, rtt ${(l.srtt_ms ?? 0).toFixed(1)} ms` : "down";
+  const impair = describeNetem(l.netem ?? prev?.default_netem ?? {}) || "none";
+  document.getElementById("pop-state").innerHTML =
+    `wire: ${wire} · FIPS: ${fips}<br>impairment: ${impair}${l.netem ? "" : " (default)"}`;
+  const pair = { a: l.a, b: l.b };
+  buttons(document.getElementById("pop-wire"), [
+    l.cut
+      ? ["heal", () => act({ action: "heal", ...pair })]
+      : ["cut", () => act({ action: "cut", ...pair }), "danger"],
+  ]);
+  buttons(document.getElementById("pop-netem"), [
+    ["default", () => act({ action: "netem", ...pair, params: null }), l.netem ? "" : "active"],
+    ...PRESETS.map(([name, preset]) => {
+      const params = presetParams(preset);
+      const on = JSON.stringify(l.netem) === JSON.stringify(params);
+      return [name, () => act({ action: "netem", ...pair, params }), on ? "active" : ""];
+    }),
+  ]);
+}
+
+function toggleGroup(id) {
+  group.has(id) ? group.delete(id) : group.add(id);
+  refreshGroup();
+}
+
+function refreshGroup() {
+  const btn = document.getElementById("btn-partition");
+  btn.disabled = group.size === 0;
+  btn.textContent = group.size ? `partition {${[...group].sort().join(", ")}}` : "partition";
+  nodeSel?.classed("grouped", (d) => group.has(d.id));
+  renderDetail();
+}
+
+function buttons(container, specs) {
+  container.replaceChildren(...specs.map(([label, onClick, cls = ""]) => {
+    const b = document.createElement("button");
+    b.textContent = label;
+    b.className = cls;
+    b.addEventListener("click", (event) => {
+      event.stopPropagation();
+      onClick();
+    });
+    return b;
+  }));
+}
+
+async function act(body) {
+  document.body.classList.add("busy");
+  try {
+    const res = await fetch("action", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const out = await res.json();
+    // Successes show up as state changes in the next snapshot; only errors are logged here.
+    if (!out.ok) log(Date.now() / 1000, `${body.action} failed: ${out.error}`, "bad");
+    return out.ok;
+  } catch (err) {
+    log(Date.now() / 1000, `${body.action} failed: ${err.message}`, "bad");
+    return false;
+  } finally {
+    document.body.classList.remove("busy");
+  }
+}
+
+document.getElementById("btn-partition").addEventListener("click", async () => {
+  if (await act({ action: "partition", nodes: [...group] })) {
+    group.clear();
+    refreshGroup();
+  }
+});
+document.getElementById("btn-reset").addEventListener("click", () => act({ action: "reset" }));
 
 function updateLive() {
   const el = document.getElementById("live");
@@ -353,6 +498,15 @@ function updateLive() {
 }
 
 // ── Helpers ────────────────────────────────────────────────────────────
+
+function describeNetem(p) {
+  if (!p) return "";
+  return [
+    p.delay && `${p.delay}${p.jitter ? ` ±${p.jitter}` : ""}`,
+    p.loss && `${p.loss} loss`,
+    p.rate,
+  ].filter(Boolean).join(" · ");
+}
 
 const shortNpub = (npub) => (npub ? `${npub.slice(0, 9)}…${npub.slice(-4)}` : "");
 const clock = (t) => new Date(t * 1000).toLocaleTimeString([], { hour12: false });
@@ -382,12 +536,14 @@ const drag = d3.drag()
 
 svg.on("click", () => {
   selected = null;
+  closePopover();
   renderDetail();
 });
 
-// "m" toggles RTT/loss labels on every link.
+// "m" toggles RTT/loss labels on every link; Escape closes the popover.
 window.addEventListener("keydown", (event) => {
   if (event.key === "m") document.getElementById("graph").classList.toggle("metrics");
+  if (event.key === "Escape") closePopover();
 });
 
 // ── Start ──────────────────────────────────────────────────────────────

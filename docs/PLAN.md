@@ -48,12 +48,24 @@ Result: 3-node chain a — b — c, all 6 directed pairs ping over the mesh, a �
 - **Memory:** 10 nodes ≈ 1.2 GB. Ceiling of 15–20 nodes on this machine stands.
 - A host reboot stops the lab (containers have no restart policy); `lab.py up` brings it back with the same identities.
 
+## Fault injection findings (2026-10-22, milestone 4)
+
+- **Faults:** cut / heal / netem per link, kill / start per node, partition (cuts every link crossing a node set), reset. Lab state (`labstate.json`: cut links, netem overrides, stopped nodes) is shared by CLI, collector and scenario runner under a file lock, written atomically so the host user and the root collector can both replace it.
+- **A restarted container gets fresh interfaces** (no qdisc, link up), so `start` reapplies each link's netem and re-cuts its end if the link is cut.
+- **cut-reroute on ring6, defaults** (3 reps): reroute 30.7 / 31.9 / 31.8 s, declared dead 31.4 / 31.9 / 31.9 s, relink after heal 4.5 / 3.3 / 3.5 s. Rerouting happens the moment the link is declared dead, not before.
+- **Open: intermittent stuck reroute with fast timeouts.** ring6-fast (heartbeat 2 s, dead timeout 6 s): in 2 of 3 scenario reps, a could not reach b for >90 s (censored), although FIPS declared a–b dead ~7 s after the cut and a's tree parent had already moved to f. Rep 3 and one manual retry recovered in 8–9 s, as did 3/3 manual runs earlier. 0 of 6 cuts got stuck at default timeouts. In the manual retry a's discovery counters did not move and its session to b stayed `established` throughout. Next: a dedicated scenario (≥20 reps) that captures `show_routing`, `show_sessions` and `show_cache` on a while stuck. Candidate causes: a stale coordinate-cache entry or session path, or lookup backoff after failures during the 6 s before the link is declared dead.
+- **Relink after a long cut is slow** (75 s after a 90 s cut, vs ~4 s after a short one). Hypothesis: exponential reconnect backoff (`node.retry.base_interval_secs` 5, doubling; `show_routing.retries` lists the pending retry). Testable by varying cut duration.
+- Waits in a scenario run in sequence, and `record` measures from the last *action*: a wait that follows a timed-out wait inherits that delay (`declared_dead_s` ≈ 90 s in the stuck reps). Read measurements after a censored one with that in mind.
+
 ## Decisions
 
 - Containers instead of hardware for the main testbed (reproducible, scalable).
 - Collector in Python, standard library only, streaming over Server-Sent Events (one-way data needs no WebSocket); runs in its own container with each node's `/run/fips` bind-mounted, which also solves the root-owned socket. Replaces the earlier FastAPI + WebSocket idea.
 - Frontend: plain JavaScript + D3 7.9.0 (vendored), 2D force layout; tree edges get shorter link distances so the layout reshapes when the tree does. TypeScript and a build step can come later if the frontend grows.
-- `lab.py cut/heal` record the wire state in `linkstate.json`, so the view can show "cut, FIPS unaware" during the dead-link timeout.
+- `lab.py cut/heal` record the wire state in `labstate.json`, so the view can show "cut, FIPS unaware" during the dead-link timeout.
+- Browser controls run inside the collector (Docker CLI + mounted Docker socket, repo mounted at its host path so `lab.py` works unchanged). Root-equivalent, so: localhost-only port, `/action` requires `Content-Type: application/json` (forces a CORS preflight that is never answered) and refuses a foreign `Origin`; netem values are checked against a strict pattern.
+- Scenario timeouts are recorded as censored observations, ready for survival-style / Bayesian models later.
+- Run data (`experiments/runs/`) stays out of git for now; a curated dataset can be committed with the first write-up.
 
 ## Visualization notes (milestone 3)
 

@@ -22,12 +22,25 @@
       <div><dt>root</dt><dd id="stat-root">–</dd></div>
       <div><dt>traffic</dt><dd id="stat-traffic">–</dd></div>
     </dl>
+    <div id="toolbar">
+      <button id="btn-partition" disabled title="Shift-click nodes to choose one side">partition</button>
+      <button id="btn-reset" title="Start all nodes, heal all links, default netem">reset lab</button>
+    </div>
+    <div id="hint" class="dim">click a link or node · shift-click nodes to partition · m: metrics</div>
   </header>
+
+  <div id="popover" hidden>
+    <h3 id="pop-title"></h3>
+    <p id="pop-state" class="dim"></p>
+    <div class="row" id="pop-wire"></div>
+    <div class="row" id="pop-netem"></div>
+  </div>
 
   <aside id="side">
     <section id="detail" hidden>
       <h2 id="detail-title"></h2>
       <dl id="detail-body"></dl>
+      <div class="row" id="detail-actions"></div>
     </section>
     <section id="log-wrap">
       <h2>events</h2>
@@ -41,6 +54,7 @@
     <span><i class="sw pending"></i>cut, FIPS unaware</span>
     <span><i class="sw dead"></i>down</span>
     <span><i class="sw root"></i>root</span>
+    <span><i class="sw group"></i>partition group</span>
   </footer>
 
   <script src="vendor/d3.min.js"></script>
