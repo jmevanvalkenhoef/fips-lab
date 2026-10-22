@@ -1,0 +1,10 @@
+# Six nodes in a ring. Every pair has two disjoint paths, so cutting any
+# one link must leave the mesh connected.
+
+[generate]
+kind = "ring"
+nodes = 6
+
+[netem]
+delay = "5ms"
+jitter = "1ms"

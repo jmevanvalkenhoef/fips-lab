@@ -1,0 +1,14 @@
+# ring6 with faster dead-link detection, to test whether reroute time after a
+# cut is governed by link_dead_timeout_secs (default 30, heartbeat 10).
+
+[generate]
+kind = "ring"
+nodes = 6
+
+[netem]
+delay = "5ms"
+jitter = "1ms"
+
+[fips.node]
+heartbeat_interval_secs = 2
+link_dead_timeout_secs = 6

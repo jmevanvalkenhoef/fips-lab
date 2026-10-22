@@ -1,0 +1,13 @@
+# Ten nodes, random connected mesh with average degree 3, fixed seed so the
+# shape is the same every run. Links behave like a decent WAN.
+
+[generate]
+kind = "random"
+nodes = 10
+degree = 3
+seed = 7
+
+[netem]
+delay = "15ms"
+jitter = "3ms"
+loss = "0.5%"
