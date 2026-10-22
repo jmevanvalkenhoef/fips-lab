@@ -1,0 +1,168 @@
+:root {
+  --bg: #06080c;
+  --bg-glow: #0d1520;
+  --panel: rgba(10, 14, 20, 0.78);
+  --line: #1c2633;
+  --text: #d6e2ee;
+  --dim: #6b7d90;
+  --faint: #34414f;
+  --ok: #5eead4;
+  --warn: #fbbf24;
+  --bad: #f87171;
+  --root: #fbbf24;
+  --mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font: 12px/1.5 var(--mono);
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 45%, var(--bg-glow) 0%, transparent 65%),
+    radial-gradient(circle, var(--faint) 0.6px, transparent 0.8px) 0 0 / 28px 28px,
+    var(--bg);
+}
+
+#graph, #particles { position: absolute; inset: 0; width: 100%; height: 100%; }
+#particles { pointer-events: none; }
+
+/* ── HUD ─────────────────────────────────────────────────────────────── */
+
+#hud {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  display: grid;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.brand { font-size: 18px; font-weight: 700; letter-spacing: 0.32em; }
+.brand span { color: var(--ok); margin-left: 0.32em; }
+.dim { color: var(--dim); }
+
+.live { display: flex; align-items: center; gap: 8px; color: var(--dim); }
+.live i { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); }
+.live.on i { background: var(--ok); box-shadow: 0 0 8px var(--ok); animation: pulse 2s infinite; }
+.live.off i { background: var(--bad); }
+
+#stats { display: flex; gap: 22px; margin: 10px 0 0; }
+#stats div { display: grid; }
+#stats dt { color: var(--dim); font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; }
+#stats dd { margin: 0; font-size: 16px; }
+
+/* ── Side panel ──────────────────────────────────────────────────────── */
+
+#side {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  pointer-events: none;
+}
+
+#side section {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px 14px;
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+}
+
+#side h2 {
+  margin: 0 0 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+#detail h2 { font-size: 15px; color: var(--text); letter-spacing: 0.06em; text-transform: none; }
+#detail dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; }
+#detail dt { color: var(--dim); }
+#detail dd { margin: 0; overflow-wrap: anywhere; }
+
+#log-wrap { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+#log { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; }
+#log li { display: grid; grid-template-columns: 62px 1fr; gap: 8px; padding: 3px 0; border-top: 1px solid var(--line); }
+#log li:first-child { border-top: 0; }
+#log time { color: var(--dim); }
+#log .bad { color: var(--bad); }
+#log .warn { color: var(--warn); }
+#log .ok { color: var(--ok); }
+#log li.fresh { animation: fresh 1.6s ease-out; }
+
+/* ── Legend ──────────────────────────────────────────────────────────── */
+
+#legend {
+  position: fixed;
+  left: 24px;
+  bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  color: var(--dim);
+  pointer-events: none;
+}
+#legend span { display: flex; align-items: center; gap: 7px; }
+.sw { display: inline-block; width: 22px; height: 0; border-top: 2px solid; }
+.sw.tree { border-color: var(--ok); }
+.sw.mesh { border-color: var(--ok); opacity: 0.35; border-top-width: 1px; }
+.sw.pending { border-color: var(--bad); border-top-style: dashed; }
+.sw.dead { border-color: var(--faint); border-top-style: dotted; }
+.sw.root { width: 10px; height: 10px; border: 2px solid var(--root); border-radius: 50%; }
+
+/* ── Graph ───────────────────────────────────────────────────────────── */
+
+.link { fill: none; stroke-linecap: round; transition: stroke 0.6s, stroke-width 0.6s, opacity 0.6s; }
+.link.mesh { stroke-width: 1.2; opacity: 0.38; }
+.link.tree { stroke-width: 2.4; opacity: 0.95; }
+.link.pending { stroke: var(--bad) !important; stroke-width: 2; stroke-dasharray: 6 5; opacity: 1; animation: march 0.8s linear infinite; }
+.link.dead { stroke: var(--faint) !important; stroke-width: 1.2; stroke-dasharray: 1 5; opacity: 0.9; }
+.link-hit { stroke: transparent; stroke-width: 14; }
+
+.link-label { fill: var(--bad); font-size: 10px; text-anchor: middle; paint-order: stroke; stroke: var(--bg); stroke-width: 4px; }
+.link-metric { fill: var(--dim); font-size: 9px; text-anchor: middle; paint-order: stroke; stroke: var(--bg); stroke-width: 3px; opacity: 0; transition: opacity 0.3s; }
+#graph.metrics .link-metric { opacity: 0.9; }
+
+.node { cursor: grab; }
+.node:active { cursor: grabbing; }
+.node .halo { fill: var(--ok); opacity: 0.08; transition: opacity 0.4s; }
+.node .core { fill: var(--bg); stroke: var(--ok); stroke-width: 2; transition: stroke 0.4s; }
+.node .crown { fill: none; stroke: var(--root); stroke-width: 1.5; opacity: 0; }
+.node.root .crown { opacity: 0.9; animation: crown 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.node.root .core { stroke: var(--root); }
+.node.root .halo { fill: var(--root); opacity: 0.14; }
+.node.down .core { stroke: var(--faint); }
+.node.down .halo { opacity: 0; }
+.node.selected .halo { opacity: 0.28; }
+.node .name { fill: var(--text); font-size: 13px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.node .npub { fill: var(--dim); font-size: 9px; text-anchor: middle; pointer-events: none; }
+.node .depth { fill: var(--dim); font-size: 9px; pointer-events: none; }
+
+@keyframes pulse { 50% { opacity: 0.4; } }
+@keyframes march { to { stroke-dashoffset: -22; } }
+@keyframes crown { 50% { transform: scale(1.18); opacity: 0.35; } }
+@keyframes fresh { from { background: rgba(94, 234, 212, 0.16); } to { background: transparent; } }
+
+@media (max-width: 760px) {
+  #side { top: auto; height: 38vh; left: 12px; right: 12px; width: auto; }
+  #legend { display: none; }
+  #hud { left: 16px; top: 14px; }
+}

@@ -30,6 +30,8 @@ import topology
 
 ROOT = Path(__file__).resolve().parent.parent
 IMAGE = "fips-lab-node:v0.5.3"
+COLLECTOR_IMAGE = "python:3.13-slim"
+COLLECTOR_PORT = 8080
 UDP_PORT = 2121
 NETEM_KEYS = ("delay", "jitter", "loss", "rate")
 
@@ -130,10 +132,26 @@ def compose_file(topo):
             "volumes": [
                 f"./nodes/{node}.yaml:/etc/fips/fips.yaml:ro",
                 "./hosts:/etc/fips/hosts:ro",
+                # Exposes the control socket to the collector.
+                f"./run/{node}:/run/fips",
             ],
             "networks": {link.network: {"ipv4_address": link.ip(node)} for link in topo.links_of(node)},
         }
         for node in topo.nodes
+    }
+    # Reads the nodes' control sockets, not their traffic, so it joins no link network.
+    services["collector"] = {
+        "image": COLLECTOR_IMAGE,
+        "container_name": f"{project(topo.name)}-collector",
+        "command": ["python3", "-u", "/app/collector.py"],
+        "environment": [f"TOPOLOGY={topo.name}"],
+        "ports": [f"127.0.0.1:{COLLECTOR_PORT}:8080"],
+        "volumes": [
+            f"{ROOT / 'collector'}:/app:ro",
+            f"{ROOT / 'web'}:/web:ro",
+            ".:/lab:ro",
+            "./run:/sockets",
+        ],
     }
     networks = {
         link.network: {"driver": "bridge", "internal": True, "ipam": {"config": [{"subnet": link.subnet}]}}
@@ -147,6 +165,7 @@ def gen(topo):
     out = out_dir(topo.name)
     (out / "nodes").mkdir(parents=True, exist_ok=True)
     for node in topo.nodes:
+        (out / "run" / node).mkdir(parents=True, exist_ok=True)
         path = out / "nodes" / f"{node}.yaml"
         path.write_text(json.dumps(node_config(topo, node, keys), indent=2))
         path.chmod(0o644)  # read by root inside the container; holds an nsec, but only lab keys
@@ -155,6 +174,8 @@ def gen(topo):
     (out / "compose.yaml").write_text(json.dumps(compose_file(topo), indent=2))
     public = {node: {k: keys[node][k] for k in ("npub", "ipv6")} for node in topo.nodes}
     (out / "nodes.json").write_text(json.dumps(public, indent=2))
+    links = [{"id": link.id, "a": link.a, "b": link.b} for link in topo.links]
+    (out / "links.json").write_text(json.dumps(links, indent=2))
     print(f"generated {len(topo.nodes)} nodes, {len(topo.links)} links in {out.relative_to(ROOT)}")
 
 
@@ -201,6 +222,19 @@ def set_netem(topo, link, params):
 def set_link_state(topo, link, state):
     for node, dev in link_ends(topo, link):
         exec_in(topo.name, node, "ip", "link", "set", "dev", dev, state)
+    # Recorded so the visualization can show a cut before FIPS notices it.
+    cut = set(read_linkstate(topo)["cut"])
+    (cut.add if state == "down" else cut.discard)(link.id)
+    write_linkstate(topo, cut)
+
+
+def read_linkstate(topo):
+    path = out_dir(topo.name) / "linkstate.json"
+    return json.loads(path.read_text()) if path.exists() else {"cut": []}
+
+
+def write_linkstate(topo, cut):
+    (out_dir(topo.name) / "linkstate.json").write_text(json.dumps({"cut": sorted(cut)}))
 
 
 def parse_netem(pairs):
@@ -298,7 +332,9 @@ def main():
         gen(topo)
     elif opts.command == "up":
         gen(topo)
+        write_linkstate(topo, set())  # fresh containers: every link is up
         compose(topo, "up", "-d")
+        print(f"visualization: http://localhost:{COLLECTOR_PORT}")
         if topo.netem:
             parallel(lambda link: set_netem(topo, link, topo.netem), topo.links)
             print(f"netem on all links: {' '.join(netem_args(topo.netem))}")

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FIPS Lab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="stage">
+    <canvas id="particles"></canvas>
+    <svg id="graph" aria-label="Mesh topology"></svg>
+  </main>
+
+  <header id="hud">
+    <div class="brand">FIPS<span>LAB</span></div>
+    <div id="topology" class="dim">—</div>
+    <div id="live" class="live" title="Collector connection"><i></i><span>connecting</span></div>
+    <dl id="stats">
+      <div><dt>nodes</dt><dd id="stat-nodes">–</dd></div>
+      <div><dt>links</dt><dd id="stat-links">–</dd></div>
+      <div><dt>root</dt><dd id="stat-root">–</dd></div>
+      <div><dt>traffic</dt><dd id="stat-traffic">–</dd></div>
+    </dl>
+  </header>
+
+  <aside id="side">
+    <section id="detail" hidden>
+      <h2 id="detail-title"></h2>
+      <dl id="detail-body"></dl>
+    </section>
+    <section id="log-wrap">
+      <h2>events</h2>
+      <ol id="log"></ol>
+    </section>
+  </aside>
+
+  <footer id="legend">
+    <span><i class="sw tree"></i>tree edge</span>
+    <span><i class="sw mesh"></i>mesh link</span>
+    <span><i class="sw pending"></i>cut, FIPS unaware</span>
+    <span><i class="sw dead"></i>down</span>
+    <span><i class="sw root"></i>root</span>
+  </footer>
+
+  <script src="vendor/d3.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

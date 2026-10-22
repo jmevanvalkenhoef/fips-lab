@@ -13,6 +13,16 @@ The missing layer on top of FIPS's own `testing/` harness: live visualization, p
 5. **Experiments** — recovery time vs. network size, throughput vs. loss; first write-up.
 6. **Polish** — portfolio site, demo video, upstream PRs. Optional: one physical device joining the Docker mesh over LAN.
 
+## Later: Bayesian layer (parked 2026-10-22)
+
+Not started; pick up after milestones 4–5. Together they turn "I built a testbed" into "I built a testbed and used rigorous statistics to tune a real protocol".
+
+1. **Bayesian analysis of recovery time** (fits milestone 5). Model recovery = dead timeout + reroute delay, fit with MCMC (PyMC or NumPyro) over a sweep of `link_dead_timeout_secs`, topologies and loss levels; topology as a group-level effect (hierarchical). Output claims like "with timeout 6 s, 95 % of recoveries finish within X s". Visual: posterior / predictive ridgelines or violins that sharpen as runs come in.
+2. **Bayesian optimisation of FIPS settings** (needs milestone 4: scriptable fault injection). Black-box search over heartbeat interval, dead timeout, tree hysteresis, trading off recovery time, heartbeat overhead and false "dead" verdicts on lossy links. GP surrogate picks the next experiment. Visual: GP mean/uncertainty surface updating live with the next point highlighted.
+3. **Standalone MCMC sampler explainer** (Metropolis / HMC / NUTS on banana, funnel, multimodal targets). Lowest priority: good ones exist (Chi Feng's demo); only worth it with a twist such as using posteriors from the lab's own data.
+
+Order: 1, then 2; 3 only if there is a clear angle.
+
 ## Spike findings (2026-10-22, FIPS v0.5.3)
 
 Result: 3-node chain a — b — c, all 6 directed pairs ping over the mesh, a ↔ c routed via b (reachable ~4–6 s after start).
@@ -41,4 +51,11 @@ Result: 3-node chain a — b — c, all 6 directed pairs ping over the mesh, a �
 ## Decisions
 
 - Containers instead of hardware for the main testbed (reproducible, scalable).
-- Collector in Python (FastAPI + WebSocket); frontend in TypeScript.
+- Collector in Python, standard library only, streaming over Server-Sent Events (one-way data needs no WebSocket); runs in its own container with each node's `/run/fips` bind-mounted, which also solves the root-owned socket. Replaces the earlier FastAPI + WebSocket idea.
+- Frontend: plain JavaScript + D3 7.9.0 (vendored), 2D force layout; tree edges get shorter link distances so the layout reshapes when the tree does. TypeScript and a build step can come later if the frontend grows.
+- `lab.py cut/heal` record the wire state in `linkstate.json`, so the view can show "cut, FIPS unaware" during the dead-link timeout.
+
+## Visualization notes (milestone 3)
+
+- Headless Chromium `--screenshot` runs on virtual time, so it captures steady states only (verified: healthy ring, link down after reroute). Recording the transitions for the demo video (milestone 6) needs real-time capture, e.g. CDP `Page.startScreencast` or a screen recorder.
+- Not yet checked in a real browser: the "cut, FIPS unaware" countdown and the event log during a live cut.
