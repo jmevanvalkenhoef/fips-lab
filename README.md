@@ -63,7 +63,7 @@ Options: `--repeat N`, `--settle S` (quiet seconds before each repetition), `--f
 - In the first five minutes after nodes look each other up, a cut can strand traffic in a forwarding loop. A transit node keeps a destination's *verified* coordinates for 300 s and refuses the corrections in passing packets (an anti-poisoning rule), so replies bounce between two nodes until their hop limit runs out.
 - A healed link is not used until the next scheduled reconnect attempt, and those back off exponentially: up to 76 s of a working link sitting idle in these runs.
 
-**[02 · A timer through the wall](experiments/writeups/02-window/)**: a Bayesian model (PyMC) of every cut from 01, censored waits included, that infers the hidden verification window from the measurements alone: 300.1 ± 3.2 s, against 300 s in the source. It shows what each kind of evidence contributes and turns the posterior into outage predictions by time since start-up.
+**[02 · A timer through the wall](experiments/writeups/02-window/)**: a Bayesian model (PyMC) of every cut from 01, censored waits included, that infers the hidden verification window from the measurements alone: 301.4 ± 1.3 s, against 300 s in the source. It shows what each kind of evidence contributes, tests the model's prediction for cuts it had not seen (5 of 5 inside the predicted range) and turns the posterior into outage predictions by time since start-up.
 
 Serve the repo root (`python3 -m http.server`) and open `experiments/writeups/01-reroute/` or `02-window/`. To regenerate: the scripts in `experiments/`, then `python3 experiments/analyze.py`, then `uv run experiments/bayes/fit.py`.
 

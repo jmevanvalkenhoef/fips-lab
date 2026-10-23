@@ -1,0 +1,29 @@
+{
+ "commit": "d0efc0c",
+ "note": "Predictions of the when-back fit committed before the window-probe run; see experiments/bayes/fit.py.",
+ "stuck": [
+  {
+   "t": 150,
+   "q5": 0.6319,
+   "q50": 0.8854,
+   "q95": 0.9717
+  },
+  {
+   "t": 200,
+   "q5": 0.7448,
+   "q50": 0.9649,
+   "q95": 0.9961
+  },
+  {
+   "t": 250,
+   "q5": 0.828,
+   "q50": 0.9897,
+   "q95": 0.9995
+  }
+ ],
+ "back": {
+  "q5": 288.8,
+  "q50": 300.2,
+  "q95": 311.4
+ }
+}

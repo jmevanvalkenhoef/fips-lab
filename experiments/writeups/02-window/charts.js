@@ -44,9 +44,9 @@ function hdi(xs, mass = 0.94) {
 // ── Chart 1: the window, as each kind of evidence narrows it ────────────
 
 const EVIDENCE = [
-  { key: "where", label: "which cuts got stuck", sub: "10 at 16 s, 14 at 91 s, 6 at 311 s" },
-  { key: "how-long", label: "+ how long they lasted at least", sub: "the 45 s wait ran out" },
-  { key: "when-back", label: "+ when four came back", sub: "left alone for up to 330 s" },
+  { key: "where", label: "which cuts got stuck" },
+  { key: "how-long", label: "+ how long they lasted at least" },
+  { key: "when-back", label: "+ when the watched ones came back" },
 ];
 
 function windowChart(el, fits) {
@@ -124,7 +124,8 @@ function noData(svg, x, top, bottom, fresh) {
 function observed(fresh) {
   const groups = d3.groups(fresh, (r) => Math.round(r.t / 5) * 5);
   return groups.map(([t, rs]) => {
-    const stuck = rs.filter((r) => r.cens || r.left_alone && r.y > 45).length;
+    // Stuck: the wait ran out, or a came back only as the window closed.
+    const stuck = rs.filter((r) => r.cens || r.long_wait && r.t + r.y > 285).length;
     return { t: d3.mean(rs, (r) => r.t), k: stuck, n: rs.length };
   }).sort((a, b) => a.t - b.t);
 }
@@ -257,6 +258,61 @@ function outageChart(el, fit, fresh) {
   return pts;
 }
 
+// ── Chart 4: the earlier fit's prediction against the cuts that tested it ─
+
+function predictionChart(el, pred, fresh) {
+  const cuts = fresh.filter((r) => r.long_wait && r.t > 120).sort((a, b) => a.t - b.t);
+  if (!cuts.length) return empty(el, "No test cuts yet.");
+  const W = 700, rowH = 34;
+  const m = { top: 8, right: 140, bottom: 46, left: 96 };
+  const H = m.top + rowH * cuts.length + m.bottom;
+  const x = d3.scaleLinear().domain([280, 320]).range([m.left, W - m.right]);
+  const svg = d3.select(el).append("svg").attr("viewBox", `0 0 ${W} ${H}`)
+    .attr("role", "img").attr("aria-label", "Predicted and observed return times of the test cuts");
+  const tip = tooltip(el);
+
+  svg.append("g").attr("class", "grid").selectAll("line").data(x.ticks(8)).join("line")
+    .attr("x1", x).attr("x2", x).attr("y1", m.top).attr("y2", H - m.bottom);
+  svg.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.bottom})`)
+    .call(d3.axisBottom(x).ticks(8).tickSizeOuter(0).tickFormat((d) => `${d} s`));
+  svg.append("text").attr("class", "axis-label").attr("x", (m.left + W - m.right) / 2).attr("y", H - 8)
+    .attr("text-anchor", "middle").text("a reaches b again, seconds after start-up");
+
+  const near = (t) => pred.stuck.reduce((a, b) => (Math.abs(b.t - t) < Math.abs(a.t - t) ? b : a));
+  cuts.forEach((r, i) => {
+    const cy = m.top + rowH * i + rowH / 2;
+    const back = r.t + r.y;
+    const p = near(r.t);
+    const g = svg.append("g");
+    g.append("rect").attr("class", "band outer").attr("x", x(pred.back.q5)).attr("width", x(pred.back.q95) - x(pred.back.q5))
+      .attr("y", cy - 9).attr("height", 18).attr("rx", 4);
+    g.append("line").attr("class", "median").attr("x1", x(pred.back.q50)).attr("x2", x(pred.back.q50)).attr("y1", cy - 9).attr("y2", cy + 9);
+    g.append("circle").attr("class", "obs").attr("cx", x(back)).attr("cy", cy).attr("r", 5);
+    g.append("text").attr("class", "row-label").attr("x", m.left - 10).attr("y", cy + 4).attr("text-anchor", "end")
+      .text(`cut at ${fmt(r.t, 0)} s`);
+    g.append("text").attr("class", "row-label").attr("x", W - m.right + 10).attr("y", cy + 4)
+      .text(`${pct(p.q50)} predicted · ${back > 285 ? "stuck" : "rerouted"}`);
+    g.append("rect").attr("class", "hit").attr("x", m.left).attr("width", W - m.left - m.right).attr("y", cy - rowH / 2).attr("height", rowH)
+      .on("pointermove", (event) => tip.show(event, [
+        [`back ${fmt(back)} s after start-up`],
+        [`cut at ${fmt(r.t)} s, stuck for ${fmt(r.y)} s`],
+        [`predicted: back at ${fmt(pred.back.q5, 0)}–${fmt(pred.back.q95, 0)} s, ${pct(p.q50)} chance stuck`, "muted"],
+      ]))
+      .on("pointerleave", tip.hide);
+  });
+
+  table(el.closest("figure"), ["cut after start-up", "predicted stuck", "observed", "predicted back (90%)", "observed back"],
+    cuts.map((r) => {
+      const p = near(r.t);
+      return [`${fmt(r.t)} s`, `${pct(p.q50)} (${pct(p.q5)}–${pct(p.q95)})`, r.t + r.y > 285 ? "stuck" : "rerouted",
+        `${fmt(pred.back.q5)}–${fmt(pred.back.q95)} s`, `${fmt(r.t + r.y)} s`];
+    }));
+}
+
+function empty(el, text) {
+  d3.select(el).append("p").attr("class", "dim").text(text);
+}
+
 // ── Shared ─────────────────────────────────────────────────────────────
 
 function table(figure, headers, rows) {
@@ -273,7 +329,7 @@ function fill(name, value) {
 }
 
 async function main() {
-  const post = await (await fetch("posterior.json")).json();
+  const [post, pred] = await Promise.all(["posterior.json", "prediction.json"].map(async (f) => (await fetch(f)).json()));
   const { fresh, warm } = post.data;
   const fit = post.fits["when-back"];
   const s = fit.summary;
@@ -309,6 +365,24 @@ async function main() {
     fill(`out-${t}-q99`, fmt(p.q99, 0));
     fill(`out-${t}-mean`, fmt(p.mean, 0));
   }
+
+  predictionChart(document.getElementById("chart-prediction"), pred, fresh);
+  const tests = fresh.filter((r) => r.long_wait && r.t > 120);
+  fill("test-n", tests.length);
+  fill("test-stuck", tests.filter((r) => r.t + r.y > 285).length);
+  fill("test-back-lo", fmt(d3.min(tests, (r) => r.t + r.y)));
+  fill("test-back-hi", fmt(d3.max(tests, (r) => r.t + r.y)));
+  fill("pred-back-lo", fmt(pred.back.q5, 0));
+  fill("pred-back-hi", fmt(pred.back.q95, 0));
+  fill("pred-commit", pred.commit);
+  for (const p of pred.stuck) {
+    fill(`pred-${p.t}`, pct(p.q50));
+    fill(`pred-${p.t}-lo`, pct(p.q5));
+  }
+  const watched = fresh.filter((r) => r.long_wait);
+  fill("watched-n", watched.length);
+  fill("watched-back-lo", fmt(d3.min(watched, (r) => r.t + r.y), 0));
+  fill("watched-back-hi", fmt(d3.max(watched, (r) => r.t + r.y), 0));
 
   const bt = fit.by_timeout;
   for (const T of [6, 10, 30]) {

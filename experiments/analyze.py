@@ -15,7 +15,8 @@ Reads experiments/runs/*/ and, per repetition of a cut, derives:
 
 Runs of cut-reroute with a link_dead_timeout_secs override form the sweep;
 stuck-reroute runs form the stuck-reroute investigation, stuck-unlock runs
-(stuck cuts left alone) `unlock`; the remaining
+(stuck cuts left alone) `unlock`, window-probe runs (cuts later in the
+window, for write-up 02) `probe`; the remaining
 cut-reroute runs (the first ones, with a long reroute timeout and therefore
 long cuts) form `early`. Standard library only.
 """
@@ -136,7 +137,7 @@ def main():
     parser.add_argument("--out", default=str(ROOT / "experiments" / "writeups" / "01-reroute" / "data.json"))
     opts = parser.parse_args()
 
-    sweep, stuck, early, unlock, sources = [], [], [], [], []
+    sweep, stuck, early, unlock, probe, sources = [], [], [], [], [], []
     for run_dir in sorted(RUNS.iterdir()):
         meta_path = run_dir / "meta.json"
         if not meta_path.exists() or not (run_dir / "measurements.csv").exists():
@@ -159,11 +160,12 @@ def main():
                     **r,
                 })
             sources.append(run_dir.name)
-        elif meta["scenario"] == "stuck-unlock":
+        elif meta["scenario"] in ("stuck-unlock", "window-probe"):
             # Stuck cuts left alone: when does a reach b again, counted from
             # the fresh start (just after the convergence check's lookups)?
+            # window-probe: the same wait, cuts later in the window (02 only).
             for r in repetitions(run_dir):
-                unlock.append({**r, "back_since_start_s":
+                (unlock if meta["scenario"] == "stuck-unlock" else probe).append({**r, "back_since_start_s":
                                round(r["since_start_s"] + r["reroute_s"], 1) if r["since_start_s"] is not None else None})
             sources.append(run_dir.name)
         elif meta["scenario"] == "stuck-reroute":
@@ -199,6 +201,7 @@ def main():
         "stuck": stuck,
         "early": early,
         "unlock": unlock,
+        "probe": probe,
     }, indent=1))
     print(f"wrote {out}: {len(sweep)} sweep reps, {len(stuck)} stuck-reroute reps, {len(early)} early reps")
 

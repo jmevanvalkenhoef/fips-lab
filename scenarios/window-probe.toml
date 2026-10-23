@@ -1,0 +1,26 @@
+# Cuts inside the verification window, for write-up 02: what happens between
+# 91 s and 300 s after start-up? Like stuck-unlock (a stuck cut is watched
+# until it clears, not cut off at 45 s), but without waiting for the relink:
+# every repetition starts a fresh mesh anyway.
+#
+#   scenario.py window-probe --fresh --settle 200 \
+#       --fips node.heartbeat_interval_secs=2 --fips node.link_dead_timeout_secs=6
+
+topology = "ring6"
+repeat = 1
+settle = 200
+
+[[steps]]
+do = "cut"
+link = ["a", "b"]
+
+[[steps]]
+do = "wait_reachable"
+from = "a"
+to = "b"
+timeout = 330
+record = "reroute_s"
+
+[[steps]]
+do = "heal"
+link = ["a", "b"]

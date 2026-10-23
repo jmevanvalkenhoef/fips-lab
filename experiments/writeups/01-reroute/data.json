@@ -1,6 +1,6 @@
 {
  "image": "fips-lab-node:v0.5.3",
- "git": "92e7e05-dirty",
+ "git": "d0efc0c-dirty",
  "topology": "ring6 (6 nodes in a ring, 5 ms \u00b1 1 ms per link)",
  "cut": "a\u2014b",
  "sources": [
@@ -16,7 +16,12 @@
   "20261023-183113-stuck-reroute-ring6-v4eca7f",
   "20261023-190244-stuck-reroute-ring6-v4eca7f",
   "20261023-191222-stuck-reroute-ring6-v4eca7f",
-  "20261023-194701-stuck-unlock-ring6-v4eca7f"
+  "20261023-194701-stuck-unlock-ring6-v4eca7f",
+  "20261023-231136-window-probe-ring6-v4eca7f",
+  "20261023-231650-window-probe-ring6-v4eca7f",
+  "20261023-232214-window-probe-ring6-v4eca7f",
+  "20261023-232744-window-probe-ring6-v4eca7f",
+  "20261023-233310-window-probe-ring6-v4eca7f"
  ],
  "sweep": [
   {
@@ -1764,6 +1769,73 @@
    "cut_duration_s": 210.2,
    "relink_s": 116.242,
    "back_since_start_s": 301.8
+  }
+ ],
+ "probe": [
+  {
+   "fresh": true,
+   "since_start_s": 151.6,
+   "root": "c",
+   "a_parent": "b",
+   "rep": 1,
+   "reroute_s": 148.941,
+   "censored": false,
+   "dead_s": 7.7,
+   "cut_duration_s": 149.2,
+   "relink_s": null,
+   "back_since_start_s": 300.5
+  },
+  {
+   "fresh": true,
+   "since_start_s": 151.5,
+   "root": "c",
+   "a_parent": "b",
+   "rep": 1,
+   "reroute_s": 148.162,
+   "censored": false,
+   "dead_s": 8.4,
+   "cut_duration_s": 148.4,
+   "relink_s": null,
+   "back_since_start_s": 299.7
+  },
+  {
+   "fresh": true,
+   "since_start_s": 201.4,
+   "root": "c",
+   "a_parent": "b",
+   "rep": 1,
+   "reroute_s": 101.371,
+   "censored": false,
+   "dead_s": 6.5,
+   "cut_duration_s": 101.7,
+   "relink_s": null,
+   "back_since_start_s": 302.8
+  },
+  {
+   "fresh": true,
+   "since_start_s": 202.0,
+   "root": "c",
+   "a_parent": "b",
+   "rep": 1,
+   "reroute_s": 100.357,
+   "censored": false,
+   "dead_s": 8.1,
+   "cut_duration_s": 100.6,
+   "relink_s": null,
+   "back_since_start_s": 302.4
+  },
+  {
+   "fresh": true,
+   "since_start_s": 251.5,
+   "root": "c",
+   "a_parent": "b",
+   "rep": 1,
+   "reroute_s": 54.046,
+   "censored": false,
+   "dead_s": 6.8,
+   "cut_duration_s": 54.3,
+   "relink_s": null,
+   "back_since_start_s": 305.5
   }
  ]
 }

@@ -24,7 +24,7 @@ mesh, timeout sweep) only inform the delay.
 Fits the model three times, each with more of the evidence:
     where      which cuts got stuck, every stuck cut cut off at 45 s
     how-long   ...and, for censored cuts, that they lasted at least the wait
-    when-back  ...and when the four cuts left alone came back
+    when-back  ...and when the cuts watched for up to 330 s came back
 and writes thinned draws plus precomputed curves for the charts.
 """
 
@@ -43,18 +43,21 @@ OUT = ROOT / "experiments" / "writeups" / "02-window" / "posterior.json"
 
 T_SCALE = 100.0  # logistic slope per 100 s
 STEP = 2.0  # softness of the window edge, seconds; keeps W differentiable
-SHORT_WAIT = 45.0  # the stuck-reroute wait, used to hide the left-alone cuts' return
+SHORT_WAIT = 45.0  # the stuck-reroute wait, used to hide the long-wait cuts' return
 
 
 def load(path):
     d = json.loads(path.read_text())
     fresh, warm = [], []
-    for r in d["stuck"] + d["unlock"]:
+    # unlock and probe cuts were watched for up to 330 s ("long wait"), the
+    # others for 45 s.
+    long_wait = d["unlock"] + d.get("probe", [])
+    for r in d["stuck"] + long_wait:
         row = {
             "y": r["reroute_s"],
             "cens": r["censored"],
             "T": r.get("dead_timeout_s", 6),
-            "left_alone": r in d["unlock"],
+            "long_wait": r in long_wait,
         }
         if r["fresh"]:
             fresh.append({**row, "t": r["since_start_s"]})
@@ -64,7 +67,7 @@ def load(path):
     # stuck cuts have no known time after start-up and no other use here.
     for r in d["sweep"] + d["early"]:
         if not r["censored"]:
-            warm.append({"y": r["reroute_s"], "cens": False, "T": r["dead_timeout_s"], "left_alone": False})
+            warm.append({"y": r["reroute_s"], "cens": False, "T": r["dead_timeout_s"], "long_wait": False})
     return fresh, warm
 
 
@@ -91,8 +94,8 @@ def build(fresh, warm, evidence):
     y = np.array([r["y"] for r in fresh])
     cens = np.array([r["cens"] for r in fresh])
     if evidence != "when-back":
-        # Pretend the left-alone cuts had the usual 45 s wait.
-        hide = np.array([r["left_alone"] and r["y"] > SHORT_WAIT for r in fresh])
+        # Pretend the long-wait cuts had the usual 45 s wait.
+        hide = np.array([r["long_wait"] and r["y"] > SHORT_WAIT for r in fresh])
         y = np.where(hide, SHORT_WAIT, y)
         cens = cens | hide
     wT = np.array([r["T"] for r in warm], float)
