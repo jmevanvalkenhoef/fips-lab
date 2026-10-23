@@ -92,9 +92,17 @@ def fipsctl_json(name, node, *args):
 # ── Generation ──────────────────────────────────────────────────────────
 
 
-def identities(name, nodes):
-    """Load the topology's keys, generating any that are missing."""
+def identities(name, nodes, keys_from=None):
+    """Load the topology's keys, generating any that are missing.
+
+    A variant topology starts from its base topology's keys, so the same
+    nodes keep the same identities across settings.
+    """
     path = out_dir(name) / "keys.json"
+    if not path.exists() and keys_from:
+        identities(keys_from, nodes)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text((out_dir(keys_from) / "keys.json").read_text())
     keys = json.loads(path.read_text()) if path.exists() else {}
 
     def make(node):
@@ -147,7 +155,8 @@ def compose_file(topo):
             "cap_add": ["NET_ADMIN"],
             "devices": ["/dev/net/tun:/dev/net/tun"],
             "sysctls": ["net.ipv6.conf.all.disable_ipv6=0"],
-            "environment": ["RUST_LOG=info"],
+            # FIPS_LOG takes a tracing filter, e.g. FIPS_LOG=info,fips::node=debug.
+            "environment": [f"RUST_LOG={os.environ.get('FIPS_LOG', 'info')}"],
             "volumes": [
                 f"./nodes/{node}.yaml:/etc/fips/fips.yaml:ro",
                 "./hosts:/etc/fips/hosts:ro",
@@ -167,7 +176,8 @@ def compose_file(topo):
         "image": COLLECTOR_IMAGE,
         "container_name": f"{project(topo.name)}-collector",
         "command": ["python3", "-u", str(ROOT / "collector" / "collector.py")],
-        "environment": [f"TOPOLOGY={topo.name}"],
+        # A variant has no file of its own; the collector loads the base file.
+        "environment": [f"TOPOLOGY={topo.name}", f"TOPOLOGY_BASE={topo.keys_from or topo.name}"],
         "ports": [f"127.0.0.1:{COLLECTOR_PORT}:8080"],
         "volumes": [
             f"{ROOT}:{ROOT}",
@@ -182,7 +192,7 @@ def compose_file(topo):
 
 
 def gen(topo):
-    keys = identities(topo.name, topo.nodes)
+    keys = identities(topo.name, topo.nodes, topo.keys_from)
     out = out_dir(topo.name)
     (out / "nodes").mkdir(parents=True, exist_ok=True)
     for node in topo.nodes:
@@ -208,7 +218,18 @@ def compose(topo, *args):
     subprocess.run(["docker", "compose", "-f", str(out_dir(topo.name) / "compose.yaml"), *args], check=True)
 
 
+def stop_others(topo):
+    """Take down any other lab topology: they all publish the collector port."""
+    listing = run("docker", "compose", "ls", "--all", "--format", "json").stdout
+    for entry in json.loads(listing or "[]"):
+        name = entry["Name"]
+        if name.startswith("fipslab-") and name != project(topo.name):
+            print(f"stopping {name}")
+            subprocess.run(["docker", "compose", "-p", name, "down"], check=True, capture_output=True)
+
+
 def up(topo):
+    stop_others(topo)
     gen(topo)
     with labstate(topo) as state:
         state.update(fresh_state())  # fresh containers: everything up, defaults

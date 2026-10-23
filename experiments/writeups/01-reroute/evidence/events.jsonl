@@ -1,0 +1,26 @@
+{"t": 1792775006.3303046, "rep": 1, "step": "reset+settle", "seconds": 90}
+{"t": 1792775096.6185493, "rep": 1, "step": 1, "action": "cut", "link": ["a", "b"]}
+{"t": 1792775142.5433948, "rep": 1, "step": 2, "wait": "wait_reachable", "waited_s": null, "since_action_s": 45.92484837600023, "timed_out": true}
+{"t": 1792775152.2321246, "rep": 1, "step": 2, "captured": ["a", "b", "c", "d", "e", "f"]}
+{"t": 1792775152.5171041, "rep": 1, "step": 3, "action": "heal", "link": ["a", "b"]}
+{"t": 1792775180.303228, "rep": 1, "step": 4, "wait": "wait_link_up", "waited_s": 27.786061062000044, "since_action_s": 27.786128714999904, "timed_out": false}
+{"t": 1792775201.4785018, "rep": 2, "step": "fresh-start"}
+{"t": 1792775202.5691168, "rep": 2, "step": "reset+settle", "seconds": 90}
+{"t": 1792775293.015668, "rep": 2, "step": 1, "action": "cut", "link": ["a", "b"]}
+{"t": 1792775339.1333025, "rep": 2, "step": 2, "wait": "wait_reachable", "waited_s": null, "since_action_s": 46.117637267999726, "timed_out": true}
+{"t": 1792775349.4795623, "rep": 2, "step": 2, "captured": ["a", "b", "c", "d", "e", "f"]}
+{"t": 1792775349.7486234, "rep": 2, "step": 3, "action": "heal", "link": ["a", "b"]}
+{"t": 1792775378.6382482, "rep": 2, "step": 4, "wait": "wait_link_up", "waited_s": 28.88957185299978, "since_action_s": 28.88963061000004, "timed_out": false}
+{"t": 1792775400.2335956, "rep": 3, "step": "fresh-start"}
+{"t": 1792775401.3277512, "rep": 3, "step": "reset+settle", "seconds": 90}
+{"t": 1792775491.5813062, "rep": 3, "step": 1, "action": "cut", "link": ["a", "b"]}
+{"t": 1792775537.6226027, "rep": 3, "step": 2, "wait": "wait_reachable", "waited_s": null, "since_action_s": 46.041287997999916, "timed_out": true}
+{"t": 1792775546.8210428, "rep": 3, "step": 2, "captured": ["a", "b", "c", "d", "e", "f"]}
+{"t": 1792775547.0665157, "rep": 3, "step": 3, "action": "heal", "link": ["a", "b"]}
+{"t": 1792775575.9727452, "rep": 3, "step": 4, "wait": "wait_link_up", "waited_s": 28.906178614000055, "since_action_s": 28.90623605399969, "timed_out": false}
+{"t": 1792775597.2285156, "rep": 4, "step": "fresh-start"}
+{"t": 1792775598.3127902, "rep": 4, "step": "reset+settle", "seconds": 90}
+{"t": 1792775688.5751698, "rep": 4, "step": 1, "action": "cut", "link": ["a", "b"]}
+{"t": 1792775696.584912, "rep": 4, "step": 2, "wait": "wait_reachable", "waited_s": 8.009691637000287, "since_action_s": 8.009746153999913, "timed_out": false}
+{"t": 1792775696.8269775, "rep": 4, "step": 3, "action": "heal", "link": ["a", "b"]}
+{"t": 1792775700.3550417, "rep": 4, "step": 4, "wait": "wait_link_up", "waited_s": 3.5280108209999526, "since_action_s": 3.5280690959998537, "timed_out": false}

@@ -1,0 +1,65 @@
+{
+  "declaration_sequence": 3,
+  "declaration_signed": true,
+  "depth": 3,
+  "is_root": false,
+  "my_coords": [
+    "63cf57774d3b6715c1c875b42159e0c9",
+    "6303171b8215d0d7e06e7e818c9d167e",
+    "6f56062dd944fd10bfa0b567ed14d019",
+    "50a0a083f3b88031f241e36f314060ce"
+  ],
+  "my_node_addr": "63cf57774d3b6715c1c875b42159e0c9",
+  "parent": "6303171b8215d0d7e06e7e818c9d167e",
+  "parent_display_name": "e",
+  "peer_tree_count": 2,
+  "peers": [
+    {
+      "coords": [
+        "6303171b8215d0d7e06e7e818c9d167e",
+        "6f56062dd944fd10bfa0b567ed14d019",
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 2,
+      "display_name": "e",
+      "distance_to_us": 1,
+      "node_addr": "6303171b8215d0d7e06e7e818c9d167e",
+      "root": "50a0a083f3b88031f241e36f314060ce"
+    },
+    {
+      "coords": [
+        "f445dd789871aaa781b813fa930d4ed4",
+        "63cf57774d3b6715c1c875b42159e0c9",
+        "6303171b8215d0d7e06e7e818c9d167e",
+        "6f56062dd944fd10bfa0b567ed14d019",
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 4,
+      "display_name": "a",
+      "distance_to_us": 1,
+      "node_addr": "f445dd789871aaa781b813fa930d4ed4",
+      "root": "50a0a083f3b88031f241e36f314060ce"
+    }
+  ],
+  "root": "50a0a083f3b88031f241e36f314060ce",
+  "root_npub": "npub1l20d3jlzzgruxhazc962a09w4xeau5mcmpv0w3hpsv27u8swnmds7edq3r",
+  "stats": {
+    "accepted": 5,
+    "addr_mismatch": 0,
+    "ancestry_changed": 0,
+    "ancestry_invalid": 0,
+    "decode_error": 0,
+    "flap_dampened": 0,
+    "loop_detected": 0,
+    "outbound_sign_failed": 0,
+    "parent_losses": 0,
+    "parent_switches": 2,
+    "rate_limited": 6,
+    "received": 10,
+    "send_failed": 0,
+    "sent": 14,
+    "sig_failed": 0,
+    "stale": 5,
+    "unknown_peer": 0
+  }
+}

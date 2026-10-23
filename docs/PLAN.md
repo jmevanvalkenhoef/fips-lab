@@ -53,9 +53,23 @@ Result: 3-node chain a — b — c, all 6 directed pairs ping over the mesh, a �
 - **Faults:** cut / heal / netem per link, kill / start per node, partition (cuts every link crossing a node set), reset. Lab state (`labstate.json`: cut links, netem overrides, stopped nodes) is shared by CLI, collector and scenario runner under a file lock, written atomically so the host user and the root collector can both replace it.
 - **A restarted container gets fresh interfaces** (no qdisc, link up), so `start` reapplies each link's netem and re-cuts its end if the link is cut.
 - **cut-reroute on ring6, defaults** (3 reps): reroute 30.7 / 31.9 / 31.8 s, declared dead 31.4 / 31.9 / 31.9 s, relink after heal 4.5 / 3.3 / 3.5 s. Rerouting happens the moment the link is declared dead, not before.
-- **Open: intermittent stuck reroute with fast timeouts.** ring6-fast (heartbeat 2 s, dead timeout 6 s): in 2 of 3 scenario reps, a could not reach b for >90 s (censored), although FIPS declared a–b dead ~7 s after the cut and a's tree parent had already moved to f. Rep 3 and one manual retry recovered in 8–9 s, as did 3/3 manual runs earlier. 0 of 6 cuts got stuck at default timeouts. In the manual retry a's discovery counters did not move and its session to b stayed `established` throughout. Next: a dedicated scenario (≥20 reps) that captures `show_routing`, `show_sessions` and `show_cache` on a while stuck. Candidate causes: a stale coordinate-cache entry or session path, or lookup backoff after failures during the 6 s before the link is declared dead.
-- **Relink after a long cut is slow** (75 s after a 90 s cut, vs ~4 s after a short one). Hypothesis: exponential reconnect backoff (`node.retry.base_interval_secs` 5, doubling; `show_routing.retries` lists the pending retry). Testable by varying cut duration.
+- **Stuck reroute: resolved in milestone 5**, see below. (In the manual retry a's session to b *looked* `established`; the dedicated captures later showed `initiating`.)
+- **Relink after a long cut: resolved in milestone 5**, exponential reconnect backoff confirmed.
 - Waits in a scenario run in sequence, and `record` measures from the last *action*: a wait that follows a timed-out wait inherits that delay (`declared_dead_s` ≈ 90 s in the stuck reps). Read measurements after a censored one with that in mind.
+
+## Experiment findings (2026-10-23, milestone 5)
+
+Write-up: `experiments/writeups/01-reroute/` ("Thirty seconds of silence"). Data: `data.json` from `experiments/analyze.py`; the evidence of one stuck cut is committed in `evidence/`.
+
+- **Reroute ≈ dead timeout + ~1 s** over `link_dead_timeout_secs` 6/10/15/20/30 (heartbeat = timeout ÷ 3), 6 reps each. Medians 8.0 / 12.3 / 16.8 / 22.0 / 32.3 s.
+- **Stuck reroutes are a start-up effect.** Warm mesh: 0 of 38 stuck. Fresh start, cut 15 s later: slow (15–40 s) in half. Cut 90 s later: 6 of 9 stuck (> 45 s).
+- **Cause: a stale *verified* coordinate entry on a transit node.** A destination a node looked up itself (proof checked) refuses coordinate hints from passing packets for `VERIFIED_TTL_MS` = 300 s (`src/cache/entry.rs`, `coord_cache.rs` → `HintOutcome::Rejected`; an anti-poisoning measure). The lab's convergence check makes every node look up every other, so for 5 min after start every entry is pinned. When a cut then moves a in the tree, e still holds a at `a>b>c` and routes up to d, d (correct) routes down to e: b's SessionAck loops d↔e until TTL exhaustion (`SessionDatagram TTL exhausted` on d, e's `coord_hint_rejected` 589). a's handshake stays `initiating`, b's `awaiting_msg3`; the handshake times out every 30 s and starts over.
+- **Why 90 s is worse than 15 s:** idle sessions are removed after 90 s ("no application data"), so a late cut needs a new handshake, which has to cross the loop.
+- **Confirmed** (`experiments/verified-window.sh`): cut 310 s after a fresh start, 0/6 stuck (median 7.9 s, same as warm). Stuck cuts left alone (4/4) recovered on their own 294–303 s after start-up, not after the cut. Also seen: after a heal moves the tree back, some pairs involving f stayed unreachable for 90 s, so heals can trigger it too.
+- **Upstream candidates:** a verified entry that contradicts the tree (packet TTL-exhausted, or a TreeAnnounce placing the destination elsewhere) could lose its pin, or a transit node could re-verify instead of looping; worth an issue with the evidence bundle. Separately: a healed link waits for the next scheduled retry.
+- **Relink = next reconnect attempt.** Attempts at 5, 15, 35, 75, 155 s after the dead verdict (`retry.base_interval_secs` 5, doubling, no ceiling seen up to 80 s gaps). Every heal lands on that schedule; the 75 s relink after a 90 s cut was the fifth attempt.
+- **Tooling:** `FIPS_LOG` sets the nodes' `RUST_LOG`; `--fresh` restarts the mesh before every rep (since 2026-10-23 including rep 1; `analyze.py` marks `fresh` per rep from the events); every rep saves the capture nodes' logs.
+- **Lesson:** run data is not in git and a careless glob deleted three runs (rerun the same day). Curated evidence now goes into the write-up folder.
 
 ## Decisions
 

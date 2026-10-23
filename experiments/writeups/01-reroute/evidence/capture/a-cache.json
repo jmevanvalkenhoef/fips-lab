@@ -1,0 +1,23 @@
+{
+  "avg_age_ms": 39051,
+  "count": 1,
+  "default_ttl_ms": 300000,
+  "entries": [
+    {
+      "age_ms": 40004,
+      "coords": [
+        "d9476313bf06ca9e8e418b235a4ed443",
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 1,
+      "display_name": "b",
+      "ipv6_addr": "fdd9:4763:13bf:6ca:9e8e:418b:235a:4ed4",
+      "last_used_ms": 1792775141094,
+      "node_addr": "d9476313bf06ca9e8e418b235a4ed443",
+      "path_mtu": 1472
+    }
+  ],
+  "expired": 0,
+  "fill_ratio": 0.00002,
+  "max_entries": 50000
+}

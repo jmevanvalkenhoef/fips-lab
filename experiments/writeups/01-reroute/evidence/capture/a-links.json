@@ -1,0 +1,19 @@
+{
+  "links": [
+    {
+      "created_at_ms": 0,
+      "direction": "inbound",
+      "link_id": 4,
+      "remote_addr": "10.99.6.2:2121",
+      "state": "connected",
+      "stats": {
+        "bytes_recv": 171836,
+        "bytes_sent": 168964,
+        "last_recv_ms": 1792775141991,
+        "packets_recv": 1181,
+        "packets_sent": 1150
+      },
+      "transport_id": 1
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+# Hunt for the intermittent stuck reroute seen with fast dead-link detection:
+# after cutting a-b, FIPS declares the link dead within seconds and a's tree
+# parent moves to f, yet a sometimes cannot reach b for over 90 s.
+#
+# Run with fast timeouts:
+#   scenario.py stuck-reroute --fips node.heartbeat_interval_secs=2 \
+#                             --fips node.link_dead_timeout_secs=6
+#
+# When a stays stuck, a's and b's full state is captured for diagnosis.
+
+topology = "ring6"
+repeat = 20
+settle = 15
+
+[[steps]]
+do = "cut"
+link = ["a", "b"]
+
+[[steps]]
+do = "wait_reachable"
+from = "a"
+to = "b"
+timeout = 45
+record = "reroute_s"
+capture = ["a", "b"]
+
+[[steps]]
+do = "heal"
+link = ["a", "b"]
+
+[[steps]]
+do = "wait_link_up"
+link = ["a", "b"]
+timeout = 150
+record = "relink_s"

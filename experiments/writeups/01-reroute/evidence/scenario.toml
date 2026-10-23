@@ -1,0 +1,32 @@
+# The stuck reroute with every node's state captured, for finding where the
+# session handshake gets lost. Reproduces reliably with a fresh start and a
+# long settle (the session from the convergence check has expired by then):
+#
+#   FIPS_LOG=info,fips=debug scenario.py stuck-diagnose --fresh --repeat 4 \
+#       --fips node.heartbeat_interval_secs=2 --fips node.link_dead_timeout_secs=6
+
+topology = "ring6"
+repeat = 4
+settle = 90
+
+[[steps]]
+do = "cut"
+link = ["a", "b"]
+
+[[steps]]
+do = "wait_reachable"
+from = "a"
+to = "b"
+timeout = 45
+record = "reroute_s"
+capture = ["a", "b", "c", "d", "e", "f"]
+
+[[steps]]
+do = "heal"
+link = ["a", "b"]
+
+[[steps]]
+do = "wait_link_up"
+link = ["a", "b"]
+timeout = 150
+record = "relink_s"

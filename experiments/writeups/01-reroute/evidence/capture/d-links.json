@@ -1,0 +1,34 @@
+{
+  "links": [
+    {
+      "created_at_ms": 0,
+      "direction": "inbound",
+      "link_id": 3,
+      "remote_addr": "10.99.4.3:2121",
+      "state": "connected",
+      "stats": {
+        "bytes_recv": 225966,
+        "bytes_sent": 230708,
+        "last_recv_ms": 1792775144075,
+        "packets_recv": 1355,
+        "packets_sent": 1381
+      },
+      "transport_id": 1
+    },
+    {
+      "created_at_ms": 0,
+      "direction": "outbound",
+      "link_id": 1,
+      "remote_addr": "10.99.3.2:2121",
+      "state": "connected",
+      "stats": {
+        "bytes_recv": 253074,
+        "bytes_sent": 242091,
+        "last_recv_ms": 1792775144481,
+        "packets_recv": 1685,
+        "packets_sent": 1601
+      },
+      "transport_id": 1
+    }
+  ]
+}

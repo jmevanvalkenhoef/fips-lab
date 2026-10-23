@@ -4,7 +4,7 @@ A visual chaos lab for [FIPS](https://github.com/jmcorgan/fips), the self-organi
 
 Spin up a mesh of FIPS nodes in Docker, break it (cut links, kill nodes, partition the network, degrade links), and watch it heal live in the browser. Every experiment is measured and reproducible.
 
-> Status: early development.
+> Status: early development. First experiment write-up: [Thirty seconds of silence](experiments/writeups/01-reroute/).
 
 ## Quickstart
 
@@ -53,6 +53,17 @@ python3 lab/scenario.py cut-reroute --topology ring6-fast  # same steps, other t
 ```
 
 Steps are actions (`cut`, `heal`, `netem`, `kill`, `start`, `partition`, `reset`, `sleep`) and waits (`wait_reachable`, `wait_unreachable`, `wait_link_dead`, `wait_link_up`); a wait with `record` stores the seconds since the last action. A wait that times out is kept as a censored measurement, not dropped. Each run writes `experiments/runs/<time>-<scenario>-<topology>/` with the scenario, metadata (topology, image, git commit), an event log, `measurements.csv` and the collector's per-second snapshots.
+
+Options: `--repeat N`, `--settle S` (quiet seconds before each repetition), `--fresh` (new containers before every repetition), `--fips KEY=VALUE` (a variant of the topology with extra FIPS settings, same node identities). A wait with `capture = [nodes]` saves those nodes' full state when it times out, and every repetition keeps their logs; `FIPS_LOG=info,fips=debug` raises the nodes' log level.
+
+## Write-ups
+
+**[01 · Thirty seconds of silence](experiments/writeups/01-reroute/)**: how fast a FIPS mesh routes around a cut link. Short answer: the dead-link timeout plus about a second. The longer answer found two things worth taking upstream:
+
+- In the first five minutes after nodes look each other up, a cut can strand traffic in a forwarding loop. A transit node keeps a destination's *verified* coordinates for 300 s and refuses the corrections in passing packets (an anti-poisoning rule), so replies bounce between two nodes until their hop limit runs out.
+- A healed link is not used until the next scheduled reconnect attempt, and those back off exponentially: up to 76 s of a working link sitting idle in these runs.
+
+Serve the repo root (`python3 -m http.server`) and open `experiments/writeups/01-reroute/`. To regenerate: the scripts in `experiments/`, then `python3 experiments/analyze.py`.
 
 ## Layout
 

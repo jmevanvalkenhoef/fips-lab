@@ -1,0 +1,19 @@
+{
+  "sessions": [
+    {
+      "display_name": "b",
+      "is_initiator": true,
+      "last_activity_ms": 1792775133367,
+      "npub": "npub1tz5xvp6shemd3s7k3s0f0c6useftlfcrf80r2su089mazk5h2wjqmr0khn",
+      "remote_addr": "d9476313bf06ca9e8e418b235a4ed443",
+      "resend_count": 3,
+      "state": "initiating",
+      "stats": {
+        "bytes_recv": 0,
+        "bytes_sent": 0,
+        "packets_recv": 0,
+        "packets_sent": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "count": 5,
+  "entries": [
+    {
+      "age_ms": 143435,
+      "display_name": "f",
+      "ipv6_addr": "fd63:cf57:774d:3b67:15c1:c875:b421:59e0",
+      "last_seen_ms": 1792775001047,
+      "node_addr": "63cf57774d3b6715c1c875b42159e0c9",
+      "npub": "npub12ragcgmx2mamaks3vxqyqx8dn0k88nyx7kdstuxgs2wa9ut6ns4qphuh9f"
+    },
+    {
+      "age_ms": 148216,
+      "display_name": "b",
+      "ipv6_addr": "fdd9:4763:13bf:6ca:9e8e:418b:235a:4ed4",
+      "last_seen_ms": 1792774996266,
+      "node_addr": "d9476313bf06ca9e8e418b235a4ed443",
+      "npub": "npub1tz5xvp6shemd3s7k3s0f0c6useftlfcrf80r2su089mazk5h2wjqmr0khn"
+    },
+    {
+      "age_ms": 143644,
+      "display_name": "e",
+      "ipv6_addr": "fd63:317:1b82:15d0:d7e0:6e7e:818c:9d16",
+      "last_seen_ms": 1792775000838,
+      "node_addr": "6303171b8215d0d7e06e7e818c9d167e",
+      "npub": "npub12ugayq4z0nfmxmukhvgluent2vuy9j6vf9qm4vlgmjk7r75qnyfqzzp7qy"
+    },
+    {
+      "age_ms": 147939,
+      "display_name": "d",
+      "ipv6_addr": "fd6f:5606:2dd9:44fd:10bf:a0b5:67ed:14d0",
+      "last_seen_ms": 1792774996543,
+      "node_addr": "6f56062dd944fd10bfa0b567ed14d019",
+      "npub": "npub1jn0upuachzdenczum9j8szhwre5k324cjlflpex7e5x0k0hed0hsayt7vu"
+    },
+    {
+      "age_ms": 148260,
+      "display_name": "a",
+      "ipv6_addr": "fdf4:45dd:7898:71aa:a781:b813:fa93:d4e",
+      "last_seen_ms": 1792774996222,
+      "node_addr": "f445dd789871aaa781b813fa930d4ed4",
+      "npub": "npub1hrls3mw9rqz7hc70gemf5j9mne00qtgjavxkrcz2t55glmqc3clq9yqa60"
+    }
+  ],
+  "max_entries": 10000
+}

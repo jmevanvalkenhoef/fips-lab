@@ -1,0 +1,92 @@
+2026-10-23T17:03:24.986816Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=16928320695917579572 target=d ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:24.986845Z DEBUG fips::node::handlers::lookup: Discovery retry sent target_node=d attempt=4
+2026-10-23T17:03:25.035323Z  INFO fips::node::handlers::lookup: Discovery succeeded, proof verified, route cached request_id=16928320695917579572 target=d depth=1 path_mtu=1472
+2026-10-23T17:03:25.035360Z DEBUG fips::node::handlers::lookup: Wrote path_mtu_lookup from discovery LookupResponse target=d fips_addr=fd6f:5606:2dd9:44fd:10bf:a0b5:67ed:14d0 path_mtu=1472 prior=None map_len=4
+2026-10-23T17:03:25.035373Z DEBUG fips::node::handlers::lookup: Reset coords warmup after discovery for existing session dest=d warmup_packets=5
+2026-10-23T17:03:45.075860Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:03:45.986349Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:03:45.986727Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.7ms loss=0.0% jitter=0.5ms goodput=850B/s tx_pkts=187 rx_pkts=176
+2026-10-23T17:03:45.986771Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=10.2ms loss=0.0% jitter=0.7ms goodput=1.3KB/s tx_pkts=334 rx_pkts=358
+2026-10-23T17:03:45.986869Z DEBUG fips::node::handlers::session: MMP session metrics session=a rtt=10.9ms loss=0.0% jitter=0.5ms goodput=124B/s mtu=1472 tx_pkts=68 rx_pkts=68
+2026-10-23T17:03:45.986995Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1tz5x...0khn rtt=21.2ms loss=0.0% jitter=1.0ms goodput=124B/s mtu=1472 tx_pkts=67 rx_pkts=69
+2026-10-23T17:03:46.986621Z DEBUG fips::node::handlers::session: MMP session metrics session=e rtt=11.9ms loss=0.0% jitter=0.7ms goodput=124B/s mtu=1472 tx_pkts=68 rx_pkts=68
+2026-10-23T17:03:49.986476Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1l20d...dq3r rtt=33.3ms loss=0.0% jitter=1.2ms goodput=124B/s mtu=1472 tx_pkts=73 rx_pkts=73
+2026-10-23T17:03:53.986617Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1jn0u...t7vu rtt=35.6ms loss=0.0% jitter=1.3ms goodput=124B/s mtu=1472 tx_pkts=79 rx_pkts=79
+2026-10-23T17:04:15.075789Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:04:15.101412Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=a
+2026-10-23T17:04:15.986607Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.5ms loss=0.0% jitter=0.4ms goodput=747B/s tx_pkts=347 rx_pkts=396
+2026-10-23T17:04:15.986660Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=10.7ms loss=0.0% jitter=0.7ms goodput=1.8KB/s tx_pkts=704 rx_pkts=673
+2026-10-23T17:04:15.986768Z DEBUG fips::node::handlers::session: MMP session metrics session=a rtt=11.0ms loss=0.0% jitter=0.6ms goodput=124B/s mtu=1472 tx_pkts=131 rx_pkts=131
+2026-10-23T17:04:15.986845Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1tz5x...0khn rtt=21.7ms loss=0.0% jitter=0.7ms goodput=124B/s mtu=1472 tx_pkts=130 rx_pkts=132
+2026-10-23T17:04:16.986048Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:04:16.986431Z DEBUG fips::node::handlers::session: MMP session metrics session=e rtt=11.5ms loss=0.0% jitter=0.5ms goodput=124B/s mtu=1472 tx_pkts=131 rx_pkts=131
+2026-10-23T17:04:20.986648Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1l20d...dq3r rtt=33.4ms loss=0.0% jitter=1.1ms goodput=124B/s mtu=1472 tx_pkts=138 rx_pkts=139
+2026-10-23T17:04:24.986088Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1jn0u...t7vu rtt=39.0ms loss=0.0% jitter=1.3ms goodput=124B/s mtu=1472 tx_pkts=144 rx_pkts=144
+2026-10-23T17:04:45.986346Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.4ms loss=0.0% jitter=0.7ms goodput=820B/s tx_pkts=516 rx_pkts=582
+2026-10-23T17:04:45.986368Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=11.1ms loss=0.0% jitter=0.6ms goodput=1.4KB/s tx_pkts=1036 rx_pkts=989
+2026-10-23T17:04:45.986418Z DEBUG fips::node::handlers::session: MMP session metrics session=a rtt=11.1ms loss=0.0% jitter=0.4ms goodput=124B/s mtu=1472 tx_pkts=194 rx_pkts=194
+2026-10-23T17:04:45.986448Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1tz5x...0khn rtt=21.6ms loss=0.0% jitter=0.7ms goodput=124B/s mtu=1472 tx_pkts=193 rx_pkts=195
+2026-10-23T17:04:47.986457Z DEBUG fips::node::handlers::session: MMP session teardown session=e rtt=11.0ms loss=0.0% jitter=0.5ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=196 tx_bytes=14897 rx_pkts=197 rx_bytes=11769
+2026-10-23T17:04:47.986623Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=e fips_addr=fd63:317:1b82:15d0:d7e0:6e7e:818c:9d16
+2026-10-23T17:04:47.986709Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=e fips_addr=fd63:317:1b82:15d0:d7e0:6e7e:818c:9d16 link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=4
+2026-10-23T17:04:47.986815Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=e idle_secs=90
+2026-10-23T17:04:47.986827Z DEBUG fips::node::handlers::session: MMP session teardown session=a rtt=11.2ms loss=0.0% jitter=0.5ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=198 tx_bytes=15053 rx_pkts=196 rx_bytes=11761
+2026-10-23T17:04:47.986965Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=a fips_addr=fdf4:45dd:7898:71aa:a781:b813:fa93:d4e
+2026-10-23T17:04:47.986980Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=a fips_addr=fdf4:45dd:7898:71aa:a781:b813:fa93:d4e link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=4
+2026-10-23T17:04:47.986989Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=a idle_secs=90
+2026-10-23T17:04:47.986997Z DEBUG fips::node::handlers::session: MMP session teardown session=b rtt=21.5ms loss=0.0% jitter=0.8ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=197 tx_bytes=14985 rx_pkts=197 rx_bytes=11813
+2026-10-23T17:04:47.987011Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=b idle_secs=90
+2026-10-23T17:04:47.987034Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:04:50.986589Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1l20d...dq3r rtt=32.9ms loss=0.0% jitter=1.0ms goodput=124B/s mtu=1472 tx_pkts=201 rx_pkts=202
+2026-10-23T17:04:51.985804Z DEBUG fips::node::handlers::session: MMP session teardown session=c rtt=32.6ms loss=0.0% jitter=1.0ms etx=1.50 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=203 tx_bytes=15538 rx_pkts=202 rx_bytes=12174
+2026-10-23T17:04:51.985962Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=c fips_addr=fd50:a0a0:83f3:b880:31f2:41e3:6f31:4060
+2026-10-23T17:04:51.985978Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=c idle_secs=90
+2026-10-23T17:04:54.985710Z DEBUG fips::node::handlers::session: MMP session teardown session=d rtt=36.7ms loss=0.0% jitter=1.3ms etx=1.00 goodput=125B/s send_mtu=1472 observed_mtu=1472 tx_pkts=207 tx_bytes=15964 rx_pkts=205 rx_bytes=12528
+2026-10-23T17:04:54.985785Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=d fips_addr=fd6f:5606:2dd9:44fd:10bf:a0b5:67ed:14d0
+2026-10-23T17:04:54.985816Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=d idle_secs=90
+2026-10-23T17:05:02.099531Z DEBUG fips::node::tree: Processed TreeAnnounce from=a seq=3 depth=0 root=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:02.099723Z  INFO fips::node::tree: Parent switched, invalidated downstream coord cache entries, announcing to all peers new_parent=e new_seq=3 new_root=50a0a083f3b88031f241e36f314060ce depth=3
+2026-10-23T17:05:02.099775Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=a
+2026-10-23T17:05:02.100681Z DEBUG fips::node::bloom: Received FilterAnnounce from=a seq=7 est_entries="1" set_bits=5 fill=0.1% tree_peer=false
+2026-10-23T17:05:02.986047Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=6 est_entries="1" set_bits=5 fill=0.1% tree_peer=true
+2026-10-23T17:05:02.986103Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=a seq=7 est_entries="6" set_bits=30 fill=0.4% tree_peer=false
+2026-10-23T17:05:02.986838Z DEBUG fips::node::handlers::rekey: Rekey initiated, sent msg1 on existing link peer=e our_index=fb61829a
+2026-10-23T17:05:02.996501Z DEBUG fips::node::tree: Processed TreeAnnounce from=a seq=4 depth=4 root=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:05:02.997613Z DEBUG fips::node::handlers::lookup: Forwarding LookupRequest request_id=5758499566363843316 target=b ttl=63 peer_count=1
+2026-10-23T17:05:02.999227Z DEBUG fips::node::handlers::handshake: Rekey completed (initiator), pending K-bit cutover peer=e new_our_index=fb61829a new_their_index=aeafa5d4
+2026-10-23T17:05:03.038539Z DEBUG fips::node::handlers::lookup: Reverse-path forwarding LookupResponse request_id=5758499566363843316 target=b next_hop=a path_mtu=1472
+2026-10-23T17:05:03.048316Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:03.101178Z DEBUG fips::node::bloom: Received FilterAnnounce from=a seq=8 est_entries="1" set_bits=5 fill=0.1% tree_peer=true
+2026-10-23T17:05:03.986489Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=8 est_entries="2" set_bits=10 fill=0.1% tree_peer=true
+2026-10-23T17:05:03.986758Z DEBUG fips::node::handlers::rekey: Rekey cutover complete (initiator), K-bit flipped peer=e
+2026-10-23T17:05:04.099927Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:05.074418Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=10 est_entries="4" set_bits=20 fill=0.2% tree_peer=true
+2026-10-23T17:05:05.986076Z DEBUG fips::node::bloom: Resending unconfirmed FilterAnnounce peer=e reason=SessionChanged counter=Some(579)
+2026-10-23T17:05:05.986174Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=9 est_entries="2" set_bits=10 fill=0.1% tree_peer=true
+2026-10-23T17:05:05.986228Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=a seq=10 est_entries="5" set_bits=25 fill=0.3% tree_peer=true
+2026-10-23T17:05:06.073784Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:05:06.074058Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=11 est_entries="4" set_bits=20 fill=0.2% tree_peer=true
+2026-10-23T17:05:06.100756Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:11.098999Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:15.075735Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:05:15.986517Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.2ms loss=0.0% jitter=0.0ms goodput=295B/s tx_pkts=613 rx_pkts=656
+2026-10-23T17:05:15.986573Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=11.1ms loss=0.0% jitter=0.6ms goodput=258B/s tx_pkts=1130 rx_pkts=1091
+2026-10-23T17:05:18.986208Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:05:19.099722Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:20.987870Z DEBUG fips::node::handlers::rekey: Rekey initiated, sent msg1 on existing link peer=a our_index=21ce89d9
+2026-10-23T17:05:20.999472Z DEBUG fips::node::handlers::handshake: Rekey completed (initiator), pending K-bit cutover peer=a new_our_index=21ce89d9 new_their_index=e8ecab57
+2026-10-23T17:05:21.986217Z DEBUG fips::node::handlers::rekey: Rekey cutover complete (initiator), K-bit flipped peer=a
+2026-10-23T17:05:23.986616Z DEBUG fips::node::tree: Resending unconfirmed TreeAnnounce peer=a reason=SessionChanged counter=Some(1128) seq=Some(3)
+2026-10-23T17:05:33.372039Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:35.100309Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:37.099058Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:41.100475Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:45.986629Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.1ms loss=0.0% jitter=0.8ms goodput=248B/s tx_pkts=675 rx_pkts=713
+2026-10-23T17:05:45.986659Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=11.0ms loss=0.0% jitter=0.8ms goodput=189B/s tx_pkts=1189 rx_pkts=1159
+2026-10-23T17:05:48.986366Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:05:49.100996Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:06:15.986588Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.2ms loss=0.0% jitter=0.8ms goodput=196B/s tx_pkts=738 rx_pkts=772
+2026-10-23T17:06:15.986607Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=10.8ms loss=0.0% jitter=0.7ms goodput=201B/s tx_pkts=1254 rx_pkts=1228
+2026-10-23T17:06:16.074792Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:06:19.986184Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:06:20.099466Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=a

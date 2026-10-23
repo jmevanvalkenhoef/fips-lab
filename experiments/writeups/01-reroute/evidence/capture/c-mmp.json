@@ -1,0 +1,49 @@
+{
+  "peers": [
+    {
+      "display_name": "b",
+      "link_layer": {
+        "delivery_ratio_forward": 1.0,
+        "delivery_ratio_reverse": 1.0,
+        "ecn_ce_count": 0,
+        "etx": 1.0,
+        "goodput_bps": 268.67119522754496,
+        "goodput_trend": "falling",
+        "jitter_trend": "rising",
+        "loss_rate": 0.0,
+        "loss_trend": "stable",
+        "lqi": 1.3952412488312405,
+        "rtt_trend": "stable",
+        "smoothed_etx": 1.2617368705575465,
+        "smoothed_loss": 0.0,
+        "spin_bit_role": "responder",
+        "srtt_ms": 10.581
+      },
+      "mode": "full",
+      "peer": "d9476313bf06ca9e8e418b235a4ed443"
+    },
+    {
+      "display_name": "d",
+      "link_layer": {
+        "delivery_ratio_forward": 1.0,
+        "delivery_ratio_reverse": 1.0,
+        "ecn_ce_count": 0,
+        "etx": 1.0,
+        "goodput_bps": 245.6086804711714,
+        "goodput_trend": "falling",
+        "jitter_trend": "rising",
+        "loss_rate": 0.0,
+        "loss_trend": "stable",
+        "lqi": 1.262443028040859,
+        "rtt_trend": "falling",
+        "smoothed_etx": 1.1443153540430002,
+        "smoothed_loss": 0.0,
+        "spin_bit_role": "responder",
+        "srtt_ms": 10.323
+      },
+      "mode": "full",
+      "peer": "6f56062dd944fd10bfa0b567ed14d019"
+    }
+  ],
+  "sessions": []
+}

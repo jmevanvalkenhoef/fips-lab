@@ -1,0 +1,32 @@
+# Left alone, does a stuck reroute clear by itself once the stale coordinate
+# entry's verification window (VERIFIED_TTL_MS, 300 s after that node's own
+# discovery) runs out? Same as stuck-diagnose, but waits up to 330 s:
+#
+#   FIPS_LOG=info,fips=debug scenario.py stuck-unlock --fresh --repeat 4 \
+#       --fips node.heartbeat_interval_secs=2 --fips node.link_dead_timeout_secs=6
+
+topology = "ring6"
+repeat = 4
+settle = 90
+
+[[steps]]
+do = "cut"
+link = ["a", "b"]
+
+[[steps]]
+do = "wait_reachable"
+from = "a"
+to = "b"
+timeout = 330
+record = "reroute_s"
+capture = ["a", "b", "c", "d", "e", "f"]
+
+[[steps]]
+do = "heal"
+link = ["a", "b"]
+
+[[steps]]
+do = "wait_link_up"
+link = ["a", "b"]
+timeout = 150
+record = "relink_s"

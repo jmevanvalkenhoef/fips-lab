@@ -1,0 +1,49 @@
+{
+  "peers": [
+    {
+      "display_name": "d",
+      "link_layer": {
+        "delivery_ratio_forward": 1.0,
+        "delivery_ratio_reverse": 0.6666666666666666,
+        "ecn_ce_count": 0,
+        "etx": 1.5,
+        "goodput_bps": 1633.7897530161715,
+        "goodput_trend": "rising",
+        "jitter_trend": "rising",
+        "loss_rate": 0.0,
+        "loss_trend": "stable",
+        "lqi": 1.2980257184520396,
+        "rtt_trend": "stable",
+        "smoothed_etx": 1.1715139292340542,
+        "smoothed_loss": 0.0,
+        "spin_bit_role": "initiator",
+        "srtt_ms": 10.799
+      },
+      "mode": "full",
+      "peer": "6f56062dd944fd10bfa0b567ed14d019"
+    },
+    {
+      "display_name": "f",
+      "link_layer": {
+        "delivery_ratio_forward": 1.0,
+        "delivery_ratio_reverse": 1.0,
+        "ecn_ce_count": 0,
+        "etx": 1.0,
+        "goodput_bps": 188.22745263522216,
+        "goodput_trend": "falling",
+        "jitter_trend": "rising",
+        "loss_rate": 0.0,
+        "loss_trend": "stable",
+        "lqi": 1.3436431426564674,
+        "rtt_trend": "stable",
+        "smoothed_etx": 1.2124007603487188,
+        "smoothed_loss": 0.0,
+        "spin_bit_role": "responder",
+        "srtt_ms": 10.825
+      },
+      "mode": "full",
+      "peer": "63cf57774d3b6715c1c875b42159e0c9"
+    }
+  ],
+  "sessions": []
+}

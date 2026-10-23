@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """Run a fault scenario against a lab topology and record what happened.
 
-    scenario.py <scenario> [--topology NAME] [--repeat N]
+    scenario.py <scenario> [--topology NAME] [--repeat N] [--fips KEY=VALUE ...]
+
+--fips runs a variant of the topology with extra FIPS settings, e.g.
+--fips node.link_dead_timeout_secs=10. Variants keep the base topology's node
+identities, so the spanning tree is the same across settings.
 
 A scenario is scenarios/<name>.toml:
 
@@ -25,7 +29,10 @@ kill, start (node), partition (nodes), reset, sleep (seconds).
 Waits: wait_reachable, wait_unreachable (from, to), wait_link_dead,
 wait_link_up (link). A wait with `record` stores the seconds since the most
 recent action; a wait that times out is stored as censored (the real value is
-longer than the timeout), not dropped.
+longer than the timeout), not dropped. A wait with `capture = ["a", "b"]`
+saves those nodes' full state when it times out (every `fipsctl show`, recent
+logs, and for a reachability wait a `fipsctl probe` of the target), for
+diagnosing what got stuck.
 
 Each run writes experiments/runs/<timestamp>-<scenario>/:
     scenario.toml      the scenario as run
@@ -33,6 +40,8 @@ Each run writes experiments/runs/<timestamp>-<scenario>/:
     events.jsonl       every action and wait, with timestamps
     measurements.csv   repetition, measurement, seconds, censored
     snapshots.jsonl    the collector's snapshot every second, for replay
+    captures/          node state at each timed-out wait with `capture`
+    logs/              every repetition's FIPS logs of the nodes named in a `capture`
 """
 
 import argparse
@@ -58,6 +67,7 @@ POLL = 0.25
 SNAPSHOT_URL = f"http://localhost:{lab.COLLECTOR_PORT}/snapshot"
 ACTIONS = {"cut", "heal", "netem", "kill", "start", "partition", "reset", "sleep"}
 WAITS = {"wait_reachable", "wait_unreachable", "wait_link_dead", "wait_link_up"}
+SHOW = ["status", "tree", "peers", "links", "sessions", "routing", "cache", "identity-cache", "mmp"]
 
 
 def running(topo):
@@ -156,6 +166,35 @@ def wait(check, timeout):
     return None
 
 
+def capture(topo, step, out):
+    """Save everything the named nodes can tell about themselves, plus a probe."""
+    out.mkdir(parents=True, exist_ok=True)
+    for node in step["capture"]:
+        for what in SHOW:
+            result = lab.exec_in(topo.name, node, "fipsctl", "show", what, check=False)
+            (out / f"{node}-{what}.json").write_text(result.stdout or result.stderr)
+        logs = lab.run("docker", "logs", "--since", "180s", lab.container(topo.name, node), check=False)
+        (out / f"{node}.log").write_text(logs.stdout + logs.stderr)
+    if "from" in step and "to" in step:
+        try:
+            result = subprocess.run(
+                ["docker", "exec", lab.container(topo.name, step["from"]), "fipsctl", "probe", step["to"]],
+                capture_output=True, text=True, timeout=60,
+            )
+            text = result.stdout + result.stderr
+        except subprocess.TimeoutExpired:
+            text = "probe did not finish within 60 s"
+        (out / f"probe-{step['from']}-{step['to']}.txt").write_text(text)
+
+
+def save_logs(topo, nodes, since, out):
+    """Save the nodes' logs since a Unix time, before a fresh start discards them."""
+    out.mkdir(parents=True, exist_ok=True)
+    for node in nodes:
+        logs = lab.run("docker", "logs", "--since", f"{since:.3f}", lab.container(topo.name, node), check=False)
+        (out / f"{node}.log").write_text(logs.stdout + logs.stderr)
+
+
 def validate(topo, steps):
     for i, step in enumerate(steps, 1):
         kind = step.get("do")
@@ -166,6 +205,9 @@ def validate(topo, steps):
         for key in ("node", "from", "to"):
             if key in step and step[key] not in topo.nodes:
                 sys.exit(f"step {i}: unknown node '{step[key]}'")
+        for node in step.get("capture", []):
+            if node not in topo.nodes:
+                sys.exit(f"step {i}: unknown node '{node}' in capture")
 
 
 def git_commit():
@@ -179,14 +221,21 @@ def main():
     parser.add_argument("scenario")
     parser.add_argument("--topology", help="run against this topology instead of the scenario's")
     parser.add_argument("--repeat", type=int, help="override the number of repetitions")
+    parser.add_argument("--fresh", action="store_true",
+                        help="restart the whole mesh before every repetition instead of resetting it")
+    parser.add_argument("--settle", type=float, help="override the scenario's settle time")
+    parser.add_argument("--fips", action="append", default=[], metavar="KEY=VALUE",
+                        help="extra FIPS setting, e.g. node.link_dead_timeout_secs=10 (repeatable)")
     opts = parser.parse_args()
 
     path = ROOT / "scenarios" / f"{opts.scenario}.toml"
     spec = tomllib.loads(path.read_text())
-    topo = topology.load(ROOT, opts.topology or spec["topology"])
+    overrides = dict(topology.parse_override(o) for o in opts.fips)
+    base = topology.load(ROOT, opts.topology or spec["topology"])
+    topo = topology.variant(base, overrides)
     steps = spec["steps"]
     repeat = opts.repeat or spec.get("repeat", 1)
-    settle = spec.get("settle", 15)
+    settle = opts.settle if opts.settle is not None else spec.get("settle", 15)
     validate(topo, steps)
 
     stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
@@ -196,6 +245,8 @@ def main():
     (run_dir / "meta.json").write_text(json.dumps({
         "scenario": opts.scenario,
         "topology": topo.name,
+        "base_topology": base.name,
+        "overrides": overrides,
         "nodes": topo.nodes,
         "links": [[l.a, l.b] for l in topo.links],
         "default_netem": topo.netem,
@@ -204,20 +255,32 @@ def main():
         "git": git_commit(),
         "repeat": repeat,
         "settle_s": settle,
+        "fresh": opts.fresh,
         "started": datetime.now().isoformat(timespec="seconds"),
     }, indent=2))
 
-    if not running(topo):
-        print(f"starting {topo.name}")
-        lab.up(topo)
-    print(f"waiting for {topo.name} to converge")
-    if not lab.ping(topo):
-        sys.exit("topology did not converge; not running the scenario")
+    if not opts.fresh:  # with --fresh, every repetition starts and checks its own mesh
+        if not running(topo):
+            print(f"starting {topo.name}")
+            lab.up(topo)
+        print(f"waiting for {topo.name} to converge")
+        if not lab.ping(topo):
+            sys.exit("topology did not converge; not running the scenario")
 
     recorder = Recorder(run_dir)
     measurements = []
+    log_nodes = list(dict.fromkeys(n for step in steps for n in step.get("capture", [])))
     try:
         for rep in range(1, repeat + 1):
+            # Before a fresh start, so the logs include the convergence check.
+            rep_start = time.time()
+            if opts.fresh:
+                # New containers: every node starts with empty caches and sessions.
+                lab.compose(topo, "down")
+                lab.up(topo)
+                if not lab.ping(topo):
+                    sys.exit(f"rep {rep}: topology did not converge after restart")
+                recorder.event(rep=rep, step="fresh-start")
             lab.reset(topo)
             recorder.event(rep=rep, step="reset+settle", seconds=settle)
             time.sleep(settle)
@@ -234,11 +297,16 @@ def main():
                 since_action = time.monotonic() - last_action
                 recorder.event(rep=rep, step=i, wait=kind, waited_s=took, since_action_s=since_action,
                                timed_out=took is None)
+                if took is None and step.get("capture"):
+                    capture(topo, step, run_dir / "captures" / f"rep{rep:02d}-step{i}")
+                    recorder.event(rep=rep, step=i, captured=step["capture"])
                 if "record" in step:
                     censored = took is None
                     measurements.append((rep, step["record"], round(since_action, 3), censored))
                     shown = f">{since_action:.1f} s (timeout)" if censored else f"{since_action:.1f} s"
                     print(f"  rep {rep}/{repeat}  {step['record']:<16} {shown}", flush=True)
+            if log_nodes:
+                save_logs(topo, log_nodes, rep_start, run_dir / "logs" / f"rep{rep:02d}")
     finally:
         recorder.close()
         lab.reset(topo)

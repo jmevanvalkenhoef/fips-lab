@@ -27,6 +27,7 @@ import sys
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import replace
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -36,7 +37,10 @@ import lab  # noqa: E402
 import topology  # noqa: E402
 
 TOPOLOGY = os.environ["TOPOLOGY"]
-TOPO = topology.load(ROOT, TOPOLOGY)
+# A variant (same mesh, other FIPS settings) runs under its own name; the
+# collector only needs its nodes, links and default netem, which it shares
+# with its base topology.
+TOPO = replace(topology.load(ROOT, os.environ.get("TOPOLOGY_BASE", TOPOLOGY)), name=TOPOLOGY)
 LAB = ROOT / "generated" / TOPOLOGY
 SOCKETS = LAB / "run"
 WEB = ROOT / "web"

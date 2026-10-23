@@ -28,11 +28,14 @@ and FIPS settings merged into every node's config:
     link_dead_timeout_secs = 10
 """
 
+import copy
+import hashlib
+import json
 import random
 import string
 import sys
 import tomllib
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 # Each link gets its own /29 so netem and link cuts act on exactly one link.
@@ -70,6 +73,7 @@ class Topology:
     links: list
     netem: dict
     fips: dict
+    keys_from: str = None  # share identities with this topology (see variant)
 
     def link(self, a, b):
         for link in self.links:
@@ -142,3 +146,36 @@ def load(root: Path, name):
         sys.exit(f"{len(edges)} links; at most {MAX_LINKS} supported")
     links = [Link(i, a, b) for i, (a, b) in enumerate(edges, start=1)]
     return Topology(name, nodes, links, spec.get("netem", {}), spec.get("fips", {}))
+
+
+def variant(topo, overrides):
+    """The same mesh with extra FIPS settings, under its own name.
+
+    overrides are dotted keys, e.g. {"node.link_dead_timeout_secs": 10}. The
+    variant keeps the base topology's node identities: the spanning-tree root
+    is the node with the smallest key hash, so fresh keys would change the
+    tree and confound any comparison between settings.
+    """
+    if not overrides:
+        return topo
+    fips = copy.deepcopy(topo.fips)
+    for dotted, value in overrides.items():
+        *path, key = dotted.split(".")
+        table = fips
+        for part in path:
+            table = table.setdefault(part, {})
+        table[key] = value
+    digest = hashlib.sha1(json.dumps(overrides, sort_keys=True).encode()).hexdigest()[:6]
+    return replace(topo, name=f"{topo.name}-v{digest}", fips=fips, keys_from=topo.keys_from or topo.name)
+
+
+def parse_override(text):
+    """'node.link_dead_timeout_secs=10' -> ('node.link_dead_timeout_secs', 10)"""
+    key, sep, raw = text.partition("=")
+    if not sep or not key:
+        raise ValueError(f"expected key=value, got {text!r}")
+    try:
+        value = json.loads(raw)
+    except ValueError:
+        value = raw
+    return key, value

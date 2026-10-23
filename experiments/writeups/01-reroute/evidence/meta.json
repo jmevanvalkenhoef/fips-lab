@@ -1,0 +1,59 @@
+{
+  "scenario": "stuck-diagnose",
+  "topology": "ring6-v4eca7f",
+  "base_topology": "ring6",
+  "overrides": {
+    "node.heartbeat_interval_secs": 2,
+    "node.link_dead_timeout_secs": 6
+  },
+  "nodes": [
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f"
+  ],
+  "links": [
+    [
+      "a",
+      "b"
+    ],
+    [
+      "b",
+      "c"
+    ],
+    [
+      "c",
+      "d"
+    ],
+    [
+      "d",
+      "e"
+    ],
+    [
+      "e",
+      "f"
+    ],
+    [
+      "f",
+      "a"
+    ]
+  ],
+  "default_netem": {
+    "delay": "5ms",
+    "jitter": "1ms"
+  },
+  "fips_overrides": {
+    "node": {
+      "heartbeat_interval_secs": 2,
+      "link_dead_timeout_secs": 6
+    }
+  },
+  "image": "fips-lab-node:v0.5.3",
+  "git": "92e7e05-dirty",
+  "repeat": 4,
+  "settle_s": 90,
+  "fresh": true,
+  "started": "2026-10-23T18:03:08"
+}

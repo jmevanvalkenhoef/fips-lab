@@ -1,0 +1,27 @@
+{
+  "peers": [
+    {
+      "display_name": "c",
+      "link_layer": {
+        "delivery_ratio_forward": 1.0,
+        "delivery_ratio_reverse": 1.0,
+        "ecn_ce_count": 0,
+        "etx": 1.0,
+        "goodput_bps": 262.62081554856576,
+        "goodput_trend": "falling",
+        "jitter_trend": "rising",
+        "loss_rate": 0.0,
+        "loss_trend": "stable",
+        "lqi": 1.3107834381324566,
+        "rtt_trend": "stable",
+        "smoothed_etx": 1.1842573796867266,
+        "smoothed_loss": 0.0,
+        "spin_bit_role": "initiator",
+        "srtt_ms": 10.684
+      },
+      "mode": "full",
+      "peer": "50a0a083f3b88031f241e36f314060ce"
+    }
+  ],
+  "sessions": []
+}

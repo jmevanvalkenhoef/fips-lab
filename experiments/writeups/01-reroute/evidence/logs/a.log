@@ -1,0 +1,126 @@
+2026-10-23T17:03:24.991873Z DEBUG fips::node::handlers::lookup: Forwarding LookupRequest request_id=16928320695917579572 target=d ttl=63 peer_count=1
+2026-10-23T17:03:25.028560Z DEBUG fips::node::handlers::lookup: Reverse-path forwarding LookupResponse request_id=16928320695917579572 target=d next_hop=f path_mtu=1472
+2026-10-23T17:03:45.094498Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=b rtt=7.3ms loss=0.0% jitter=0.6ms goodput=2.0KB/s tx_pkts=516 rx_pkts=539
+2026-10-23T17:03:45.094533Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=f rtt=8.6ms loss=0.0% jitter=0.3ms goodput=1.5KB/s tx_pkts=346 rx_pkts=333
+2026-10-23T17:03:46.094287Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:03:46.094515Z DEBUG fips::node::handlers::session: MMP session metrics session=f rtt=11.4ms loss=0.0% jitter=0.5ms goodput=124B/s mtu=1472 tx_pkts=69 rx_pkts=71
+2026-10-23T17:03:46.094536Z DEBUG fips::node::handlers::session: MMP session metrics session=b rtt=12.9ms loss=0.0% jitter=0.5ms goodput=124B/s mtu=1472 tx_pkts=68 rx_pkts=71
+2026-10-23T17:03:46.094565Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1l20d...dq3r rtt=20.4ms loss=0.0% jitter=1.0ms goodput=124B/s mtu=1472 tx_pkts=69 rx_pkts=69
+2026-10-23T17:03:47.094977Z DEBUG fips::node::handlers::session: MMP session metrics session=npub12uga...p7qy rtt=36.4ms loss=0.0% jitter=3.2ms goodput=124B/s mtu=1472 tx_pkts=66 rx_pkts=70
+2026-10-23T17:03:50.095137Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1jn0u...t7vu rtt=31.5ms loss=0.0% jitter=1.2ms goodput=124B/s mtu=1472 tx_pkts=75 rx_pkts=76
+2026-10-23T17:04:14.992653Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=f
+2026-10-23T17:04:15.095121Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=b rtt=9.4ms loss=0.0% jitter=0.4ms goodput=2.6KB/s tx_pkts=1032 rx_pkts=991
+2026-10-23T17:04:15.095172Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=f rtt=10.0ms loss=0.0% jitter=0.2ms goodput=1.4KB/s tx_pkts=663 rx_pkts=703
+2026-10-23T17:04:15.965814Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=b
+2026-10-23T17:04:16.094639Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:04:16.095378Z DEBUG fips::node::handlers::session: MMP session metrics session=f rtt=11.3ms loss=0.0% jitter=0.5ms goodput=124B/s mtu=1472 tx_pkts=132 rx_pkts=134
+2026-10-23T17:04:16.095455Z DEBUG fips::node::handlers::session: MMP session metrics session=b rtt=12.0ms loss=0.0% jitter=0.6ms goodput=124B/s mtu=1472 tx_pkts=131 rx_pkts=133
+2026-10-23T17:04:16.095535Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1l20d...dq3r rtt=21.3ms loss=0.0% jitter=1.0ms goodput=124B/s mtu=1472 tx_pkts=132 rx_pkts=132
+2026-10-23T17:04:17.095818Z DEBUG fips::node::handlers::session: MMP session metrics session=npub12uga...p7qy rtt=36.6ms loss=0.0% jitter=4.1ms goodput=124B/s mtu=1472 tx_pkts=129 rx_pkts=133
+2026-10-23T17:04:20.095193Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1jn0u...t7vu rtt=32.4ms loss=0.0% jitter=1.2ms goodput=124B/s mtu=1472 tx_pkts=138 rx_pkts=139
+2026-10-23T17:04:45.094597Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=b rtt=10.2ms loss=0.0% jitter=0.4ms goodput=2.4KB/s tx_pkts=1523 rx_pkts=1456
+2026-10-23T17:04:45.094623Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=f rtt=10.4ms loss=0.0% jitter=0.3ms goodput=1.5KB/s tx_pkts=978 rx_pkts=1035
+2026-10-23T17:04:46.094821Z DEBUG fips::node::handlers::session: MMP session teardown session=b rtt=11.0ms loss=0.0% jitter=0.5ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=194 tx_bytes=14741 rx_pkts=196 rx_bytes=11761
+2026-10-23T17:04:46.094853Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=b fips_addr=fdd9:4763:13bf:6ca:9e8e:418b:235a:4ed4
+2026-10-23T17:04:46.094864Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=b fips_addr=fdd9:4763:13bf:6ca:9e8e:418b:235a:4ed4 link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=4
+2026-10-23T17:04:46.094873Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=b idle_secs=90
+2026-10-23T17:04:46.094899Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:04:46.095155Z DEBUG fips::node::handlers::session: MMP session metrics session=f rtt=11.1ms loss=0.0% jitter=0.6ms goodput=124B/s mtu=1472 tx_pkts=195 rx_pkts=196
+2026-10-23T17:04:46.095199Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1l20d...dq3r rtt=21.7ms loss=0.0% jitter=1.0ms goodput=124B/s mtu=1472 tx_pkts=195 rx_pkts=195
+2026-10-23T17:04:47.094499Z DEBUG fips::node::handlers::session: MMP session teardown session=f rtt=11.1ms loss=0.0% jitter=0.5ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=197 tx_bytes=14994 rx_pkts=198 rx_bytes=11885
+2026-10-23T17:04:47.094539Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=f fips_addr=fd63:cf57:774d:3b67:15c1:c875:b421:59e0
+2026-10-23T17:04:47.094552Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=f fips_addr=fd63:cf57:774d:3b67:15c1:c875:b421:59e0 link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=4
+2026-10-23T17:04:47.094584Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=f idle_secs=90
+2026-10-23T17:04:47.094593Z DEBUG fips::node::handlers::session: MMP session teardown session=c rtt=22.3ms loss=0.0% jitter=1.0ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=197 tx_bytes=14994 rx_pkts=195 rx_bytes=11718
+2026-10-23T17:04:47.094613Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=c fips_addr=fd50:a0a0:83f3:b880:31f2:41e3:6f31:4060
+2026-10-23T17:04:47.094620Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=c idle_secs=90
+2026-10-23T17:04:47.094627Z DEBUG fips::node::handlers::session: MMP session teardown session=e rtt=37.3ms loss=0.0% jitter=4.4ms etx=1.00 goodput=125B/s send_mtu=1472 observed_mtu=1472 tx_pkts=192 tx_bytes=14556 rx_pkts=193 rx_bytes=11556
+2026-10-23T17:04:47.094659Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=e idle_secs=90
+2026-10-23T17:04:50.094939Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1jn0u...t7vu rtt=32.1ms loss=0.0% jitter=1.3ms goodput=124B/s mtu=1472 tx_pkts=201 rx_pkts=202
+2026-10-23T17:04:51.094820Z DEBUG fips::node::handlers::session: MMP session teardown session=d rtt=31.6ms loss=0.0% jitter=1.5ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=203 tx_bytes=15576 rx_pkts=204 rx_bytes=12371
+2026-10-23T17:04:51.094855Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=d fips_addr=fd6f:5606:2dd9:44fd:10bf:a0b5:67ed:14d0
+2026-10-23T17:04:51.094863Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=d idle_secs=90
+2026-10-23T17:04:56.678420Z DEBUG fips::node::handlers::session: Session initiation started dest=b
+2026-10-23T17:04:56.678439Z DEBUG fips::node::encrypt_worker: FMP encrypt worker batch flush failed worker=1 error=sendmmsg(2) failed: Network is unreachable (os error 101)
+2026-10-23T17:04:57.095817Z DEBUG fips::node::encrypt_worker: FMP encrypt worker batch flush failed worker=1 error=sendmsg+UDP_GSO failed: Network is unreachable (os error 101)
+2026-10-23T17:04:58.094858Z DEBUG fips::node::handlers::timeout: Resent session handshake dest=b resend=1
+2026-10-23T17:04:58.094890Z DEBUG fips::node::encrypt_worker: FMP encrypt worker batch flush failed worker=1 error=sendmmsg(2) failed: Network is unreachable (os error 101)
+2026-10-23T17:04:59.095377Z DEBUG fips::node::encrypt_worker: FMP encrypt worker batch flush failed worker=1 error=sendmmsg(2) failed: Network is unreachable (os error 101)
+2026-10-23T17:05:00.095236Z DEBUG fips::node::handlers::timeout: Resent session handshake dest=b resend=2
+2026-10-23T17:05:00.095380Z DEBUG fips::node::encrypt_worker: FMP encrypt worker batch flush failed worker=1 error=sendmmsg(2) failed: Network is unreachable (os error 101)
+2026-10-23T17:05:00.096045Z DEBUG fips::node::encrypt_worker: FMP encrypt worker batch flush failed worker=1 error=sendmmsg(2) failed: Network is unreachable (os error 101)
+2026-10-23T17:05:00.096139Z DEBUG fips::node::encrypt_worker: FMP encrypt worker batch flush failed worker=1 error=sendmmsg(2) failed: Network is unreachable (os error 101)
+2026-10-23T17:05:01.094852Z DEBUG fips::node::handlers::mmp: Removing peer: link dead timeout peer=b timeout_secs=6
+2026-10-23T17:05:01.094920Z DEBUG fips::node::handlers::mmp: MMP link teardown peer=b rtt=11.0ms loss=0.0% jitter=1.2ms etx=1.00 goodput=714B/s tx_pkts=1599 tx_bytes=244546 rx_pkts=1527 rx_bytes=235473
+2026-10-23T17:05:01.094963Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=b fips_addr=fdd9:4763:13bf:6ca:9e8e:418b:235a:4ed4
+2026-10-23T17:05:01.095329Z  INFO fips::node::tree: Tree state updated after parent loss new_root=f445dd789871aaa781b813fa930d4ed4 is_root=true
+2026-10-23T17:05:01.095430Z DEBUG fips::node::dataplane::dispatch: Peer removed and state cleaned up peer=b link_id=link:3 tree_changed=true
+2026-10-23T17:05:01.986476Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=b error=send failed to d9476313bf06ca9e8e418b235a4ed443: no route to destination
+2026-10-23T17:05:01.986505Z DEBUG fips::node::handlers::lookup: Discovery skipped, target not in any peer bloom filter target_node=b
+2026-10-23T17:05:01.986520Z DEBUG fips::node::handlers::session: No lookup pending for destination, answering no route dest=b kind=BloomMiss released=0 reason="no-lookup"
+2026-10-23T17:05:02.094584Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=f seq=7 est_entries="1" set_bits=5 fill=0.1% tree_peer=true
+2026-10-23T17:05:02.105241Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=f
+2026-10-23T17:05:02.308699Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=b error=send failed to d9476313bf06ca9e8e418b235a4ed443: no route to destination
+2026-10-23T17:05:02.308721Z DEBUG fips::node::handlers::lookup: Discovery skipped, target not in any peer bloom filter target_node=b
+2026-10-23T17:05:02.308733Z DEBUG fips::node::handlers::session: No lookup pending for destination, answering no route dest=b kind=BloomMiss released=0 reason="no-lookup"
+2026-10-23T17:05:02.631297Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=b error=send failed to d9476313bf06ca9e8e418b235a4ed443: no route to destination
+2026-10-23T17:05:02.631333Z DEBUG fips::node::handlers::lookup: Discovery skipped, target not in any peer bloom filter target_node=b
+2026-10-23T17:05:02.631358Z DEBUG fips::node::handlers::session: No lookup pending for destination, answering no route dest=b kind=BloomMiss released=0 reason="no-lookup"
+2026-10-23T17:05:02.990510Z DEBUG fips::node::tree: Processed TreeAnnounce from=f seq=3 depth=3 root=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:05:02.990623Z  INFO fips::node::tree: Parent switched, invalidated downstream coord cache entries, announcing to all peers new_parent=f new_seq=4 new_root=50a0a083f3b88031f241e36f314060ce depth=4
+2026-10-23T17:05:02.991190Z DEBUG fips::node::bloom: Received FilterAnnounce from=f seq=7 est_entries="6" set_bits=30 fill=0.4% tree_peer=true
+2026-10-23T17:05:02.993051Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=b error=send failed to d9476313bf06ca9e8e418b235a4ed443: no route to destination
+2026-10-23T17:05:02.993088Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=5758499566363843316 target=b ttl=64 peer_count=1 total_peers=1
+2026-10-23T17:05:03.043700Z  INFO fips::node::handlers::lookup: Discovery succeeded, proof verified, route cached request_id=5758499566363843316 target=b depth=1 path_mtu=1472
+2026-10-23T17:05:03.043727Z DEBUG fips::node::handlers::lookup: Wrote path_mtu_lookup from discovery LookupResponse target=b fips_addr=fdd9:4763:13bf:6ca:9e8e:418b:235a:4ed4 path_mtu=1472 prior=None map_len=2
+2026-10-23T17:05:03.043737Z DEBUG fips::node::handlers::lookup: Retrying queued packets after discovery dest=b queued_packets=1 queued_native=0
+2026-10-23T17:05:03.043992Z DEBUG fips::node::handlers::session: Session initiation started dest=b
+2026-10-23T17:05:03.044001Z DEBUG fips::node::handlers::session: Session initiated after discovery dest=b
+2026-10-23T17:05:03.095202Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=f seq=8 est_entries="1" set_bits=5 fill=0.1% tree_peer=true
+2026-10-23T17:05:04.094743Z DEBUG fips::node::handlers::timeout: Resent session handshake dest=b resend=1
+2026-10-23T17:05:05.991856Z DEBUG fips::node::bloom: Received FilterAnnounce from=f seq=10 est_entries="5" set_bits=25 fill=0.3% tree_peer=true
+2026-10-23T17:05:06.095247Z DEBUG fips::node::handlers::timeout: Resent session handshake dest=b resend=2
+2026-10-23T17:05:06.095689Z DEBUG fips::node::lifecycle: Connection initiated peer=b transport_id=transport:1 remote_addr=10.99.1.3:2121 link_id=link:5 our_index=2d04f643
+2026-10-23T17:05:06.095733Z  WARN fips::node::lifecycle: Failed to send handshake message link_id=link:5 error=send failed: Network is unreachable (os error 101)
+2026-10-23T17:05:07.094825Z DEBUG fips::node::handlers::timeout: Failed handshake connection cleaned up link_id=link:5 direction=outbound
+2026-10-23T17:05:11.094600Z DEBUG fips::node::handlers::timeout: Resent session handshake dest=b resend=3
+2026-10-23T17:05:15.095200Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=f rtt=10.6ms loss=0.0% jitter=0.7ms goodput=290B/s tx_pkts=1089 rx_pkts=1128
+2026-10-23T17:05:15.992165Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=f
+2026-10-23T17:05:16.095411Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=1 contributors=1
+2026-10-23T17:05:17.095471Z DEBUG fips::node::lifecycle: Connection initiated peer=b transport_id=transport:1 remote_addr=10.99.1.3:2121 link_id=link:6 our_index=90fe410b
+2026-10-23T17:05:17.095572Z  WARN fips::node::lifecycle: Failed to send handshake message link_id=link:6 error=send failed: Network is unreachable (os error 101)
+2026-10-23T17:05:18.094747Z DEBUG fips::node::handlers::timeout: Failed handshake connection cleaned up link_id=link:6 direction=outbound
+2026-10-23T17:05:19.094967Z DEBUG fips::node::handlers::timeout: Resent session handshake dest=b resend=4
+2026-10-23T17:05:20.994420Z DEBUG fips::node::handlers::handshake: Sent rekey msg2 response peer=f new_our_index=e8ecab57
+2026-10-23T17:05:22.992186Z DEBUG fips::node::dataplane::encrypted: Peer new-epoch frame authenticated, K-bit flip promoting new session peer=f
+2026-10-23T17:05:23.992025Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=f
+2026-10-23T17:05:33.095198Z  INFO fips::node::handlers::timeout: Session handshake timed out, removing dest=b
+2026-10-23T17:05:33.095229Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=b fips_addr=fdd9:4763:13bf:6ca:9e8e:418b:235a:4ed4
+2026-10-23T17:05:33.367109Z DEBUG fips::node::handlers::session: Session initiation started dest=b
+2026-10-23T17:05:35.094737Z DEBUG fips::node::handlers::timeout: Resent session handshake dest=b resend=1
+2026-10-23T17:05:37.094812Z DEBUG fips::node::handlers::timeout: Resent session handshake dest=b resend=2
+2026-10-23T17:05:38.094986Z DEBUG fips::node::lifecycle: Connection initiated peer=b transport_id=transport:1 remote_addr=10.99.1.3:2121 link_id=link:8 our_index=0686fe7b
+2026-10-23T17:05:38.095034Z  WARN fips::node::lifecycle: Failed to send handshake message link_id=link:8 error=send failed: Network is unreachable (os error 101)
+2026-10-23T17:05:39.094326Z DEBUG fips::node::handlers::timeout: Failed handshake connection cleaned up link_id=link:8 direction=outbound
+2026-10-23T17:05:41.094978Z DEBUG fips::node::handlers::timeout: Resent session handshake dest=b resend=3
+2026-10-23T17:05:45.095141Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=f rtt=10.9ms loss=0.0% jitter=0.5ms goodput=223B/s tx_pkts=1157 rx_pkts=1188
+2026-10-23T17:05:46.717325Z DEBUG fips::control::commands: API probe requested npub=npub1tz5xvp6shemd3s7k3s0f0c6useftlfcrf80r2su089mazk5h2wjqmr0khn
+2026-10-23T17:05:46.717411Z  INFO fips::node::handlers::probe: Probe started npub=npub1tz5xvp6shemd3s7k3s0f0c6useftlfcrf80r2su089mazk5h2wjqmr0khn probe_id=1 budget_ms=28000
+2026-10-23T17:05:47.095221Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=1 contributors=1
+2026-10-23T17:05:49.094921Z DEBUG fips::node::handlers::timeout: Resent session handshake dest=b resend=4
+2026-10-23T17:05:52.094516Z DEBUG fips::node::handlers::probe: Probe finished probe_id=1
+2026-10-23T17:06:04.094308Z  INFO fips::node::handlers::timeout: Session handshake timed out, removing dest=b
+2026-10-23T17:06:15.094427Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=f rtt=10.9ms loss=0.0% jitter=0.6ms goodput=208B/s tx_pkts=1226 rx_pkts=1252
+2026-10-23T17:06:15.992609Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=f
+2026-10-23T17:06:18.094316Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=1 contributors=1
+2026-10-23T17:06:19.094866Z DEBUG fips::node::lifecycle: Connection initiated peer=b transport_id=transport:1 remote_addr=10.99.1.3:2121 link_id=link:9 our_index=9a84d403
+2026-10-23T17:06:19.094945Z DEBUG fips::node::lifecycle: Sent Noise handshake message 1 (wire format) link_id=link:9 our_index=9a84d403 bytes=114
+2026-10-23T17:06:19.115774Z DEBUG fips::node::handlers::handshake: Outbound handshake completed peer=b link_id=link:9 their_index=f00c914e
+2026-10-23T17:06:19.115804Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=b fips_addr=fdd9:4763:13bf:6ca:9e8e:418b:235a:4ed4 link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=2
+2026-10-23T17:06:19.115830Z DEBUG fips::node::handlers::handshake: Connection promoted to active peer peer=b link_id=link:9 our_index=9a84d403 their_index=f00c914e
+2026-10-23T17:06:19.115855Z  INFO fips::node::handlers::handshake: Peer promoted to active peer=b
+2026-10-23T17:06:19.965400Z DEBUG fips::node::tree: Processed TreeAnnounce from=b seq=2 depth=1 root=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:06:19.966767Z DEBUG fips::node::bloom: Received FilterAnnounce from=b seq=9 est_entries="6" set_bits=30 fill=0.4% tree_peer=false
+2026-10-23T17:06:20.094492Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=b seq=9 est_entries="6" set_bits=30 fill=0.4% tree_peer=false
+2026-10-23T17:06:20.094684Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=npub1tz5x...0khn rtt=n/a loss=n/a jitter=0.1ms goodput=n/a tx_pkts=3 rx_pkts=5
+2026-10-23T17:06:20.094855Z DEBUG fips::node::dataplane::connected_udp: connected UDP socket installed peer=b peer_addr=10.99.1.3:2121

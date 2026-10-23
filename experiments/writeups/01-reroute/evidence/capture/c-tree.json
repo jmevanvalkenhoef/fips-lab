@@ -1,0 +1,58 @@
+{
+  "declaration_sequence": 1,
+  "declaration_signed": true,
+  "depth": 0,
+  "is_root": true,
+  "my_coords": [
+    "50a0a083f3b88031f241e36f314060ce"
+  ],
+  "my_node_addr": "50a0a083f3b88031f241e36f314060ce",
+  "parent": "50a0a083f3b88031f241e36f314060ce",
+  "parent_display_name": "c",
+  "peer_tree_count": 2,
+  "peers": [
+    {
+      "coords": [
+        "6f56062dd944fd10bfa0b567ed14d019",
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 1,
+      "display_name": "d",
+      "distance_to_us": 1,
+      "node_addr": "6f56062dd944fd10bfa0b567ed14d019",
+      "root": "50a0a083f3b88031f241e36f314060ce"
+    },
+    {
+      "coords": [
+        "d9476313bf06ca9e8e418b235a4ed443",
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 1,
+      "display_name": "b",
+      "distance_to_us": 1,
+      "node_addr": "d9476313bf06ca9e8e418b235a4ed443",
+      "root": "50a0a083f3b88031f241e36f314060ce"
+    }
+  ],
+  "root": "50a0a083f3b88031f241e36f314060ce",
+  "root_npub": "npub1l20d3jlzzgruxhazc962a09w4xeau5mcmpv0w3hpsv27u8swnmds7edq3r",
+  "stats": {
+    "accepted": 4,
+    "addr_mismatch": 0,
+    "ancestry_changed": 0,
+    "ancestry_invalid": 0,
+    "decode_error": 0,
+    "flap_dampened": 0,
+    "loop_detected": 0,
+    "outbound_sign_failed": 0,
+    "parent_losses": 0,
+    "parent_switches": 0,
+    "rate_limited": 4,
+    "received": 9,
+    "send_failed": 0,
+    "sent": 10,
+    "sig_failed": 0,
+    "stale": 5,
+    "unknown_peer": 0
+  }
+}

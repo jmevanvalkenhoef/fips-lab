@@ -1,0 +1,273 @@
+2026-10-23T17:03:13.828360Z  INFO fips: FIPS 0.5.3 (rev f4a5b4a8e6) starting
+2026-10-23T17:03:13.828400Z  INFO fips: Loaded config file path=/etc/fips/fips.yaml
+2026-10-23T17:03:13.828408Z  INFO fips: Using identity from configuration
+2026-10-23T17:03:13.828413Z DEBUG fips: Creating node
+2026-10-23T17:03:13.828840Z DEBUG fips::upper::hosts: Host map entries from peer config count=2
+2026-10-23T17:03:13.829061Z  INFO fips::upper::hosts: Loaded hosts file path=/etc/fips/hosts count=6
+2026-10-23T17:03:13.829298Z  INFO fips::upper::hosts: Loaded hosts file path=/etc/fips/hosts count=6
+2026-10-23T17:03:13.829336Z DEBUG fips::node::acl: No ACL file found, skipping path=/etc/fips/peers.allow
+2026-10-23T17:03:13.829347Z DEBUG fips::node::acl: No ACL file found, skipping path=/etc/fips/peers.deny
+2026-10-23T17:03:13.829543Z  INFO fips: Node created:
+2026-10-23T17:03:13.829555Z  INFO fips:       npub: npub12ragcgmx2mamaks3vxqyqx8dn0k88nyx7kdstuxgs2wa9ut6ns4qphuh9f
+2026-10-23T17:03:13.829572Z  INFO fips:    node_addr: 63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:13.829576Z  INFO fips:    address: fd63:cf57:774d:3b67:15c1:c875:b421:59e0
+2026-10-23T17:03:13.829581Z  INFO fips:      state: created
+2026-10-23T17:03:13.829585Z  INFO fips:  leaf_only: false
+2026-10-23T17:03:13.829593Z  INFO fips::shutdown: Shutdown signal handler installed since_start_ms=4
+2026-10-23T17:03:13.829792Z  INFO fips::transport::udp: UDP transport started local_addr=0.0.0.0:2121 recv_buf=4194304 send_buf=4194304
+2026-10-23T17:03:13.829810Z  INFO fips::node::lifecycle: Transports initialized count=1
+2026-10-23T17:03:13.876702Z  INFO fips::node::lifecycle: Spawned FMP-encrypt worker pool workers=4
+2026-10-23T17:03:13.970141Z  INFO fips::node::lifecycle: Spawned FMP-decrypt worker pool workers=4
+2026-10-23T17:03:13.970584Z DEBUG fips::node::lifecycle: Initiating static peer connections count=2
+2026-10-23T17:03:13.974438Z DEBUG fips::node::lifecycle: Connection initiated peer=e transport_id=transport:1 remote_addr=10.99.5.2:2121 link_id=link:1 our_index=5b5055f4
+2026-10-23T17:03:13.974516Z DEBUG fips::transport::udp: UDP receive loop starting transport_id=transport:1
+2026-10-23T17:03:13.974717Z DEBUG fips::node::lifecycle: Sent Noise handshake message 1 (wire format) link_id=link:1 our_index=5b5055f4 bytes=114
+2026-10-23T17:03:13.975178Z DEBUG fips::node::lifecycle: Connection initiated peer=a transport_id=transport:1 remote_addr=10.99.6.3:2121 link_id=link:2 our_index=c9610f1b
+2026-10-23T17:03:13.978317Z DEBUG fips::node::lifecycle: Sent Noise handshake message 1 (wire format) link_id=link:2 our_index=c9610f1b bytes=114
+2026-10-23T17:03:13.983105Z  INFO fips::node::lifecycle: TUN device active:
+2026-10-23T17:03:13.984282Z  INFO fips::node::lifecycle:      name: fips0
+2026-10-23T17:03:13.984304Z  INFO fips::node::lifecycle:   address: fd63:cf57:774d:3b67:15c1:c875:b421:59e0
+2026-10-23T17:03:13.984311Z  INFO fips::node::lifecycle:       mtu: 1280
+2026-10-23T17:03:13.984316Z  INFO fips::node::lifecycle: effective MTU: 1395 bytes
+2026-10-23T17:03:13.984320Z DEBUG fips::node::lifecycle:    max TCP MSS: 1335 bytes
+2026-10-23T17:03:13.984646Z DEBUG fips::upper::tun: TUN reader starting name=fips0 tun_mtu=1280 transport_mtu=1472 effective_mtu=1395 max_mss=1335
+2026-10-23T17:03:13.984789Z DEBUG fips::upper::hosts: Host map entries from peer config count=2
+2026-10-23T17:03:13.984981Z  INFO fips::upper::hosts: Loaded hosts file path=/etc/fips/hosts count=6
+2026-10-23T17:03:13.985025Z  INFO fips::node::lifecycle: DNS responder started for .fips domain (auto-reload enabled) bind=[::1]:5354 hosts=6 mesh_ifindex=Some(4)
+2026-10-23T17:03:13.985049Z  INFO fips::node::lifecycle: Node started:
+2026-10-23T17:03:13.985053Z  INFO fips::node::lifecycle:        state: running
+2026-10-23T17:03:13.985057Z  INFO fips::node::lifecycle:   transports: 1
+2026-10-23T17:03:13.985060Z  INFO fips::node::lifecycle:  connections: 2
+2026-10-23T17:03:13.985065Z  INFO fips: FIPS running
+2026-10-23T17:03:13.985088Z  INFO fips::node::dataplane::rx_loop: RX event loop started
+2026-10-23T17:03:13.986728Z DEBUG fips::utils::sockbind: 'fips' group not found, skipping chown for /run/fips/control.sock
+2026-10-23T17:03:13.986857Z DEBUG fips::utils::sockbind: 'fips' group not found, skipping chown for /run/fips
+2026-10-23T17:03:13.986909Z  INFO fips::control::unix_impl: Control socket listening path=/run/fips/control.sock
+2026-10-23T17:03:13.989344Z DEBUG fips::upper::tun: TUN writer starting name=fips0 max_mss=1335
+2026-10-23T17:03:14.066445Z DEBUG fips::node::handlers::handshake: Cross-connection detected: have outbound, received inbound msg1 transport_id=transport:1 remote_addr=10.99.5.2:2121 existing_link_id=link:1
+2026-10-23T17:03:14.067253Z DEBUG fips::node::handlers::handshake: Deferring cleanup of pending outbound (awaiting msg2 for index update) peer=e pending_link_id=link:1 promoted_link_id=link:3
+2026-10-23T17:03:14.067289Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=e fips_addr=fd63:317:1b82:15d0:d7e0:6e7e:818c:9d16 link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=1
+2026-10-23T17:03:14.067341Z DEBUG fips::node::handlers::handshake: Connection promoted to active peer peer=e link_id=link:3 our_index=80307d0c their_index=7cd87f30
+2026-10-23T17:03:14.070075Z DEBUG fips::node::handlers::handshake: Outbound handshake completed peer=e link_id=link:1 their_index=5b63f39a
+2026-10-23T17:03:14.070159Z DEBUG fips::node::handlers::handshake: Cross-connection: keeping inbound session and original their_index (peer outbound wins) peer=e kept_their_index=Some(SessionIndex(2094563120))
+2026-10-23T17:03:14.070191Z DEBUG fips::node: Handshake link shares its connection with an active peer; leaving it open link_id=link:1 addr=10.99.5.2:2121
+2026-10-23T17:03:14.070229Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=e
+2026-10-23T17:03:14.075923Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=2 est_entries="1" set_bits=5 fill=0.1% tree_peer=false
+2026-10-23T17:03:14.089418Z DEBUG fips::node::handlers::handshake: Cross-connection detected: have outbound, received inbound msg1 transport_id=transport:1 remote_addr=10.99.6.3:2121 existing_link_id=link:2
+2026-10-23T17:03:14.090200Z DEBUG fips::node::handlers::handshake: Deferring cleanup of pending outbound (awaiting msg2 for index update) peer=a pending_link_id=link:2 promoted_link_id=link:4
+2026-10-23T17:03:14.090216Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=a fips_addr=fdf4:45dd:7898:71aa:a781:b813:fa93:d4e link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=2
+2026-10-23T17:03:14.090252Z DEBUG fips::node::handlers::handshake: Connection promoted to active peer peer=a link_id=link:4 our_index=48f9d477 their_index=f224a29d
+2026-10-23T17:03:14.096664Z DEBUG fips::node::handlers::handshake: Outbound handshake completed peer=a link_id=link:2 their_index=48e0f9e5
+2026-10-23T17:03:14.096699Z DEBUG fips::node::handlers::handshake: Cross-connection: swapped to outbound session (our outbound wins) peer=a new_our_index=c9610f1b new_their_index=48e0f9e5
+2026-10-23T17:03:14.096710Z DEBUG fips::node: Handshake link shares its connection with an active peer; leaving it open link_id=link:2 addr=10.99.6.3:2121
+2026-10-23T17:03:14.096717Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=a
+2026-10-23T17:03:14.102295Z DEBUG fips::node::tree: Processed TreeAnnounce from=a seq=1 depth=0 root=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:14.102326Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=a
+2026-10-23T17:03:14.103746Z DEBUG fips::node::bloom: Received FilterAnnounce from=a seq=2 est_entries="1" set_bits=5 fill=0.1% tree_peer=false
+2026-10-23T17:03:14.962444Z DEBUG fips::node::tree: Processed TreeAnnounce from=a seq=2 depth=2 root=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:14.963025Z  INFO fips::node::tree: Parent switched, invalidated downstream coord cache entries, announcing to all peers new_parent=a new_seq=2 new_root=50a0a083f3b88031f241e36f314060ce depth=3
+2026-10-23T17:03:14.985943Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=e
+2026-10-23T17:03:14.987562Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=a
+2026-10-23T17:03:14.988404Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=1 est_entries="2" set_bits=10 fill=0.1% tree_peer=false
+2026-10-23T17:03:14.988465Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=a seq=2 est_entries="1" set_bits=5 fill=0.1% tree_peer=true
+2026-10-23T17:03:14.988488Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=3 peers=2 contributors=2
+2026-10-23T17:03:14.988660Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=n/a loss=n/a jitter=0.0ms goodput=n/a tx_pkts=3 rx_pkts=3
+2026-10-23T17:03:14.988671Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=n/a loss=n/a jitter=0.2ms goodput=n/a tx_pkts=3 rx_pkts=5
+2026-10-23T17:03:14.988837Z DEBUG fips::node::dataplane::connected_udp: connected UDP socket installed peer=e peer_addr=10.99.5.2:2121
+2026-10-23T17:03:14.988920Z DEBUG fips::node::dataplane::connected_udp: connected UDP socket installed peer=a peer_addr=10.99.6.3:2121
+2026-10-23T17:03:15.074096Z DEBUG fips::node::tree: Processed TreeAnnounce from=e seq=2 depth=2 root=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:15.075444Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=4 est_entries="3" set_bits=15 fill=0.2% tree_peer=false
+2026-10-23T17:03:15.098377Z DEBUG fips::node::bloom: Received FilterAnnounce from=a seq=4 est_entries="3" set_bits=15 fill=0.2% tree_peer=true
+2026-10-23T17:03:15.554851Z DEBUG fips::node::dataplane::forwarding: Coordinate hint not paid for peer=a addr=f445dd789871aaa781b813fa930d4ed4 reason="over link peer's hint budget" segment=Probation
+2026-10-23T17:03:15.554888Z DEBUG fips::node::dataplane::forwarding: Coordinate hint not paid for peer=a addr=63cf57774d3b6715c1c875b42159e0c9 reason="over link peer's hint budget" segment=Probation
+2026-10-23T17:03:15.554898Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:15.555447Z DEBUG fips::node::handlers::session: SessionSetup processed (XK), SessionAck sent, awaiting msg3 src=a
+2026-10-23T17:03:15.567306Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:15.567348Z DEBUG fips::node::handlers::session: Encrypted message but session not established (awaiting handshake completion) src=a
+2026-10-23T17:03:15.567905Z  INFO fips::node::handlers::session: Session established (responder, XK) src=a
+2026-10-23T17:03:15.763104Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:15.916650Z DEBUG fips::node::handlers::lookup: We are the lookup target, generating response request_id=18000515607160587586 origin=b
+2026-10-23T17:03:15.916756Z DEBUG fips::node::handlers::lookup: Sending LookupResponse request_id=18000515607160587586 origin=b next_hop=a path_mtu=1472
+2026-10-23T17:03:15.938183Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=d9476313bf06ca9e8e418b235a4ed443 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:15.938958Z DEBUG fips::node::handlers::session: SessionSetup processed (XK), SessionAck sent, awaiting msg3 src=b
+2026-10-23T17:03:15.963339Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:15.963377Z DEBUG fips::node::handlers::session: Encrypted message but session not established (awaiting handshake completion) src=b
+2026-10-23T17:03:15.963485Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:15.963901Z  INFO fips::node::handlers::session: Session established (responder, XK) src=b
+2026-10-23T17:03:15.985622Z DEBUG fips::node::tree: Resending unconfirmed TreeAnnounce peer=a reason=Unverified counter=Some(0) seq=Some(2)
+2026-10-23T17:03:15.986465Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=3 est_entries="4" set_bits=20 fill=0.2% tree_peer=false
+2026-10-23T17:03:15.986697Z DEBUG fips::node::handlers::session: MMP session metrics session=a rtt=n/a loss=n/a jitter=0.1ms goodput=n/a mtu=1472 tx_pkts=2 rx_pkts=2
+2026-10-23T17:03:15.986909Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1tz5x...0khn rtt=n/a loss=n/a jitter=0.0ms goodput=n/a mtu=1472 tx_pkts=0 rx_pkts=1
+2026-10-23T17:03:16.076566Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=5 est_entries="4" set_bits=20 fill=0.2% tree_peer=false
+2026-10-23T17:03:16.098770Z DEBUG fips::node::bloom: Received FilterAnnounce from=a seq=5 est_entries="4" set_bits=20 fill=0.2% tree_peer=true
+2026-10-23T17:03:16.118056Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.319298Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.617204Z DEBUG fips::node::dataplane::forwarding: Coordinate hint not paid for peer=e addr=6303171b8215d0d7e06e7e818c9d167e reason="over link peer's hint budget" segment=Probation
+2026-10-23T17:03:16.617338Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=6303171b8215d0d7e06e7e818c9d167e dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.617817Z DEBUG fips::node::handlers::session: SessionSetup processed (XK), SessionAck sent, awaiting msg3 src=e
+2026-10-23T17:03:16.629227Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.629271Z DEBUG fips::node::handlers::session: Encrypted message but session not established (awaiting handshake completion) src=e
+2026-10-23T17:03:16.629729Z  INFO fips::node::handlers::session: Session established (responder, XK) src=e
+2026-10-23T17:03:16.652383Z DEBUG fips::upper::dns: DNS resolved .fips name, registering identity node_addr=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:16.652453Z DEBUG fips::node::dataplane::rx_loop: Registering identity from DNS resolution node_addr=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:16.665576Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.733465Z DEBUG fips::upper::dns: DNS resolved .fips name, registering identity node_addr=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:16.733528Z DEBUG fips::node::dataplane::rx_loop: Registering identity from DNS resolution node_addr=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:16.735351Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=c error=send failed to 50a0a083f3b88031f241e36f314060ce: no route to destination
+2026-10-23T17:03:16.735390Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=3562875432423915574 target=c ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:16.750527Z DEBUG fips::upper::dns: DNS resolved .fips name, registering identity node_addr=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:03:16.750595Z DEBUG fips::node::dataplane::rx_loop: Registering identity from DNS resolution node_addr=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:03:16.776383Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.800745Z DEBUG fips::upper::dns: DNS resolved .fips name, registering identity node_addr=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.800804Z DEBUG fips::node::dataplane::rx_loop: Registering identity from DNS resolution node_addr=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.801542Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=d error=send failed to 6f56062dd944fd10bfa0b567ed14d019: no route to destination
+2026-10-23T17:03:16.801582Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=3451434279306268872 target=d ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:16.823759Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.866094Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.936244Z DEBUG fips::upper::dns: DNS resolved .fips name, registering identity node_addr=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.936322Z DEBUG fips::node::dataplane::rx_loop: Registering identity from DNS resolution node_addr=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.939719Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=c error=send failed to 50a0a083f3b88031f241e36f314060ce: no route to destination
+2026-10-23T17:03:16.939993Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=c
+2026-10-23T17:03:16.947120Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.974083Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.986377Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=4 est_entries="5" set_bits=25 fill=0.3% tree_peer=false
+2026-10-23T17:03:16.986589Z DEBUG fips::node::handlers::session: MMP session metrics session=e rtt=n/a loss=n/a jitter=0.1ms goodput=n/a mtu=1472 tx_pkts=2 rx_pkts=2
+2026-10-23T17:03:17.003577Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=d error=send failed to 6f56062dd944fd10bfa0b567ed14d019: no route to destination
+2026-10-23T17:03:17.003604Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=d
+2026-10-23T17:03:17.024700Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:17.074210Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=6 est_entries="6" set_bits=30 fill=0.4% tree_peer=false
+2026-10-23T17:03:17.099407Z DEBUG fips::node::bloom: Received FilterAnnounce from=a seq=6 est_entries="5" set_bits=25 fill=0.3% tree_peer=true
+2026-10-23T17:03:17.147703Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=c error=send failed to 50a0a083f3b88031f241e36f314060ce: no route to destination
+2026-10-23T17:03:17.147730Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=c
+2026-10-23T17:03:17.148119Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:17.211697Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=d error=send failed to 6f56062dd944fd10bfa0b567ed14d019: no route to destination
+2026-10-23T17:03:17.211727Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=d
+2026-10-23T17:03:17.986207Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=5 est_entries="6" set_bits=30 fill=0.4% tree_peer=false
+2026-10-23T17:03:17.986511Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=552963338476037569 target=c ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:17.986536Z DEBUG fips::node::handlers::lookup: Discovery retry sent target_node=c attempt=2
+2026-10-23T17:03:17.986547Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=989075098840154783 target=d ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:17.986557Z DEBUG fips::node::handlers::lookup: Discovery retry sent target_node=d attempt=2
+2026-10-23T17:03:19.493642Z DEBUG fips::node::handlers::lookup: We are the lookup target, generating response request_id=8153255932994405019 origin=c
+2026-10-23T17:03:19.493779Z DEBUG fips::node::handlers::lookup: Sending LookupResponse request_id=8153255932994405019 origin=c next_hop=a path_mtu=1472
+2026-10-23T17:03:19.524091Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=50a0a083f3b88031f241e36f314060ce dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:19.524884Z DEBUG fips::node::handlers::session: SessionSetup processed (XK), SessionAck sent, awaiting msg3 src=c
+2026-10-23T17:03:19.555892Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:19.555931Z DEBUG fips::node::handlers::session: Encrypted message but session not established (awaiting handshake completion) src=c
+2026-10-23T17:03:19.558293Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:19.558328Z DEBUG fips::node::handlers::session: Encrypted message but session not established (awaiting handshake completion) src=c
+2026-10-23T17:03:19.558556Z  INFO fips::node::handlers::session: Session established (responder, XK) src=c
+2026-10-23T17:03:19.558825Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:19.589918Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:19.592334Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:19.986019Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1l20d...dq3r rtt=n/a loss=n/a jitter=0.2ms goodput=n/a mtu=1472 tx_pkts=4 rx_pkts=4
+2026-10-23T17:03:20.654995Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=d error=send failed to 6f56062dd944fd10bfa0b567ed14d019: no route to destination
+2026-10-23T17:03:20.655036Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=d
+2026-10-23T17:03:20.860030Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=d error=send failed to 6f56062dd944fd10bfa0b567ed14d019: no route to destination
+2026-10-23T17:03:20.860065Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=d
+2026-10-23T17:03:20.985868Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=4987052799729469172 target=c ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:20.985897Z DEBUG fips::node::handlers::lookup: Discovery retry sent target_node=c attempt=3
+2026-10-23T17:03:20.985908Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=10718374713646560604 target=d ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:20.985918Z DEBUG fips::node::handlers::lookup: Discovery retry sent target_node=d attempt=3
+2026-10-23T17:03:21.020656Z  INFO fips::node::handlers::lookup: Discovery succeeded, proof verified, route cached request_id=4987052799729469172 target=c depth=0 path_mtu=1472
+2026-10-23T17:03:21.020690Z DEBUG fips::node::handlers::lookup: Wrote path_mtu_lookup from discovery LookupResponse target=c fips_addr=fd50:a0a0:83f3:b880:31f2:41e3:6f31:4060 path_mtu=1472 prior=None map_len=3
+2026-10-23T17:03:21.020701Z DEBUG fips::node::handlers::lookup: Reset coords warmup after discovery for existing session dest=c warmup_packets=5
+2026-10-23T17:03:21.067796Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=d error=send failed to 6f56062dd944fd10bfa0b567ed14d019: no route to destination
+2026-10-23T17:03:21.067842Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=d
+2026-10-23T17:03:23.680859Z DEBUG fips::node::handlers::lookup: We are the lookup target, generating response request_id=9839657423712462335 origin=d
+2026-10-23T17:03:23.680958Z DEBUG fips::node::handlers::lookup: Sending LookupResponse request_id=9839657423712462335 origin=d next_hop=a path_mtu=1472
+2026-10-23T17:03:23.725545Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=6f56062dd944fd10bfa0b567ed14d019 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:23.726044Z DEBUG fips::node::handlers::session: SessionSetup processed (XK), SessionAck sent, awaiting msg3 src=d
+2026-10-23T17:03:23.766093Z DEBUG fips::node::handlers::session: Encrypted message but session not established (awaiting handshake completion) src=d
+2026-10-23T17:03:23.766483Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6f56062dd944fd10bfa0b567ed14d019 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:23.766548Z DEBUG fips::node::handlers::session: Encrypted message but session not established (awaiting handshake completion) src=d
+2026-10-23T17:03:23.766824Z  INFO fips::node::handlers::session: Session established (responder, XK) src=d
+2026-10-23T17:03:23.766881Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6f56062dd944fd10bfa0b567ed14d019 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:23.767064Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6f56062dd944fd10bfa0b567ed14d019 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:23.767202Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6f56062dd944fd10bfa0b567ed14d019 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:23.769083Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6f56062dd944fd10bfa0b567ed14d019 dest=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:23.986459Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1jn0u...t7vu rtt=n/a loss=n/a jitter=0.5ms goodput=n/a mtu=1472 tx_pkts=10 rx_pkts=10
+2026-10-23T17:03:24.986816Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=16928320695917579572 target=d ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:24.986845Z DEBUG fips::node::handlers::lookup: Discovery retry sent target_node=d attempt=4
+2026-10-23T17:03:25.035323Z  INFO fips::node::handlers::lookup: Discovery succeeded, proof verified, route cached request_id=16928320695917579572 target=d depth=1 path_mtu=1472
+2026-10-23T17:03:25.035360Z DEBUG fips::node::handlers::lookup: Wrote path_mtu_lookup from discovery LookupResponse target=d fips_addr=fd6f:5606:2dd9:44fd:10bf:a0b5:67ed:14d0 path_mtu=1472 prior=None map_len=4
+2026-10-23T17:03:25.035373Z DEBUG fips::node::handlers::lookup: Reset coords warmup after discovery for existing session dest=d warmup_packets=5
+2026-10-23T17:03:45.075860Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:03:45.986349Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:03:45.986727Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.7ms loss=0.0% jitter=0.5ms goodput=850B/s tx_pkts=187 rx_pkts=176
+2026-10-23T17:03:45.986771Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=10.2ms loss=0.0% jitter=0.7ms goodput=1.3KB/s tx_pkts=334 rx_pkts=358
+2026-10-23T17:03:45.986869Z DEBUG fips::node::handlers::session: MMP session metrics session=a rtt=10.9ms loss=0.0% jitter=0.5ms goodput=124B/s mtu=1472 tx_pkts=68 rx_pkts=68
+2026-10-23T17:03:45.986995Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1tz5x...0khn rtt=21.2ms loss=0.0% jitter=1.0ms goodput=124B/s mtu=1472 tx_pkts=67 rx_pkts=69
+2026-10-23T17:03:46.986621Z DEBUG fips::node::handlers::session: MMP session metrics session=e rtt=11.9ms loss=0.0% jitter=0.7ms goodput=124B/s mtu=1472 tx_pkts=68 rx_pkts=68
+2026-10-23T17:03:49.986476Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1l20d...dq3r rtt=33.3ms loss=0.0% jitter=1.2ms goodput=124B/s mtu=1472 tx_pkts=73 rx_pkts=73
+2026-10-23T17:03:53.986617Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1jn0u...t7vu rtt=35.6ms loss=0.0% jitter=1.3ms goodput=124B/s mtu=1472 tx_pkts=79 rx_pkts=79
+2026-10-23T17:04:15.075789Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:04:15.101412Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=a
+2026-10-23T17:04:15.986607Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.5ms loss=0.0% jitter=0.4ms goodput=747B/s tx_pkts=347 rx_pkts=396
+2026-10-23T17:04:15.986660Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=10.7ms loss=0.0% jitter=0.7ms goodput=1.8KB/s tx_pkts=704 rx_pkts=673
+2026-10-23T17:04:15.986768Z DEBUG fips::node::handlers::session: MMP session metrics session=a rtt=11.0ms loss=0.0% jitter=0.6ms goodput=124B/s mtu=1472 tx_pkts=131 rx_pkts=131
+2026-10-23T17:04:15.986845Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1tz5x...0khn rtt=21.7ms loss=0.0% jitter=0.7ms goodput=124B/s mtu=1472 tx_pkts=130 rx_pkts=132
+2026-10-23T17:04:16.986048Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:04:16.986431Z DEBUG fips::node::handlers::session: MMP session metrics session=e rtt=11.5ms loss=0.0% jitter=0.5ms goodput=124B/s mtu=1472 tx_pkts=131 rx_pkts=131
+2026-10-23T17:04:20.986648Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1l20d...dq3r rtt=33.4ms loss=0.0% jitter=1.1ms goodput=124B/s mtu=1472 tx_pkts=138 rx_pkts=139
+2026-10-23T17:04:24.986088Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1jn0u...t7vu rtt=39.0ms loss=0.0% jitter=1.3ms goodput=124B/s mtu=1472 tx_pkts=144 rx_pkts=144
+2026-10-23T17:04:45.986346Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.4ms loss=0.0% jitter=0.7ms goodput=820B/s tx_pkts=516 rx_pkts=582
+2026-10-23T17:04:45.986368Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=11.1ms loss=0.0% jitter=0.6ms goodput=1.4KB/s tx_pkts=1036 rx_pkts=989
+2026-10-23T17:04:45.986418Z DEBUG fips::node::handlers::session: MMP session metrics session=a rtt=11.1ms loss=0.0% jitter=0.4ms goodput=124B/s mtu=1472 tx_pkts=194 rx_pkts=194
+2026-10-23T17:04:45.986448Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1tz5x...0khn rtt=21.6ms loss=0.0% jitter=0.7ms goodput=124B/s mtu=1472 tx_pkts=193 rx_pkts=195
+2026-10-23T17:04:47.986457Z DEBUG fips::node::handlers::session: MMP session teardown session=e rtt=11.0ms loss=0.0% jitter=0.5ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=196 tx_bytes=14897 rx_pkts=197 rx_bytes=11769
+2026-10-23T17:04:47.986623Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=e fips_addr=fd63:317:1b82:15d0:d7e0:6e7e:818c:9d16
+2026-10-23T17:04:47.986709Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=e fips_addr=fd63:317:1b82:15d0:d7e0:6e7e:818c:9d16 link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=4
+2026-10-23T17:04:47.986815Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=e idle_secs=90
+2026-10-23T17:04:47.986827Z DEBUG fips::node::handlers::session: MMP session teardown session=a rtt=11.2ms loss=0.0% jitter=0.5ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=198 tx_bytes=15053 rx_pkts=196 rx_bytes=11761
+2026-10-23T17:04:47.986965Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=a fips_addr=fdf4:45dd:7898:71aa:a781:b813:fa93:d4e
+2026-10-23T17:04:47.986980Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=a fips_addr=fdf4:45dd:7898:71aa:a781:b813:fa93:d4e link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=4
+2026-10-23T17:04:47.986989Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=a idle_secs=90
+2026-10-23T17:04:47.986997Z DEBUG fips::node::handlers::session: MMP session teardown session=b rtt=21.5ms loss=0.0% jitter=0.8ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=197 tx_bytes=14985 rx_pkts=197 rx_bytes=11813
+2026-10-23T17:04:47.987011Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=b idle_secs=90
+2026-10-23T17:04:47.987034Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:04:50.986589Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1l20d...dq3r rtt=32.9ms loss=0.0% jitter=1.0ms goodput=124B/s mtu=1472 tx_pkts=201 rx_pkts=202
+2026-10-23T17:04:51.985804Z DEBUG fips::node::handlers::session: MMP session teardown session=c rtt=32.6ms loss=0.0% jitter=1.0ms etx=1.50 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=203 tx_bytes=15538 rx_pkts=202 rx_bytes=12174
+2026-10-23T17:04:51.985962Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=c fips_addr=fd50:a0a0:83f3:b880:31f2:41e3:6f31:4060
+2026-10-23T17:04:51.985978Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=c idle_secs=90
+2026-10-23T17:04:54.985710Z DEBUG fips::node::handlers::session: MMP session teardown session=d rtt=36.7ms loss=0.0% jitter=1.3ms etx=1.00 goodput=125B/s send_mtu=1472 observed_mtu=1472 tx_pkts=207 tx_bytes=15964 rx_pkts=205 rx_bytes=12528
+2026-10-23T17:04:54.985785Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=d fips_addr=fd6f:5606:2dd9:44fd:10bf:a0b5:67ed:14d0
+2026-10-23T17:04:54.985816Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=d idle_secs=90
+2026-10-23T17:05:02.099531Z DEBUG fips::node::tree: Processed TreeAnnounce from=a seq=3 depth=0 root=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:02.099723Z  INFO fips::node::tree: Parent switched, invalidated downstream coord cache entries, announcing to all peers new_parent=e new_seq=3 new_root=50a0a083f3b88031f241e36f314060ce depth=3
+2026-10-23T17:05:02.099775Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=a
+2026-10-23T17:05:02.100681Z DEBUG fips::node::bloom: Received FilterAnnounce from=a seq=7 est_entries="1" set_bits=5 fill=0.1% tree_peer=false
+2026-10-23T17:05:02.986047Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=6 est_entries="1" set_bits=5 fill=0.1% tree_peer=true
+2026-10-23T17:05:02.986103Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=a seq=7 est_entries="6" set_bits=30 fill=0.4% tree_peer=false
+2026-10-23T17:05:02.986838Z DEBUG fips::node::handlers::rekey: Rekey initiated, sent msg1 on existing link peer=e our_index=fb61829a
+2026-10-23T17:05:02.996501Z DEBUG fips::node::tree: Processed TreeAnnounce from=a seq=4 depth=4 root=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:05:02.997613Z DEBUG fips::node::handlers::lookup: Forwarding LookupRequest request_id=5758499566363843316 target=b ttl=63 peer_count=1
+2026-10-23T17:05:02.999227Z DEBUG fips::node::handlers::handshake: Rekey completed (initiator), pending K-bit cutover peer=e new_our_index=fb61829a new_their_index=aeafa5d4
+2026-10-23T17:05:03.038539Z DEBUG fips::node::handlers::lookup: Reverse-path forwarding LookupResponse request_id=5758499566363843316 target=b next_hop=a path_mtu=1472
+2026-10-23T17:05:03.048316Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:03.101178Z DEBUG fips::node::bloom: Received FilterAnnounce from=a seq=8 est_entries="1" set_bits=5 fill=0.1% tree_peer=true
+2026-10-23T17:05:03.986489Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=8 est_entries="2" set_bits=10 fill=0.1% tree_peer=true
+2026-10-23T17:05:03.986758Z DEBUG fips::node::handlers::rekey: Rekey cutover complete (initiator), K-bit flipped peer=e
+2026-10-23T17:05:04.099927Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:05.074418Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=10 est_entries="4" set_bits=20 fill=0.2% tree_peer=true
+2026-10-23T17:05:05.986076Z DEBUG fips::node::bloom: Resending unconfirmed FilterAnnounce peer=e reason=SessionChanged counter=Some(579)
+2026-10-23T17:05:05.986174Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=9 est_entries="2" set_bits=10 fill=0.1% tree_peer=true
+2026-10-23T17:05:05.986228Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=a seq=10 est_entries="5" set_bits=25 fill=0.3% tree_peer=true
+2026-10-23T17:05:06.073784Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:05:06.074058Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=11 est_entries="4" set_bits=20 fill=0.2% tree_peer=true
+2026-10-23T17:05:06.100756Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:11.098999Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:15.075735Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:05:15.986517Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.2ms loss=0.0% jitter=0.0ms goodput=295B/s tx_pkts=613 rx_pkts=656
+2026-10-23T17:05:15.986573Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=11.1ms loss=0.0% jitter=0.6ms goodput=258B/s tx_pkts=1130 rx_pkts=1091
+2026-10-23T17:05:18.986208Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:05:19.099722Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:20.987870Z DEBUG fips::node::handlers::rekey: Rekey initiated, sent msg1 on existing link peer=a our_index=21ce89d9
+2026-10-23T17:05:20.999472Z DEBUG fips::node::handlers::handshake: Rekey completed (initiator), pending K-bit cutover peer=a new_our_index=21ce89d9 new_their_index=e8ecab57
+2026-10-23T17:05:21.986217Z DEBUG fips::node::handlers::rekey: Rekey cutover complete (initiator), K-bit flipped peer=a
+2026-10-23T17:05:23.986616Z DEBUG fips::node::tree: Resending unconfirmed TreeAnnounce peer=a reason=SessionChanged counter=Some(1128) seq=Some(3)
+2026-10-23T17:05:33.372039Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:35.100309Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:37.099058Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:41.100475Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:45.986629Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=11.1ms loss=0.0% jitter=0.8ms goodput=248B/s tx_pkts=675 rx_pkts=713
+2026-10-23T17:05:45.986659Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=a rtt=11.0ms loss=0.0% jitter=0.8ms goodput=189B/s tx_pkts=1189 rx_pkts=1159

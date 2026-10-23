@@ -1,0 +1,592 @@
+2026-10-23T17:03:13.600608Z  INFO fips: FIPS 0.5.3 (rev f4a5b4a8e6) starting
+2026-10-23T17:03:13.600846Z  INFO fips: Loaded config file path=/etc/fips/fips.yaml
+2026-10-23T17:03:13.601002Z  INFO fips: Using identity from configuration
+2026-10-23T17:03:13.601037Z DEBUG fips: Creating node
+2026-10-23T17:03:13.601993Z DEBUG fips::upper::hosts: Host map entries from peer config count=2
+2026-10-23T17:03:13.602792Z  INFO fips::upper::hosts: Loaded hosts file path=/etc/fips/hosts count=6
+2026-10-23T17:03:13.603393Z  INFO fips::upper::hosts: Loaded hosts file path=/etc/fips/hosts count=6
+2026-10-23T17:03:13.603611Z DEBUG fips::node::acl: No ACL file found, skipping path=/etc/fips/peers.allow
+2026-10-23T17:03:13.603743Z DEBUG fips::node::acl: No ACL file found, skipping path=/etc/fips/peers.deny
+2026-10-23T17:03:13.604118Z  INFO fips: Node created:
+2026-10-23T17:03:13.604136Z  INFO fips:       npub: npub1jn0upuachzdenczum9j8szhwre5k324cjlflpex7e5x0k0hed0hsayt7vu
+2026-10-23T17:03:13.604149Z  INFO fips:    node_addr: 6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:13.604154Z  INFO fips:    address: fd6f:5606:2dd9:44fd:10bf:a0b5:67ed:14d0
+2026-10-23T17:03:13.604160Z  INFO fips:      state: created
+2026-10-23T17:03:13.604164Z  INFO fips:  leaf_only: false
+2026-10-23T17:03:13.604174Z  INFO fips::shutdown: Shutdown signal handler installed since_start_ms=8
+2026-10-23T17:03:13.604387Z  INFO fips::transport::udp: UDP transport started local_addr=0.0.0.0:2121 recv_buf=4194304 send_buf=4194304
+2026-10-23T17:03:13.604404Z  INFO fips::node::lifecycle: Transports initialized count=1
+2026-10-23T17:03:13.619129Z  INFO fips::node::lifecycle: Spawned FMP-encrypt worker pool workers=4
+2026-10-23T17:03:13.647341Z  INFO fips::node::lifecycle: Spawned FMP-decrypt worker pool workers=4
+2026-10-23T17:03:13.647727Z DEBUG fips::node::lifecycle: Initiating static peer connections count=2
+2026-10-23T17:03:13.650292Z DEBUG fips::node::lifecycle: Connection initiated peer=c transport_id=transport:1 remote_addr=10.99.3.2:2121 link_id=link:1 our_index=d2447773
+2026-10-23T17:03:13.650651Z DEBUG fips::transport::udp: UDP receive loop starting transport_id=transport:1
+2026-10-23T17:03:13.652301Z DEBUG fips::node::lifecycle: Sent Noise handshake message 1 (wire format) link_id=link:1 our_index=d2447773 bytes=114
+2026-10-23T17:03:13.652822Z DEBUG fips::node::lifecycle: Connection initiated peer=e transport_id=transport:1 remote_addr=10.99.4.3:2121 link_id=link:2 our_index=4d276074
+2026-10-23T17:03:13.652959Z DEBUG fips::node::lifecycle: Sent Noise handshake message 1 (wire format) link_id=link:2 our_index=4d276074 bytes=114
+2026-10-23T17:03:13.656009Z  INFO fips::node::lifecycle: TUN device active:
+2026-10-23T17:03:13.656234Z  INFO fips::node::lifecycle:      name: fips0
+2026-10-23T17:03:13.656358Z  INFO fips::node::lifecycle:   address: fd6f:5606:2dd9:44fd:10bf:a0b5:67ed:14d0
+2026-10-23T17:03:13.656499Z  INFO fips::node::lifecycle:       mtu: 1280
+2026-10-23T17:03:13.656632Z  INFO fips::node::lifecycle: effective MTU: 1395 bytes
+2026-10-23T17:03:13.656790Z DEBUG fips::node::lifecycle:    max TCP MSS: 1335 bytes
+2026-10-23T17:03:13.657191Z DEBUG fips::upper::tun: TUN writer starting name=fips0 max_mss=1335
+2026-10-23T17:03:13.657576Z DEBUG fips::upper::hosts: Host map entries from peer config count=2
+2026-10-23T17:03:13.657594Z DEBUG fips::upper::tun: TUN reader starting name=fips0 tun_mtu=1280 transport_mtu=1472 effective_mtu=1395 max_mss=1335
+2026-10-23T17:03:13.657886Z  INFO fips::upper::hosts: Loaded hosts file path=/etc/fips/hosts count=6
+2026-10-23T17:03:13.658088Z  INFO fips::node::lifecycle: DNS responder started for .fips domain (auto-reload enabled) bind=[::1]:5354 hosts=6 mesh_ifindex=Some(4)
+2026-10-23T17:03:13.658218Z  INFO fips::node::lifecycle: Node started:
+2026-10-23T17:03:13.658346Z  INFO fips::node::lifecycle:        state: running
+2026-10-23T17:03:13.658436Z  INFO fips::node::lifecycle:   transports: 1
+2026-10-23T17:03:13.658609Z  INFO fips::node::lifecycle:  connections: 2
+2026-10-23T17:03:13.658619Z  INFO fips: FIPS running
+2026-10-23T17:03:13.658786Z  INFO fips::node::dataplane::rx_loop: RX event loop started
+2026-10-23T17:03:13.659225Z DEBUG fips::node::handlers::handshake: Outbound handshake completed peer=c link_id=link:1 their_index=a5a3a590
+2026-10-23T17:03:13.659366Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=c fips_addr=fd50:a0a0:83f3:b880:31f2:41e3:6f31:4060 link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=1
+2026-10-23T17:03:13.659601Z DEBUG fips::node::handlers::handshake: Connection promoted to active peer peer=c link_id=link:1 our_index=d2447773 their_index=a5a3a590
+2026-10-23T17:03:13.659743Z  INFO fips::node::handlers::handshake: Peer promoted to active peer=c
+2026-10-23T17:03:13.661011Z DEBUG fips::utils::sockbind: 'fips' group not found, skipping chown for /run/fips/control.sock
+2026-10-23T17:03:13.661241Z DEBUG fips::utils::sockbind: 'fips' group not found, skipping chown for /run/fips
+2026-10-23T17:03:13.661354Z  INFO fips::control::unix_impl: Control socket listening path=/run/fips/control.sock
+2026-10-23T17:03:13.661788Z DEBUG fips::node::tree: Processed TreeAnnounce from=c seq=1 depth=0 root=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:13.661920Z  INFO fips::node::tree: Parent switched, invalidated downstream coord cache entries, announcing to all peers new_parent=c new_seq=2 new_root=50a0a083f3b88031f241e36f314060ce depth=1
+2026-10-23T17:03:13.661936Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=c
+2026-10-23T17:03:13.662315Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=c seq=1 est_entries="1" set_bits=5 fill=0.1% tree_peer=true
+2026-10-23T17:03:13.662886Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=c rtt=n/a loss=n/a jitter=0.0ms goodput=n/a tx_pkts=2 rx_pkts=1
+2026-10-23T17:03:13.663229Z DEBUG fips::node::dataplane::connected_udp: connected UDP socket installed peer=c peer_addr=10.99.3.2:2121
+2026-10-23T17:03:14.065005Z DEBUG fips::node::handlers::handshake: Cross-connection detected: have outbound, received inbound msg1 transport_id=transport:1 remote_addr=10.99.4.3:2121 existing_link_id=link:2
+2026-10-23T17:03:14.066111Z DEBUG fips::node::handlers::handshake: Deferring cleanup of pending outbound (awaiting msg2 for index update) peer=e pending_link_id=link:2 promoted_link_id=link:3
+2026-10-23T17:03:14.067545Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=e fips_addr=fd63:317:1b82:15d0:d7e0:6e7e:818c:9d16 link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=2
+2026-10-23T17:03:14.067714Z DEBUG fips::node::handlers::handshake: Connection promoted to active peer peer=e link_id=link:3 our_index=4c5c2b93 their_index=e4ae0903
+2026-10-23T17:03:14.071849Z DEBUG fips::node::tree: Processed TreeAnnounce from=e seq=1 depth=0 root=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:14.071876Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=e
+2026-10-23T17:03:14.074072Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=1 est_entries="1" set_bits=5 fill=0.1% tree_peer=false
+2026-10-23T17:03:14.476396Z DEBUG fips::node::handlers::handshake: Same-epoch msg1 inside the peering's replacement interval, dropping peer=c remote_addr=10.99.3.2:2121 idle_ms=815 dampened=false reason="heard-within-interval"
+2026-10-23T17:03:14.478030Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=c
+2026-10-23T17:03:14.478065Z DEBUG fips::node::bloom: Received FilterAnnounce from=c seq=2 est_entries="1" set_bits=5 fill=0.1% tree_peer=true
+2026-10-23T17:03:14.659469Z DEBUG fips::node::handlers::timeout: Resent handshake msg1 link_id=link:2 resend=1
+2026-10-23T17:03:14.662901Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=e
+2026-10-23T17:03:14.663132Z DEBUG fips::node::tree: TreeAnnounce rate-limited, marking pending peer=c
+2026-10-23T17:03:14.663180Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=2 est_entries="2" set_bits=10 fill=0.1% tree_peer=false
+2026-10-23T17:03:14.663203Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=3 peers=2 contributors=2
+2026-10-23T17:03:14.665384Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=n/a loss=n/a jitter=0.1ms goodput=n/a tx_pkts=3 rx_pkts=4
+2026-10-23T17:03:14.666504Z DEBUG fips::node::dataplane::connected_udp: connected UDP socket installed peer=e peer_addr=10.99.4.3:2121
+2026-10-23T17:03:15.070135Z DEBUG fips::node::tree: Processed TreeAnnounce from=e seq=2 depth=2 root=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:15.070414Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=3 est_entries="1" set_bits=5 fill=0.1% tree_peer=true
+2026-10-23T17:03:15.484969Z DEBUG fips::node::bloom: Received FilterAnnounce from=c seq=4 est_entries="2" set_bits=10 fill=0.1% tree_peer=true
+2026-10-23T17:03:15.485224Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=c
+2026-10-23T17:03:15.661302Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=3 est_entries="3" set_bits=15 fill=0.2% tree_peer=true
+2026-10-23T17:03:15.661354Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=c seq=4 est_entries="2" set_bits=10 fill=0.1% tree_peer=true
+2026-10-23T17:03:15.747938Z DEBUG fips::node::handlers::lookup: We are the lookup target, generating response request_id=13774841198789769152 origin=b
+2026-10-23T17:03:15.748052Z DEBUG fips::node::handlers::lookup: Sending LookupResponse request_id=13774841198789769152 origin=b next_hop=c path_mtu=1472
+2026-10-23T17:03:15.786897Z DEBUG fips::node::dataplane::forwarding: Coordinate hint not paid for peer=c addr=d9476313bf06ca9e8e418b235a4ed443 reason="over link peer's hint budget" segment=Probation
+2026-10-23T17:03:15.786929Z DEBUG fips::node::dataplane::forwarding: Coordinate hint not paid for peer=c addr=6f56062dd944fd10bfa0b567ed14d019 reason="over link peer's hint budget" segment=Probation
+2026-10-23T17:03:15.786939Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=d9476313bf06ca9e8e418b235a4ed443 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:15.787452Z DEBUG fips::node::handlers::session: SessionSetup processed (XK), SessionAck sent, awaiting msg3 src=b
+2026-10-23T17:03:15.826043Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:15.826079Z DEBUG fips::node::handlers::session: Encrypted message but session not established (awaiting handshake completion) src=b
+2026-10-23T17:03:15.826320Z  INFO fips::node::handlers::session: Session established (responder, XK) src=b
+2026-10-23T17:03:15.860506Z DEBUG fips::upper::dns: DNS resolved .fips name, registering identity node_addr=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:15.860565Z DEBUG fips::node::dataplane::rx_loop: Registering identity from DNS resolution node_addr=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:15.863042Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=a error=send failed to f445dd789871aaa781b813fa930d4ed4: no route to destination
+2026-10-23T17:03:15.863074Z DEBUG fips::node::handlers::lookup: Discovery skipped, target not in any peer bloom filter target_node=a
+2026-10-23T17:03:15.883865Z DEBUG fips::node::handlers::lookup: Forwarding LookupRequest request_id=2481327981898913044 target=e ttl=63 peer_count=1
+2026-10-23T17:03:15.895051Z DEBUG fips::node::handlers::lookup: Reverse-path forwarding LookupResponse request_id=2481327981898913044 target=e next_hop=c path_mtu=1472
+2026-10-23T17:03:15.909532Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=50a0a083f3b88031f241e36f314060ce dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:15.912782Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=50a0a083f3b88031f241e36f314060ce dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:15.913204Z DEBUG fips::node::handlers::session: SessionSetup processed (XK), SessionAck sent, awaiting msg3 src=c
+2026-10-23T17:03:15.922196Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=6303171b8215d0d7e06e7e818c9d167e dest=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:15.923397Z  INFO fips::node::handlers::session: Session established (responder, XK) src=c
+2026-10-23T17:03:15.923862Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:15.934344Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:15.934402Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:15.934480Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:15.941362Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.067768Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=a error=send failed to f445dd789871aaa781b813fa930d4ed4: no route to destination
+2026-10-23T17:03:16.067805Z DEBUG fips::node::handlers::lookup: Discovery skipped, target not in any peer bloom filter target_node=a
+2026-10-23T17:03:16.113716Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.132720Z DEBUG fips::upper::dns: DNS resolved .fips name, registering identity node_addr=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:16.133293Z DEBUG fips::node::dataplane::rx_loop: Registering identity from DNS resolution node_addr=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:16.136552Z DEBUG fips::upper::dns: DNS resolved .fips name, registering identity node_addr=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:03:16.136656Z DEBUG fips::node::dataplane::rx_loop: Registering identity from DNS resolution node_addr=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:03:16.143727Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.144616Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.158920Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.239526Z DEBUG fips::upper::dns: DNS resolved .fips name, registering identity node_addr=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.239604Z DEBUG fips::node::dataplane::rx_loop: Registering identity from DNS resolution node_addr=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.239993Z DEBUG fips::node::handlers::session: Session initiation started dest=e
+2026-10-23T17:03:16.250860Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=6303171b8215d0d7e06e7e818c9d167e dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.251251Z  INFO fips::node::handlers::session: Session established (initiator, XK) src=e
+2026-10-23T17:03:16.276277Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=a error=send failed to f445dd789871aaa781b813fa930d4ed4: no route to destination
+2026-10-23T17:03:16.276313Z DEBUG fips::node::handlers::lookup: Discovery skipped, target not in any peer bloom filter target_node=a
+2026-10-23T17:03:16.315095Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.336211Z DEBUG fips::upper::dns: DNS resolved .fips name, registering identity node_addr=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.336288Z DEBUG fips::node::dataplane::rx_loop: Registering identity from DNS resolution node_addr=63cf57774d3b6715c1c875b42159e0c9
+2026-10-23T17:03:16.339107Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=f error=send failed to 63cf57774d3b6715c1c875b42159e0c9: no route to destination
+2026-10-23T17:03:16.339138Z DEBUG fips::node::handlers::lookup: Discovery skipped, target not in any peer bloom filter target_node=f
+2026-10-23T17:03:16.348524Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.367759Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.457590Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.470919Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:16.479168Z DEBUG fips::node::handlers::handshake: Same-epoch msg1 inside the peering's replacement interval, dropping peer=c remote_addr=10.99.3.2:2121 idle_ms=114 dampened=false reason="heard-within-interval"
+2026-10-23T17:03:16.481375Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.481475Z DEBUG fips::node::bloom: Received FilterAnnounce from=c seq=6 est_entries="4" set_bits=20 fill=0.2% tree_peer=true
+2026-10-23T17:03:16.517222Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.528227Z DEBUG fips::node::handlers::lookup: Forwarding LookupRequest request_id=9051939091006623707 target=b ttl=63 peer_count=1
+2026-10-23T17:03:16.539686Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=f error=send failed to 63cf57774d3b6715c1c875b42159e0c9: no route to destination
+2026-10-23T17:03:16.541281Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=487848283504755594 target=f ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:16.549830Z DEBUG fips::node::handlers::lookup: Reverse-path forwarding LookupResponse request_id=9051939091006623707 target=b next_hop=e path_mtu=1472
+2026-10-23T17:03:16.562889Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=6303171b8215d0d7e06e7e818c9d167e dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:03:16.585048Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.596291Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:03:16.619056Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.619206Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.619383Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.629915Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:03:16.630320Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:03:16.630543Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:03:16.655694Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.659984Z DEBUG fips::node::handlers::timeout: Resent handshake msg1 link_id=link:2 resend=2
+2026-10-23T17:03:16.660082Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=5 est_entries="5" set_bits=25 fill=0.3% tree_peer=true
+2026-10-23T17:03:16.660312Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1tz5x...0khn rtt=24.0ms loss=n/a jitter=0.4ms goodput=n/a mtu=1472 tx_pkts=5 rx_pkts=8
+2026-10-23T17:03:16.660326Z DEBUG fips::node::handlers::session: MMP session metrics session=e rtt=n/a loss=n/a jitter=0.2ms goodput=n/a mtu=1472 tx_pkts=4 rx_pkts=3
+2026-10-23T17:03:16.660335Z DEBUG fips::node::handlers::session: MMP session metrics session=c rtt=12.0ms loss=n/a jitter=0.2ms goodput=n/a mtu=1472 tx_pkts=6 rx_pkts=9
+2026-10-23T17:03:16.674037Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:16.685644Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=50a0a083f3b88031f241e36f314060ce dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.718386Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.729781Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:03:16.747912Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=f error=send failed to 63cf57774d3b6715c1c875b42159e0c9: no route to destination
+2026-10-23T17:03:16.747948Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=f
+2026-10-23T17:03:16.752478Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.793706Z DEBUG fips::node::handlers::lookup: Forwarding LookupRequest request_id=10220790050123547354 target=a ttl=63 peer_count=1
+2026-10-23T17:03:16.827025Z DEBUG fips::node::handlers::lookup: Reverse-path forwarding LookupResponse request_id=10220790050123547354 target=a next_hop=e path_mtu=1472
+2026-10-23T17:03:16.839578Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=6303171b8215d0d7e06e7e818c9d167e dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:16.869934Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=f445dd789871aaa781b813fa930d4ed4 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.873079Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:16.880632Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:16.881098Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:16.881561Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:16.914596Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.914771Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.916772Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.916956Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:16.919497Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:16.923882Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:16.926166Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:03:16.954683Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=d9476313bf06ca9e8e418b235a4ed443 dest=6303171b8215d0d7e06e7e818c9d167e
+2026-10-23T17:03:17.660141Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=5666616545035382153 target=f ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:17.660174Z DEBUG fips::node::handlers::lookup: Discovery retry sent target_node=f attempt=2
+2026-10-23T17:03:19.112530Z DEBUG fips::node::handlers::lookup: We are the lookup target, generating response request_id=14003391881857591017 origin=a
+2026-10-23T17:03:19.112626Z DEBUG fips::node::handlers::lookup: Sending LookupResponse request_id=14003391881857591017 origin=a next_hop=c path_mtu=1472
+2026-10-23T17:03:19.144599Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:19.145009Z DEBUG fips::node::handlers::session: SessionSetup processed (XK), SessionAck sent, awaiting msg3 src=a
+2026-10-23T17:03:19.175448Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:19.175488Z DEBUG fips::node::handlers::session: Encrypted message but session not established (awaiting handshake completion) src=a
+2026-10-23T17:03:19.175735Z  INFO fips::node::handlers::session: Session established (responder, XK) src=a
+2026-10-23T17:03:19.177470Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:19.177650Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:19.208808Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:19.209551Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=f445dd789871aaa781b813fa930d4ed4 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:19.660152Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1hrls...qa60 rtt=n/a loss=n/a jitter=0.1ms goodput=n/a mtu=1472 tx_pkts=5 rx_pkts=5
+2026-10-23T17:03:19.660337Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=16540893331167745328 target=f ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:19.660493Z DEBUG fips::node::handlers::lookup: Discovery retry sent target_node=f attempt=3
+2026-10-23T17:03:20.459381Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:20.487689Z DEBUG fips::node::handlers::handshake: Same-epoch msg1 inside the peering's replacement interval, dropping peer=c remote_addr=10.99.3.2:2121 idle_ms=46 dampened=false reason="heard-within-interval"
+2026-10-23T17:03:20.615755Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=f error=send failed to 63cf57774d3b6715c1c875b42159e0c9: no route to destination
+2026-10-23T17:03:20.615789Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=f
+2026-10-23T17:03:20.654139Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=6303171b8215d0d7e06e7e818c9d167e dest=50a0a083f3b88031f241e36f314060ce
+2026-10-23T17:03:20.659950Z DEBUG fips::node::handlers::timeout: Resent handshake msg1 link_id=link:2 resend=3
+2026-10-23T17:03:20.821891Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=f error=send failed to 63cf57774d3b6715c1c875b42159e0c9: no route to destination
+2026-10-23T17:03:20.822008Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=f
+2026-10-23T17:03:21.027699Z DEBUG fips::node::handlers::session: Failed to initiate session, trying discovery dest=f error=send failed to 63cf57774d3b6715c1c875b42159e0c9: no route to destination
+2026-10-23T17:03:21.027739Z DEBUG fips::node::handlers::lookup: Discovery lookup deduplicated, already pending target_node=f
+2026-10-23T17:03:23.660296Z DEBUG fips::node::handlers::lookup: Discovery lookup initiated request_id=9839657423712462335 target=f ttl=64 peer_count=1 total_peers=2
+2026-10-23T17:03:23.660326Z DEBUG fips::node::handlers::lookup: Discovery retry sent target_node=f attempt=4
+2026-10-23T17:03:23.702812Z  INFO fips::node::handlers::lookup: Discovery succeeded, proof verified, route cached request_id=9839657423712462335 target=f depth=3 path_mtu=1472
+2026-10-23T17:03:23.702842Z DEBUG fips::node::handlers::lookup: Wrote path_mtu_lookup from discovery LookupResponse target=f fips_addr=fd63:cf57:774d:3b67:15c1:c875:b421:59e0 path_mtu=1472 prior=None map_len=3
+2026-10-23T17:03:23.702854Z DEBUG fips::node::handlers::lookup: Retrying queued packets after discovery dest=f queued_packets=6 queued_native=0
+2026-10-23T17:03:23.703172Z DEBUG fips::node::handlers::session: Session initiation started dest=f
+2026-10-23T17:03:23.703190Z DEBUG fips::node::handlers::session: Session initiated after discovery dest=f
+2026-10-23T17:03:23.746213Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=63cf57774d3b6715c1c875b42159e0c9 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:23.746622Z  INFO fips::node::handlers::session: Session established (initiator, XK) src=f
+2026-10-23T17:03:23.786389Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=63cf57774d3b6715c1c875b42159e0c9 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:23.786565Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=63cf57774d3b6715c1c875b42159e0c9 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:23.786856Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=63cf57774d3b6715c1c875b42159e0c9 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:23.787270Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=63cf57774d3b6715c1c875b42159e0c9 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:23.787681Z DEBUG fips::node::dataplane::forwarding: Cached coords from encrypted message src=63cf57774d3b6715c1c875b42159e0c9 dest=6f56062dd944fd10bfa0b567ed14d019
+2026-10-23T17:03:24.660223Z DEBUG fips::node::handlers::session: MMP session metrics session=npub12rag...uh9f rtt=42.0ms loss=n/a jitter=1.3ms goodput=n/a mtu=1472 tx_pkts=18 rx_pkts=19
+2026-10-23T17:03:25.009605Z DEBUG fips::node::handlers::lookup: We are the lookup target, generating response request_id=16928320695917579572 origin=f
+2026-10-23T17:03:25.009712Z DEBUG fips::node::handlers::lookup: Sending LookupResponse request_id=16928320695917579572 origin=f next_hop=c path_mtu=1472
+2026-10-23T17:03:28.481274Z DEBUG fips::node::handlers::handshake: Same-epoch msg1 inside the peering's replacement interval, dropping peer=c remote_addr=10.99.3.2:2121 idle_ms=1 dampened=false reason="heard-within-interval"
+2026-10-23T17:03:28.659743Z DEBUG fips::node::handlers::timeout: Resent handshake msg1 link_id=link:2 resend=4
+2026-10-23T17:03:43.659641Z DEBUG fips::node::handlers::timeout: Handshake connection timed out link_id=link:2
+2026-10-23T17:03:43.659679Z DEBUG fips::node: Handshake link shares its connection with an active peer; leaving it open link_id=link:2 addr=10.99.4.3:2121
+2026-10-23T17:03:44.659555Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=c rtt=8.9ms loss=0.0% jitter=0.5ms goodput=2.7KB/s tx_pkts=528 rx_pkts=521
+2026-10-23T17:03:45.659692Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:03:45.659961Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=8.5ms loss=0.0% jitter=0.4ms goodput=1.5KB/s tx_pkts=349 rx_pkts=357
+2026-10-23T17:03:46.660231Z DEBUG fips::node::handlers::session: MMP session metrics session=e rtt=11.3ms loss=0.0% jitter=0.8ms goodput=124B/s mtu=1472 tx_pkts=69 rx_pkts=68
+2026-10-23T17:03:46.660277Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1tz5x...0khn rtt=22.3ms loss=0.0% jitter=1.4ms goodput=124B/s mtu=1472 tx_pkts=68 rx_pkts=71
+2026-10-23T17:03:46.660286Z DEBUG fips::node::handlers::session: MMP session metrics session=c rtt=11.4ms loss=0.0% jitter=0.4ms goodput=124B/s mtu=1472 tx_pkts=69 rx_pkts=71
+2026-10-23T17:03:49.660376Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1hrls...qa60 rtt=32.5ms loss=0.0% jitter=1.0ms goodput=124B/s mtu=1472 tx_pkts=74 rx_pkts=74
+2026-10-23T17:03:54.660387Z DEBUG fips::node::handlers::session: MMP session metrics session=npub12rag...uh9f rtt=39.9ms loss=0.0% jitter=3.6ms goodput=125B/s mtu=1472 tx_pkts=81 rx_pkts=81
+2026-10-23T17:04:14.481003Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=c
+2026-10-23T17:04:14.659625Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=c rtt=10.0ms loss=0.0% jitter=0.6ms goodput=2.1KB/s tx_pkts=953 rx_pkts=1011
+2026-10-23T17:04:15.075116Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:04:15.659826Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:04:15.660530Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=9.9ms loss=0.0% jitter=0.5ms goodput=1.5KB/s tx_pkts=661 rx_pkts=623
+2026-10-23T17:04:16.660185Z DEBUG fips::node::handlers::session: MMP session metrics session=e rtt=11.2ms loss=0.0% jitter=0.6ms goodput=124B/s mtu=1472 tx_pkts=132 rx_pkts=131
+2026-10-23T17:04:16.660381Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1tz5x...0khn rtt=22.5ms loss=0.0% jitter=0.9ms goodput=124B/s mtu=1472 tx_pkts=131 rx_pkts=133
+2026-10-23T17:04:16.660460Z DEBUG fips::node::handlers::session: MMP session metrics session=c rtt=11.3ms loss=0.0% jitter=0.8ms goodput=124B/s mtu=1472 tx_pkts=132 rx_pkts=134
+2026-10-23T17:04:20.659348Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1hrls...qa60 rtt=32.8ms loss=0.0% jitter=1.2ms goodput=124B/s mtu=1472 tx_pkts=139 rx_pkts=139
+2026-10-23T17:04:25.659570Z DEBUG fips::node::handlers::session: MMP session metrics session=npub12rag...uh9f rtt=40.7ms loss=0.0% jitter=2.0ms goodput=124B/s mtu=1472 tx_pkts=146 rx_pkts=146
+2026-10-23T17:04:44.660168Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=c rtt=10.9ms loss=0.0% jitter=0.4ms goodput=2.3KB/s tx_pkts=1415 rx_pkts=1496
+2026-10-23T17:04:46.659241Z DEBUG fips::node::handlers::session: MMP session teardown session=b rtt=21.8ms loss=0.0% jitter=0.9ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=194 tx_bytes=14741 rx_pkts=196 rx_bytes=11761
+2026-10-23T17:04:46.659280Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=b idle_secs=90
+2026-10-23T17:04:46.659289Z DEBUG fips::node::handlers::session: MMP session teardown session=c rtt=11.4ms loss=0.0% jitter=0.8ms etx=2.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=195 tx_bytes=14838 rx_pkts=197 rx_bytes=11842
+2026-10-23T17:04:46.659301Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=c fips_addr=fd50:a0a0:83f3:b880:31f2:41e3:6f31:4060
+2026-10-23T17:04:46.659311Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=c fips_addr=fd50:a0a0:83f3:b880:31f2:41e3:6f31:4060 link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=3
+2026-10-23T17:04:46.659321Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=c idle_secs=90
+2026-10-23T17:04:46.659343Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:04:46.659528Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=10.5ms loss=0.0% jitter=0.5ms goodput=1.5KB/s tx_pkts=984 rx_pkts=918
+2026-10-23T17:04:47.659897Z DEBUG fips::node::handlers::session: MMP session teardown session=e rtt=11.6ms loss=0.0% jitter=0.9ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=197 tx_bytes=14994 rx_pkts=194 rx_bytes=11637
+2026-10-23T17:04:47.659933Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=e fips_addr=fd63:317:1b82:15d0:d7e0:6e7e:818c:9d16
+2026-10-23T17:04:47.659945Z DEBUG fips::node::handlers::lookup: seed_path_mtu_for_link_peer: wrote link MTU peer=e fips_addr=fd63:317:1b82:15d0:d7e0:6e7e:818c:9d16 link_mtu=1472 prior=None prior_transport=None transport_id=transport:1 relinked=false map_len=3
+2026-10-23T17:04:47.659955Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=e idle_secs=90
+2026-10-23T17:04:50.659551Z DEBUG fips::node::handlers::session: MMP session metrics session=npub1hrls...qa60 rtt=32.4ms loss=0.0% jitter=0.9ms goodput=124B/s mtu=1472 tx_pkts=202 rx_pkts=202
+2026-10-23T17:04:51.660005Z DEBUG fips::node::handlers::session: MMP session teardown session=a rtt=31.7ms loss=0.0% jitter=0.9ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=204 tx_bytes=15635 rx_pkts=202 rx_bytes=12247
+2026-10-23T17:04:51.660040Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=a idle_secs=90
+2026-10-23T17:04:54.659808Z DEBUG fips::node::handlers::session: MMP session teardown session=f rtt=36.4ms loss=0.0% jitter=3.1ms etx=1.00 goodput=124B/s send_mtu=1472 observed_mtu=1472 tx_pkts=207 tx_bytes=16002 rx_pkts=207 rx_bytes=12652
+2026-10-23T17:04:54.659837Z DEBUG fips::node: Released path_mtu_lookup entry for an invalidated path dest=f fips_addr=fd63:cf57:774d:3b67:15c1:c875:b421:59e0
+2026-10-23T17:04:54.659843Z DEBUG fips::node::handlers::timeout: Idle session removed (no application data) dest=f idle_secs=90
+2026-10-23T17:05:01.661133Z DEBUG fips::node::handlers::rekey: Rekey initiated, sent msg1 on existing link peer=c our_index=9681ddde
+2026-10-23T17:05:01.673682Z DEBUG fips::node::handlers::handshake: Rekey completed (initiator), pending K-bit cutover peer=c new_our_index=9681ddde new_their_index=43682ae6
+2026-10-23T17:05:02.660122Z DEBUG fips::node::handlers::rekey: Rekey cutover complete (initiator), K-bit flipped peer=c
+2026-10-23T17:05:02.660491Z DEBUG fips::node::handlers::rekey: Rekey initiated, sent msg1 on existing link peer=e our_index=e83911c9
+2026-10-23T17:05:02.671558Z DEBUG fips::node::handlers::handshake: Rekey completed (initiator), pending K-bit cutover peer=e new_our_index=e83911c9 new_their_index=d0cf1d70
+2026-10-23T17:05:03.008715Z DEBUG fips::node::handlers::lookup: Forwarding LookupRequest request_id=5758499566363843316 target=b ttl=61 peer_count=1
+2026-10-23T17:05:03.028938Z DEBUG fips::node::handlers::lookup: Reverse-path forwarding LookupResponse request_id=5758499566363843316 target=b next_hop=e path_mtu=1472
+2026-10-23T17:05:03.059791Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:03.075212Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=7 est_entries="2" set_bits=10 fill=0.1% tree_peer=true
+2026-10-23T17:05:03.082808Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.091688Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.102051Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.113547Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.125090Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.134662Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.145849Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.155563Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.166335Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.175936Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.187640Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.198293Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.208388Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.219062Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.230300Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.241421Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.250716Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.260416Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.272564Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.283428Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.294977Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.305220Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.315950Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.325875Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.335925Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.345200Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.356048Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.367846Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.379653Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.390031Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.399208Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.409634Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:03.409659Z DEBUG fips::node::dataplane::forwarding: SessionDatagram TTL exhausted, dropping src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4 ttl=1
+2026-10-23T17:05:03.659630Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=c seq=6 est_entries="3" set_bits=15 fill=0.2% tree_peer=true
+2026-10-23T17:05:03.659834Z DEBUG fips::node::handlers::rekey: Rekey cutover complete (initiator), K-bit flipped peer=e
+2026-10-23T17:05:04.076039Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=8 est_entries="3" set_bits=15 fill=0.2% tree_peer=true
+2026-10-23T17:05:04.110340Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:04.130206Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.139454Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.149129Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.160383Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.170490Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.180563Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.189591Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.200306Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.210359Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.222198Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.232418Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.244337Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.254323Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.263581Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.274064Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.283076Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.294304Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.306532Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.316429Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.328598Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.339048Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.348504Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.359510Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.370554Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.380310Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.390647Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.401662Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.412403Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.424164Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.434006Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.444326Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.454988Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:04.455010Z DEBUG fips::node::dataplane::forwarding: SessionDatagram TTL exhausted, dropping src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4 ttl=1
+2026-10-23T17:05:04.480145Z DEBUG fips::node::bloom: Received FilterAnnounce from=c seq=8 est_entries="2" set_bits=10 fill=0.1% tree_peer=true
+2026-10-23T17:05:04.659748Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=7 est_entries="3" set_bits=15 fill=0.2% tree_peer=true
+2026-10-23T17:05:04.659806Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=c seq=8 est_entries="4" set_bits=20 fill=0.2% tree_peer=true
+2026-10-23T17:05:05.074118Z DEBUG fips::node::bloom: Received FilterAnnounce from=e seq=9 est_entries="3" set_bits=15 fill=0.2% tree_peer=true
+2026-10-23T17:05:05.479765Z DEBUG fips::node::bloom: Received FilterAnnounce from=c seq=10 est_entries="2" set_bits=10 fill=0.1% tree_peer=true
+2026-10-23T17:05:05.660103Z DEBUG fips::node::bloom: Resending unconfirmed FilterAnnounce peer=e reason=Unverified counter=Some(31)
+2026-10-23T17:05:05.660189Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=e seq=9 est_entries="3" set_bits=15 fill=0.2% tree_peer=true
+2026-10-23T17:05:06.111744Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:06.133550Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.144973Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.156327Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.167366Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.177359Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.187800Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.197718Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.208133Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.218162Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.227718Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.239317Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.251384Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.261966Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.273057Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.282591Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.293361Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.304252Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.314471Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.325089Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.335752Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.346081Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.355722Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.366287Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.376538Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.386567Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.397480Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.408096Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.418417Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.427730Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.437536Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.448199Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.458475Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:06.458512Z DEBUG fips::node::dataplane::forwarding: SessionDatagram TTL exhausted, dropping src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4 ttl=1
+2026-10-23T17:05:11.109632Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:11.129219Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.139811Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.151058Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.161537Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.172671Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.184990Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.195755Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.205789Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.217796Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.229109Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.239477Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.250562Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.260762Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.271620Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.282600Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.294650Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.304245Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.314472Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.324092Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.334032Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.343116Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.353250Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.364247Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.374557Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.385517Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.397356Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.408097Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.418259Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.429931Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.443209Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.453813Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.463480Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:11.463499Z DEBUG fips::node::dataplane::forwarding: SessionDatagram TTL exhausted, dropping src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4 ttl=1
+2026-10-23T17:05:14.660375Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=c rtt=11.0ms loss=0.0% jitter=0.0ms goodput=301B/s tx_pkts=1539 rx_pkts=1617
+2026-10-23T17:05:15.076819Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=e
+2026-10-23T17:05:15.481188Z DEBUG fips::node::tree: TreeAnnounce not fresher than existing, ignored from=c
+2026-10-23T17:05:16.659666Z DEBUG fips::node: Mesh size estimate estimated_mesh_size=6 peers=2 contributors=2
+2026-10-23T17:05:16.660204Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=e rtt=10.7ms loss=0.0% jitter=0.0ms goodput=1.5KB/s tx_pkts=1177 rx_pkts=1133
+2026-10-23T17:05:19.110011Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:19.130319Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.141635Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.153414Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.163726Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.176733Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.187030Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.197815Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.209736Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.220668Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.231355Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.243509Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.254459Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.264578Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.275110Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.286955Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.298091Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.310999Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.321023Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.331802Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.344333Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.355830Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.367966Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.380099Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.392629Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.402314Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.412507Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.424369Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.435761Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.446474Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.457397Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.467905Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.479331Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:19.479389Z DEBUG fips::node::dataplane::forwarding: SessionDatagram TTL exhausted, dropping src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4 ttl=1
+2026-10-23T17:05:33.383266Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:33.405910Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.417123Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.427891Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.438139Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.449035Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.458632Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.469461Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.480047Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.490486Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.501315Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.512365Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.522007Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.533055Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.543492Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.555181Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.566323Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.577205Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.587201Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.598348Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.608825Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.619027Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.628870Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.638529Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.650976Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.662032Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.672467Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.681886Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.692062Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.701631Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.712837Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.722781Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.733753Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:33.733959Z DEBUG fips::node::dataplane::forwarding: SessionDatagram TTL exhausted, dropping src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4 ttl=1
+2026-10-23T17:05:34.660086Z DEBUG fips::node::bloom: Resending unconfirmed FilterAnnounce peer=c reason=Timeout counter=Some(4)
+2026-10-23T17:05:34.660341Z DEBUG fips::node::bloom: Sent FilterAnnounce peer=c seq=10 est_entries="4" set_bits=20 fill=0.2% tree_peer=true
+2026-10-23T17:05:35.111740Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:35.132373Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.142194Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.153193Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.163977Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.173729Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.184485Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.194493Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.204696Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.216061Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.227412Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.236831Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.246057Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.257436Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.268843Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.277671Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.287469Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.298110Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.308096Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.317082Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.328745Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.338983Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.349741Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.360975Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.372022Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.381105Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.389776Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.399624Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.410686Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.420827Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.433038Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.442741Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.452399Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:35.452424Z DEBUG fips::node::dataplane::forwarding: SessionDatagram TTL exhausted, dropping src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4 ttl=1
+2026-10-23T17:05:37.108462Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:37.129017Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.140201Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.149605Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.161634Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.172560Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.184041Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.194566Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.205990Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.215872Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.226760Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.236114Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.247455Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.258085Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.268622Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.281175Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.293250Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.305114Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.315309Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.326784Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.336912Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.346099Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.355609Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.365565Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.375107Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.386828Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.398590Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.409772Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.420876Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.429557Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.440695Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.450027Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.460719Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:37.460738Z DEBUG fips::node::dataplane::forwarding: SessionDatagram TTL exhausted, dropping src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4 ttl=1
+2026-10-23T17:05:41.111618Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionSetup src=f445dd789871aaa781b813fa930d4ed4 dest=d9476313bf06ca9e8e418b235a4ed443
+2026-10-23T17:05:41.130538Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.140409Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.150681Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.162054Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.173001Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.184684Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.196056Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.208212Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.219287Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.228727Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.237862Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.248382Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.257402Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.268170Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.278954Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.289225Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.300066Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.309715Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.319548Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.328719Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.339150Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.349730Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.359450Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.371134Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.380572Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.391406Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.402305Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.414405Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.425184Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.436192Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.446643Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.456724Z DEBUG fips::node::dataplane::forwarding: Cached coords from SessionAck src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4
+2026-10-23T17:05:41.456739Z DEBUG fips::node::dataplane::forwarding: SessionDatagram TTL exhausted, dropping src=d9476313bf06ca9e8e418b235a4ed443 dest=f445dd789871aaa781b813fa930d4ed4 ttl=1
+2026-10-23T17:05:44.660293Z DEBUG fips::node::handlers::mmp: MMP link metrics peer=c rtt=10.6ms loss=0.0% jitter=0.5ms goodput=273B/s tx_pkts=1601 rx_pkts=1685

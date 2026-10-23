@@ -1,0 +1,108 @@
+{
+  "peers": [
+    {
+      "authenticated_at_ms": 1792774994066,
+      "connectivity": "connected",
+      "consecutive_decrypt_failures": 0,
+      "current_k_bit": true,
+      "direction": "outbound",
+      "display_name": "d",
+      "effective_depth": 2.661985,
+      "filter_sequence": 9,
+      "has_bloom_filter": true,
+      "has_tree_position": true,
+      "ipv6_addr": "fd6f:5606:2dd9:44fd:10bf:a0b5:67ed:14d0",
+      "is_child": false,
+      "is_parent": true,
+      "last_seen_ms": 1792775144666,
+      "link_id": 1,
+      "mmp": {
+        "delivery_ratio_forward": 1.0,
+        "delivery_ratio_reverse": 0.6666666666666666,
+        "etx": 1.5,
+        "goodput_bps": 1633.7897530161715,
+        "loss_rate": 0.0,
+        "lqi": 1.2980257184520396,
+        "mode": "full",
+        "smoothed_etx": 1.1715139292340542,
+        "smoothed_loss": 0.0,
+        "srtt_ms": 10.799
+      },
+      "node_addr": "6f56062dd944fd10bfa0b567ed14d019",
+      "noise": {
+        "highest_recv_counter": 0,
+        "send_counter": 337
+      },
+      "nostr_traversal": {
+        "consecutive_failures": 0,
+        "cooldown_until_ms": null,
+        "in_cooldown": false,
+        "last_observed_skew_ms": null
+      },
+      "npub": "npub1jn0upuachzdenczum9j8szhwre5k324cjlflpex7e5x0k0hed0hsayt7vu",
+      "our_session_index": "d0cf1d70",
+      "replay_suppressed": 0,
+      "stats": {
+        "bytes_recv": 230896,
+        "bytes_sent": 225966,
+        "packets_recv": 1383,
+        "packets_sent": 1355
+      },
+      "transport_addr": "10.99.4.2:2121",
+      "transport_type": "udp",
+      "tree_depth": 1
+    },
+    {
+      "authenticated_at_ms": 1792774994065,
+      "connectivity": "connected",
+      "consecutive_decrypt_failures": 0,
+      "current_k_bit": true,
+      "direction": "inbound",
+      "display_name": "f",
+      "effective_depth": 4.10825,
+      "filter_sequence": 9,
+      "has_bloom_filter": true,
+      "has_tree_position": true,
+      "ipv6_addr": "fd63:cf57:774d:3b67:15c1:c875:b421:59e0",
+      "is_child": true,
+      "is_parent": false,
+      "last_seen_ms": 1792775144990,
+      "link_id": 3,
+      "mmp": {
+        "delivery_ratio_forward": 1.0,
+        "delivery_ratio_reverse": 1.0,
+        "etx": 1.0,
+        "goodput_bps": 188.22745263522216,
+        "loss_rate": 0.0,
+        "lqi": 1.3436431426564674,
+        "mode": "full",
+        "smoothed_etx": 1.2124007603487188,
+        "smoothed_loss": 0.0,
+        "srtt_ms": 10.825
+      },
+      "node_addr": "63cf57774d3b6715c1c875b42159e0c9",
+      "noise": {
+        "highest_recv_counter": 0,
+        "send_counter": 85
+      },
+      "nostr_traversal": {
+        "consecutive_failures": 0,
+        "cooldown_until_ms": null,
+        "in_cooldown": false,
+        "last_observed_skew_ms": null
+      },
+      "npub": "npub12ragcgmx2mamaks3vxqyqx8dn0k88nyx7kdstuxgs2wa9ut6ns4qphuh9f",
+      "our_session_index": "aeafa5d4",
+      "replay_suppressed": 0,
+      "stats": {
+        "bytes_recv": 92410,
+        "bytes_sent": 97360,
+        "packets_recv": 675,
+        "packets_sent": 717
+      },
+      "transport_addr": "10.99.5.3:2121",
+      "transport_type": "udp",
+      "tree_depth": 3
+    }
+  ]
+}

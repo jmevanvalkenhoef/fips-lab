@@ -1,0 +1,19 @@
+{
+  "sessions": [
+    {
+      "display_name": "a",
+      "is_initiator": false,
+      "last_activity_ms": 1792775103070,
+      "npub": "npub1tz5xvp6shemd3s7k3s0f0c6useftlfcrf80r2su089mazk5h2wjqmr0khn",
+      "remote_addr": "f445dd789871aaa781b813fa930d4ed4",
+      "resend_count": 0,
+      "state": "awaiting_msg3",
+      "stats": {
+        "bytes_recv": 0,
+        "bytes_sent": 0,
+        "packets_recv": 0,
+        "packets_sent": 0
+      }
+    }
+  ]
+}

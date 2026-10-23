@@ -1,0 +1,89 @@
+{
+  "avg_age_ms": 147090,
+  "count": 6,
+  "default_ttl_ms": 300000,
+  "entries": [
+    {
+      "age_ms": 148740,
+      "coords": [
+        "f445dd789871aaa781b813fa930d4ed4",
+        "63cf57774d3b6715c1c875b42159e0c9",
+        "6303171b8215d0d7e06e7e818c9d167e",
+        "6f56062dd944fd10bfa0b567ed14d019",
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 4,
+      "display_name": "a",
+      "ipv6_addr": "fdf4:45dd:7898:71aa:a781:b813:fa93:d4e",
+      "last_used_ms": 1792775141125,
+      "node_addr": "f445dd789871aaa781b813fa930d4ed4"
+    },
+    {
+      "age_ms": 144902,
+      "coords": [
+        "63cf57774d3b6715c1c875b42159e0c9",
+        "f445dd789871aaa781b813fa930d4ed4",
+        "d9476313bf06ca9e8e418b235a4ed443",
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 3,
+      "display_name": "f",
+      "ipv6_addr": "fd63:cf57:774d:3b67:15c1:c875:b421:59e0",
+      "last_used_ms": 1792775093665,
+      "node_addr": "63cf57774d3b6715c1c875b42159e0c9",
+      "path_mtu": 1472
+    },
+    {
+      "age_ms": 148632,
+      "coords": [
+        "6f56062dd944fd10bfa0b567ed14d019",
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 1,
+      "display_name": "d",
+      "ipv6_addr": "fd6f:5606:2dd9:44fd:10bf:a0b5:67ed:14d0",
+      "last_used_ms": 1792775003781,
+      "node_addr": "6f56062dd944fd10bfa0b567ed14d019"
+    },
+    {
+      "age_ms": 148740,
+      "coords": [
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 0,
+      "display_name": "c",
+      "ipv6_addr": "fd50:a0a0:83f3:b880:31f2:41e3:6f31:4060",
+      "last_used_ms": 1792775001068,
+      "node_addr": "50a0a083f3b88031f241e36f314060ce"
+    },
+    {
+      "age_ms": 148632,
+      "coords": [
+        "d9476313bf06ca9e8e418b235a4ed443",
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 1,
+      "display_name": "b",
+      "ipv6_addr": "fdd9:4763:13bf:6ca:9e8e:418b:235a:4ed4",
+      "last_used_ms": 1792775141125,
+      "node_addr": "d9476313bf06ca9e8e418b235a4ed443"
+    },
+    {
+      "age_ms": 148508,
+      "coords": [
+        "6303171b8215d0d7e06e7e818c9d167e",
+        "6f56062dd944fd10bfa0b567ed14d019",
+        "50a0a083f3b88031f241e36f314060ce"
+      ],
+      "depth": 2,
+      "display_name": "e",
+      "ipv6_addr": "fd63:317:1b82:15d0:d7e0:6e7e:818c:9d16",
+      "last_used_ms": 1792775090475,
+      "node_addr": "6303171b8215d0d7e06e7e818c9d167e",
+      "path_mtu": 1472
+    }
+  ],
+  "expired": 0,
+  "fill_ratio": 0.00012,
+  "max_entries": 50000
+}

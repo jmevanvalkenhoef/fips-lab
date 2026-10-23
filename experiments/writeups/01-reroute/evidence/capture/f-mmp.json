@@ -1,0 +1,49 @@
+{
+  "peers": [
+    {
+      "display_name": "e",
+      "link_layer": {
+        "delivery_ratio_forward": 1.0,
+        "delivery_ratio_reverse": 1.0,
+        "ecn_ce_count": 0,
+        "etx": 1.0,
+        "goodput_bps": 247.59288075062705,
+        "goodput_trend": "falling",
+        "jitter_trend": "rising",
+        "loss_rate": 0.0,
+        "loss_trend": "stable",
+        "lqi": 1.2558806942734355,
+        "rtt_trend": "stable",
+        "smoothed_etx": 1.1317299218468375,
+        "smoothed_loss": 0.0,
+        "spin_bit_role": "responder",
+        "srtt_ms": 10.97
+      },
+      "mode": "full",
+      "peer": "6303171b8215d0d7e06e7e818c9d167e"
+    },
+    {
+      "display_name": "a",
+      "link_layer": {
+        "delivery_ratio_forward": 1.0,
+        "delivery_ratio_reverse": 1.0,
+        "ecn_ce_count": 0,
+        "etx": 1.0,
+        "goodput_bps": 188.63819015823896,
+        "goodput_trend": "falling",
+        "jitter_trend": "rising",
+        "loss_rate": 0.0,
+        "loss_trend": "stable",
+        "lqi": 1.4251029671417894,
+        "rtt_trend": "stable",
+        "smoothed_etx": 1.284802530780553,
+        "smoothed_loss": 0.0,
+        "spin_bit_role": "responder",
+        "srtt_ms": 10.92
+      },
+      "mode": "full",
+      "peer": "f445dd789871aaa781b813fa930d4ed4"
+    }
+  ],
+  "sessions": []
+}

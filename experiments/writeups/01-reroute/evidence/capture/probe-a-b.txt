@@ -1,0 +1,21 @@
+probe b
+  npub       npub1tz5xvp6shemd3s7k3s0f0c6useftlfcrf80r2su089mazk5h2wjqmr0khn
+  node_addr  d9476313bf06ca9e8e418b235a4ed443
+  ipv6       fdd9:4763:13bf:6ca:9e8e:418b:235a:4ed4
+
+  bloom       skipped   0.0s  coordinates already cached
+  discovery   skipped   0.0s  no lookup needed
+
+  session     skipped   5.4s  a session to this endpoint already existed
+
+path:
+  ours       depth 4    50a0a083 > 6f56062d > 6303171b > 63cf5777 > f445dd78 [self]
+  theirs     depth 1    50a0a083 > d9476313 [target]
+
+  route      f445dd78 [self] > 63cf5777 > 6303171b > 6f56062d > 50a0a083 > d9476313 [target]
+
+  walk       4 up, 1 down   tree distance 5 (upper bound; crosslinks may shorten it)
+  next hop   63cf5777 (f)   class tree up
+
+  cleanup    session left in place (preexisting)
+  overall    partial, 5377 ms   (stage timings quantized to the 1000 ms tick)
