@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Timer Through the Wall</title>
+  <meta name="description" content="Inferring a hidden five-minute timer inside FIPS from outside measurements alone, with a Bayesian model of every cut.">
+  <link rel="stylesheet" href="../01-reroute/style.css">
+  <link rel="stylesheet" href="extra.css">
+</head>
+<body>
+<button id="theme" type="button" aria-label="Toggle light or dark theme">theme</button>
+<main>
+  <div class="kicker">FIPS Lab · write-up 02</div>
+  <h1>A timer through the wall</h1>
+  <p class="lede">In <a href="../01-reroute/">write-up 01</a>, a cut in the first minutes after start-up could strand traffic until a five-minute timer inside FIPS ran out. I found that timer by reading the source. Could the measurements alone have found it, and how sure could they have been?</p>
+
+  <div class="tiles">
+    <div class="tile">
+      <div class="label">Window, inferred from outside</div>
+      <div class="value"><span data-fill="w-mean">–</span> s</div>
+      <div class="note">± <span data-fill="w-sd">–</span> s; the source says 300 s</div>
+    </div>
+    <div class="tile">
+      <div class="label">Chance a cut 90 s after start-up sticks</div>
+      <div class="value"><span data-fill="stuck-90">–</span></div>
+      <div class="note">90% interval <span data-fill="stuck-90-lo">–</span>–<span data-fill="stuck-90-hi">–</span></div>
+    </div>
+    <div class="tile">
+      <div class="label">Warm mesh, timeout 6 s</div>
+      <div class="value"><span data-fill="T6-q95">–</span> s</div>
+      <div class="note">95 in 100 cuts reroute within this</div>
+    </div>
+  </div>
+
+  <h2>One model for every cut</h2>
+  <p>The data are <span data-fill="n-total">–</span> of the cuts of a—b from write-up 01. For <span data-fill="n-fresh">–</span> of them I know how long after start-up the cut came; the other <span data-fill="n-warm">–</span> were in a mesh that had been running for an unknown time. The model tells one story for every cut and lets the data decide its numbers:</p>
+  <dl class="model">
+    <dt>It reroutes.</dt>
+    <dd>a reaches b again after the dead-link timeout plus a delay. Usually a short one (fast), sometimes tens of seconds (slow), with its own slow share inside the window and in a warm mesh.</dd>
+    <dt>Or it gets stuck,</dt>
+    <dd>but only if the cut comes before the window closes, <em>W</em> seconds after start-up. Inside the window, the chance of sticking may rise or fall with the time of the cut (a logistic curve).</dd>
+    <dt>And a stuck cut comes back when the window closes,</dt>
+    <dd>at <em>W</em> after start-up, give or take a few seconds, whenever the cut was.</dd>
+  </dl>
+  <p>The prior on <em>W</em> is flat from 0 to 20 minutes: nothing in the model knows about 300 s. A cut that hit the 45 s wait without rerouting is not thrown away or counted as 45 s. It is <em>censored</em>: the model only learns that it took at least that long, and weighs both ways that can happen (stuck, or very slow).</p>
+
+  <h2>Three kinds of evidence</h2>
+  <p>To see what each part of the data contributes, I fitted the model three times, each with more of it.</p>
+
+  <figure>
+    <h4>When does the window close?</h4>
+    <p class="sub">Posterior of <em>W</em>, each row scaled to its own peak.</p>
+    <div class="keys">
+      <span><i class="key-bar"></i>posterior</span>
+      <span><i class="key-source"></i>VERIFIED_TTL_MS in the FIPS source (300 s)</span>
+    </div>
+    <div class="chart" id="chart-window"></div>
+    <figcaption>4 chains × 1000 draws per fit; 94% highest-density intervals.</figcaption>
+  </figure>
+
+  <p><strong>Which cuts got stuck</strong> already bounds it. Cuts 91 s after start-up got stuck, so the window is still open at 91 s; none of the six at 311 s did, which is easy to explain with a window that has closed and hard with one still open, where the chance of sticking had been rising. That leaves <span data-fill="where-lo">–</span> to <span data-fill="where-hi">–</span> s.</p>
+  <p><strong>How long they lasted</strong> moves the lower end. A cut stuck at 91 s was still stuck at the end of the 45 s wait, so the window cannot close before about 137 s: <span data-fill="how-long-lo">–</span> to <span data-fill="how-long-hi">–</span> s. Censored data is not missing data.</p>
+  <p><strong>When the four left-alone cuts came back</strong> pins it: <span data-fill="w-mean">–</span> ± <span data-fill="w-sd">–</span> s. Four observations do this because they agree: they returned within a few seconds of each other (spread <span data-fill="back-sd">–</span> s) after cuts at the same time, and the model has a single number to explain them with. The source says 300 s, counted from each node's own lookup in the first seconds after start-up; at this precision the two cannot be told apart.</p>
+
+  <h2>When is a cut risky?</h2>
+  <figure>
+    <h4>Chance that a cut gets stuck</h4>
+    <p class="sub">By how long after start-up the cut comes; dead timeout 6 s.</p>
+    <div class="keys">
+      <span><i class="key-solid"></i>posterior median</span>
+      <span><i class="key-band"></i>50% and 90% intervals</span>
+      <span><i class="key-obs"></i>observed (stuck / cuts)</span>
+    </div>
+    <div class="chart" id="chart-stuck"></div>
+    <figcaption>The curve stops at <em>W</em>. Between 91 s and 300 s it is the model's guess, not a measurement.</figcaption>
+  </figure>
+  <p>A cut 16 s after start-up sticks with a chance of about <span data-fill="stuck-16">–</span> (<span data-fill="stuck-16-lo">–</span>–<span data-fill="stuck-16-hi">–</span>), one at 90 s about <span data-fill="stuck-90">–</span> (<span data-fill="stuck-90-lo">–</span>–<span data-fill="stuck-90-hi">–</span>). Write-up 01 has a reason for the rise: by 90 s the sessions from the start-up check have been dropped, and a new handshake has to cross the loop.</p>
+  <p>The wide band between 91 s and 300 s is honest: no cut was made there. The curve keeps rising only because a logistic curve has to go somewhere, and the data leave it free. The edge at <em>W</em> comes from the four recoveries, not from cuts near 300 s. That gap is where a next run would go: a handful of cuts at 200 s and 280 s would turn the guess into a measurement.</p>
+
+  <h2>What an operator gets out of it</h2>
+  <p>A posterior is not just a number with error bars: it can be run forward. For a cut at any moment after start-up, simulating the model's draws gives the whole distribution of how long a is cut off from b, with the uncertainty about every parameter folded in.</p>
+  <figure>
+    <h4>How long a is cut off from b</h4>
+    <p class="sub">Posterior predictive, by how long after start-up the cut comes; dead timeout 6 s.</p>
+    <div class="keys">
+      <span><i class="key-solid"></i>half of cuts back within</span>
+      <span><i class="key-dash"></i>9 in 10</span>
+      <span><i class="key-dot2"></i>99 in 100</span>
+    </div>
+    <div class="chart" id="chart-outage"></div>
+    <figcaption>Logarithmic axis. 4000 posterior draws, ten simulated cuts per draw and moment.</figcaption>
+  </figure>
+  <p>Inside the window the outage is set by the clock, not by the timeout. A cut that sticks waits for the window to close, so the cost of sticking shrinks as the window runs down: a cut at 290 s is the most likely to stick, and loses about ten seconds when it does. The expensive cuts come early. At 90 s, half of all cuts are back only after <span data-fill="out-90-q50">–</span> s and the average outage is <span data-fill="out-90-mean">–</span> s. At 16 s, half are back within <span data-fill="out-16-q50">–</span> s, but 1 in 10 waits <span data-fill="out-16-q90">–</span> s. Past the window, a cut costs the timeout and a second or two: 9 in 10 back within <span data-fill="out-310-q90">–</span> s.</p>
+  <p>In a warm mesh the same model gives the plain answer write-up 01 started with. With the 6 s timeout, half of cuts reroute within <span data-fill="T6-q50">–</span> s and 95 in 100 within <span data-fill="T6-q95">–</span> s; with the default 30 s, <span data-fill="T30-q50">–</span> and <span data-fill="T30-q95">–</span> s. The delay after the timeout is usually short (median <span data-fill="fast-median">–</span> s). Slow reroutes, a median of <span data-fill="slow-median">–</span> s late, happen in <span data-fill="slow-win">–</span> (<span data-fill="slow-win-lo">–</span>–<span data-fill="slow-win-hi">–</span>) of rerouted cuts inside the window and <span data-fill="slow-warm">–</span> (at most <span data-fill="slow-warm-hi">–</span>) in a warm mesh. The model will also quote a 99th percentile, <span data-fill="T6-q99">–</span> s at the 6 s timeout, but that tail rests on four slow reroutes in 72 warm cuts; I would not plan around it.</p>
+
+  <h2>How much to trust it</h2>
+  <p>The sampler is happy: no fit has an <em>R̂</em> above <span data-fill="rhat">–</span>, the smallest effective sample size is <span data-fill="ess">–</span>, and <span data-fill="div">–</span> of 12 000 draws diverged. That took two fixes, both worth knowing about. The spread of the return around <em>W</em> needed a floor of one second (the reachability wait's probe interval): without it, fits that see no return push the spread to zero and the sampler falls off the censoring cliffs. And the delay mixture has a second, worse mode, one wide component with the other squeezed against it, about 10 log units below the main one; one chain in four started at random stayed there for the whole run. The chains now start from the data's own median delay, and all four agree.</p>
+  <p>The observed counts sit inside the model's 90% intervals (the table under the second chart), the 91 s group at the top edge. That says the model fits; what it can't say is what it doesn't contain:</p>
+  <ul>
+    <li><strong>One mesh, one link.</strong> Six nodes in a ring, always the a—b link. <em>W</em> is a property of FIPS and should carry over; the chance of sticking depends on which node ends up holding a stale entry, and will not.</li>
+    <li><strong>The shape of the risk curve is assumed.</strong> Logistic in time, measured at two points inside the window.</li>
+    <li><strong>The slow reroutes are described, not explained.</strong> They cluster at 16 s, and the model's single in-window slow share smears them over the whole window.</li>
+    <li><strong>Warm cuts have no clock.</strong> Their time after start-up is unknown, so they teach the model about delays and nothing about the window.</li>
+  </ul>
+  <p>Still: from 30 cuts and a stopwatch, the model finds a timer it was never told about, to within a few seconds of the value in the source, and says how far to trust each part of the answer. That is the case for doing this the Bayesian way. The same machinery could now decide which experiment to run next, by choosing the cut times that would narrow the band the most.</p>
+
+  <h2>Reproduce it</h2>
+  <pre><code>python3 experiments/analyze.py          # write-up 01's data.json, the input
+uv run experiments/bayes/fit.py         # PyMC; pinned dependencies in the script header</code></pre>
+  <p class="dim">The model is in <code>experiments/bayes/fit.py</code>. The fit takes a few minutes, most of it compiling.</p>
+</main>
+<script src="../../../web/vendor/d3.min.js"></script>
+<script src="charts.js"></script>
+</body>
+</html>

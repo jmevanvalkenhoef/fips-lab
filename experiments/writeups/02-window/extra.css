@@ -1,0 +1,22 @@
+/* Write-up 02: additions to 01's stylesheet. Same validated series colour;
+   bands are that colour at low opacity, lines and labels in text tokens. */
+
+.density { fill: var(--series); fill-opacity: 0.85; }
+.axis-base { stroke: var(--axis); stroke-width: 1; }
+.ref.source { stroke: var(--text); stroke-width: 1.5; stroke-dasharray: 4 4; }
+.band.outer { fill: var(--series); fill-opacity: 0.16; }
+.band.inner { fill: var(--series); fill-opacity: 0.3; }
+.line { fill: none; stroke: var(--series); stroke-width: 2; stroke-linejoin: round; }
+.line.q90 { stroke-dasharray: 6 4; }
+.line.q99 { stroke-dasharray: 2 4; }
+.obs { fill: var(--surface); stroke: var(--text); stroke-width: 2; }
+.key-band { width: 16px; height: 10px; border-radius: 2px; background: var(--series); opacity: 0.35; }
+.key-source { width: 16px; height: 0; border-top: 1.5px dashed var(--text); }
+.key-obs { width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--text); }
+.key-dash { width: 16px; height: 0; border-top: 2px dashed var(--series); }
+.key-dot2 { width: 16px; height: 0; border-top: 2px dotted var(--series); }
+.key-solid { width: 16px; height: 0; border-top: 2px solid var(--series); }
+dl.model { margin: 16px 0; }
+dl.model dt { font-weight: 600; margin-top: 10px; }
+dl.model dd { margin: 2px 0 0 0; color: var(--text-2); }
+.nodata { fill: var(--grid); fill-opacity: 0.45; }

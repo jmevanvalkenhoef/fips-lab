@@ -15,7 +15,7 @@ The missing layer on top of FIPS's own `testing/` harness: live visualization, p
 
 ## Later: Bayesian layer (parked 2026-10-22)
 
-Not started; pick up after milestones 4–5. Together they turn "I built a testbed" into "I built a testbed and used rigorous statistics to tune a real protocol".
+Item 1 done differently (2026-10-23): write-up 02 infers the verification window from the outside (censored mixture model, PyMC) instead of a timeout regression. Possible next step: use the posterior to pick the next cut times (the 91–300 s gap), a short run. Together they turn "I built a testbed" into "I built a testbed and used rigorous statistics to tune a real protocol".
 
 1. **Bayesian analysis of recovery time** (fits milestone 5). Model recovery = dead timeout + reroute delay, fit with MCMC (PyMC or NumPyro) over a sweep of `link_dead_timeout_secs`, topologies and loss levels; topology as a group-level effect (hierarchical). Output claims like "with timeout 6 s, 95 % of recoveries finish within X s". Visual: posterior / predictive ridgelines or violins that sharpen as runs come in.
 2. **Bayesian optimisation of FIPS settings** (needs milestone 4: scriptable fault injection). Black-box search over heartbeat interval, dead timeout, tree hysteresis, trading off recovery time, heartbeat overhead and false "dead" verdicts on lossy links. GP surrogate picks the next experiment. Visual: GP mean/uncertainty surface updating live with the next point highlighted.
