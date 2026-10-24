@@ -1,6 +1,6 @@
 {
  "image": "fips-lab-node:v0.5.3",
- "git": "d0efc0c-dirty",
+ "git": "f757550-dirty",
  "topology": "ring6 (6 nodes in a ring, 5 ms \u00b1 1 ms per link)",
  "cut": "a\u2014b",
  "sources": [

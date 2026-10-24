@@ -1,5 +1,5 @@
 {
- "commit": "d0efc0c",
+ "commit": "f757550",
  "note": "Predictions of the when-back fit committed before the window-probe run; see experiments/bayes/fit.py.",
  "stuck": [
   {

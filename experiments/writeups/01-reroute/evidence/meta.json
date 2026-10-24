@@ -51,7 +51,7 @@
     }
   },
   "image": "fips-lab-node:v0.5.3",
-  "git": "92e7e05-dirty",
+  "git": "2aedc2e-dirty",
   "repeat": 4,
   "settle_s": 90,
   "fresh": true,
