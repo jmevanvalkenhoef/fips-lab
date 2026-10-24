@@ -10,7 +10,7 @@
 .line.q90 { stroke-dasharray: 6 4; }
 .line.q99 { stroke-dasharray: 2 4; }
 .obs { fill: var(--surface); stroke: var(--text); stroke-width: 2; }
-.key-band { width: 16px; height: 10px; border-radius: 2px; background: var(--series); opacity: 0.35; }
+.key-band { width: 16px; height: 10px; border-radius: 0; background: var(--series); opacity: 0.35; }
 .key-source { width: 16px; height: 0; border-top: 1.5px dashed var(--text); }
 .key-obs { width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--text); }
 .key-dash { width: 16px; height: 0; border-top: 2px dashed var(--series); }
