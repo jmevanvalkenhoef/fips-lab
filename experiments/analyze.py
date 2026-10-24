@@ -195,7 +195,7 @@ def main():
         "image": image,
         "git": git,
         "topology": "ring6 (6 nodes in a ring, 5 ms ± 1 ms per link)",
-        "cut": "a—b",
+        "cut": "a–b",
         "sources": sources,
         "sweep": sweep,
         "stuck": stuck,

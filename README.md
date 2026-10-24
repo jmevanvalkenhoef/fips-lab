@@ -58,7 +58,7 @@ Options: `--repeat N`, `--settle S` (quiet seconds before each repetition), `--f
 
 ## Write-ups
 
-**[01 · Thirty seconds of silence](experiments/writeups/01-reroute/)**: how fast a FIPS mesh routes around a cut link. Short answer: the dead-link timeout plus about a second. The longer answer found two things worth taking upstream:
+**[01 · Thirty seconds of silence](experiments/writeups/01-reroute/)**: how fast a FIPS mesh routes around a cut link. Usually it takes the dead-link timeout plus about a second. The experiments also found two problems worth reporting upstream:
 
 - In the first five minutes after nodes look each other up, a cut can strand traffic in a forwarding loop. A transit node keeps a destination's *verified* coordinates for 300 s and refuses the corrections in passing packets (an anti-poisoning rule), so replies bounce between two nodes until their hop limit runs out.
 - A healed link is not used until the next scheduled reconnect attempt, and those back off exponentially: up to 76 s of a working link sitting idle in these runs.

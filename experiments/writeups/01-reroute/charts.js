@@ -100,7 +100,7 @@ function sweepChart(el, sweep) {
       .attr("y1", m.top - 6).attr("y2", m.top - 6).style("stroke", "var(--grid)");
     svg.append("g").selectAll("g").data(stuck).join((enter) => point(enter, "dot stuck", () => top))
       .on("pointermove", (event, r) => tip.show(event, [
-        [`> ${fmt(r.reroute_s, 0)} s — stuck`],
+        [`> ${fmt(r.reroute_s, 0)} s, stuck`],
         [`timeout ${r.dead_timeout_s} s · declared dead after ${fmt(r.dead_s, 0)} s`],
         [`repetition ${r.rep}`, "muted"],
       ]))
@@ -183,7 +183,7 @@ function conditionChart(el, stuck) {
       return p;
     })
       .on("pointermove", (event, r) => tip.show(event, [
-        [r.censored ? `> ${fmt(r.reroute_s, 0)} s — stuck` : `${fmt(r.reroute_s)} s to reroute`],
+        [r.censored ? `> ${fmt(r.reroute_s, 0)} s, stuck` : `${fmt(r.reroute_s)} s to reroute`],
         [`${d.label}, ${d.sub} · declared dead after ${fmt(r.dead_s, 0)} s`],
         [`${r.identities} identities · repetition ${r.rep}`, "muted"],
       ]))

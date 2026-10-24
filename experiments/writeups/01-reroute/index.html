@@ -12,7 +12,7 @@
 <main>
   <div class="kicker">FIPS Lab · write-up 01</div>
   <h1>Thirty seconds of silence</h1>
-  <p class="lede">When a link in a FIPS mesh breaks, how long until traffic flows the other way round? I cut the same link <span data-fill="sweep-n">–</span> times under <span data-fill="sweep-settings">–</span> settings to find out, and ran into something stranger on the way.</p>
+  <p class="lede">This write-up measures how long it takes, after a link in a FIPS mesh breaks, before traffic flows the other way round. I cut the same link <span data-fill="sweep-n">–</span> times under <span data-fill="sweep-settings">–</span> settings. Along the way, some cuts got stuck for minutes.</p>
 
   <div class="tiles">
     <div class="tile">
@@ -28,12 +28,12 @@
     <div class="tile">
       <div class="label">Relink after a heal</div>
       <div class="value">up to <span data-fill="relink-max">–</span> s</div>
-      <div class="note">waiting for the next retry, not for the link</div>
+      <div class="note">the wait for the next reconnect attempt</div>
     </div>
   </div>
 
   <h2>Recovery is the dead-link timer</h2>
-  <p>FIPS notices a dead link by its silence: peers exchange heartbeats, and a link that has been quiet for <code>link_dead_timeout_secs</code> is declared dead. Only then does the node pick a new tree parent and send traffic the other way. Until that moment the node keeps forwarding into the broken link.</p>
+  <p>FIPS detects a dead link through missing heartbeats. Peers exchange heartbeats, and a link that has been quiet for <code>link_dead_timeout_secs</code> is declared dead. Only then does the node pick a new tree parent and send traffic the other way. Until that moment the node keeps forwarding into the broken link.</p>
 
   <figure>
     <h4>Time from cut until a reaches b again</h4>
@@ -44,14 +44,14 @@
       <span><i class="key-line"></i>y = timeout</span>
     </div>
     <div class="chart" id="chart-sweep"></div>
-    <figcaption>ring6, cut a—b, 6 repetitions per setting.</figcaption>
+    <figcaption>ring6, cut a–b, 6 repetitions per setting.</figcaption>
   </figure>
 
-  <p>The dots sit on a line parallel to the diagonal: rerouting takes the timeout plus a median of <span data-fill="over-median">–</span> s. That extra is the time between the last heartbeat that got through and the cut, plus the reroute itself (a new parent, a tree announcement, a fresh path). Detection is almost the whole story: at the default 30 s, a link failure means half a minute in which a sends traffic into nothing.</p>
-  <p>The tuning knob is obvious, and so is its price. Faster detection means more frequent heartbeats on every link, all the time, and a shorter silence before a merely congested or lossy link gets thrown away. This experiment only measures the benefit side; the cost side (heartbeat overhead and false "dead" verdicts on lossy links) is the next experiment.</p>
-  <div class="callout">One dot per setting doesn't fit the pattern: in four of the five runs, the very first cut took 8–12 s longer than the rest. That turned out to be the interesting part.</div>
+  <p>The dots sit on a line parallel to the diagonal: rerouting takes the timeout plus a median of <span data-fill="over-median">–</span> s. That extra is the time between the last heartbeat that got through and the cut, plus the time the reroute itself takes (choosing a new parent and announcing it). So detection accounts for almost all of the delay. With the default timeout of 30 s, a link failure means that for half a minute a sends traffic into a dead link.</p>
+  <p>A shorter timeout makes rerouting faster, at a cost. It needs more frequent heartbeats on every link, and a congested or lossy link is then declared dead sooner. This experiment only measures the benefit side; the cost side (heartbeat overhead and false "dead" verdicts on lossy links) is the next experiment.</p>
+  <div class="callout">One dot per setting doesn't fit the pattern: in four of the five runs, the very first cut took 8 to 12 s longer than the rest. The rest of this write-up is about why.</div>
 
-  <h2>The cut that wouldn't heal</h2>
+  <h2>Cuts that did not recover</h2>
   <p>Early in this project, with fast timeouts (heartbeat 2 s, dead after 6 s), two cuts in a row left a unable to reach b for over 90 s, although FIPS had declared the link dead after 7 s and a had already moved to its new parent. Then it stopped happening: <span data-fill="warm-k">–</span> of <span data-fill="warm-n">–</span> cuts later in the same runs got stuck. What the slow and stuck cuts had in common was timing. Each was the first cut after the mesh had started. So I restarted the whole mesh before every cut, and varied how long it ran before the cut.</p>
 
   <figure>
@@ -65,14 +65,14 @@
     <figcaption>"Warm mesh" pools both identity sets (ring6 and ring6-fast), cuts two onwards. "Fresh start": new containers before each cut, then the lab's convergence check (every node pings every other), then the wait shown.</figcaption>
   </figure>
 
-  <p>In a warm mesh the reroute follows the dead-link timer and nothing else. After a fresh start it falls apart: 15 s after start-up, four cuts in ten take 17–41 s and one doesn't recover; 90 s after start-up, <span data-fill="fresh-90-k">–</span> of <span data-fill="fresh-90-n">–</span> don't recover at all. Waiting longer made it worse, which rules out a mesh that is still settling. Something set up at start-up is still around, and gets in the way.</p>
+  <p>In a warm mesh the reroute follows the dead-link timer and nothing else. After a fresh start that no longer holds. 15 s after start-up, four cuts in ten take 17 to 41 s and one doesn't recover; 90 s after start-up, <span data-fill="fresh-90-k">–</span> of <span data-fill="fresh-90-n">–</span> don't recover at all. Waiting longer made it worse, so the mesh is not simply still settling. Some state created at start-up is still present and interferes with the reroute.</p>
 
-  <h3>The reply that goes in circles</h3>
-  <p>FIPS's logs at debug level show what a is doing. Sessions with no application data are dropped after 90 s, so by the time of a late cut, a has to set up a new end-to-end session to b. Its first handshake message makes it round the ring to b, and b answers. The answer never arrives. On its way back to a, it bounces between d and e until its hop limit runs out, every resend, for as long as the scenario waited.</p>
+  <h3>Where the reply goes</h3>
+  <p>FIPS's logs at debug level show what a is doing. Sessions with no application data are dropped after 90 s, so by the time of a late cut, a has to set up a new end-to-end session to b. Its first handshake message makes it round the ring to b, and b answers, but the answer never reaches a. On its way back, it bounces between d and e until its hop limit runs out, every resend, for as long as the scenario waited.</p>
 
   <figure>
     <h4>Where b's answer goes</h4>
-    <p class="sub">The ring after cutting a—b. Each node forwards a packet for a towards where its own cache says a is.</p>
+    <p class="sub">The ring after cutting a–b. Each node forwards a packet for a towards where its own cache says a is.</p>
     <svg class="diagram" viewBox="0 0 680 330" role="img" aria-label="Ring of six nodes. Link a to b is cut. b's reply travels to c and d; d sends it down to e, e sends it back up to d, in a loop.">
       <defs>
         <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -111,16 +111,16 @@
   </figure>
 
   <p>e is the only node with a wrong idea of where a is: <code>a › b › c</code>, a's position before the cut. Every packet for a that passes e carries a's new coordinates, and e refuses every one of them (its <code>coord_hint_rejected</code> counter stood at 589).</p>
-  <p>The refusal is deliberate. Coordinates in a passing packet are a claim anyone can make, and a node that believed them blindly could be tricked into routing a destination's traffic anywhere. So FIPS ranks sources: when a node looks a destination up itself and verifies the answer's proof, that entry is <em>verified</em>, and for <code>VERIFIED_TTL_MS</code>, five minutes, it outranks anything passing traffic says. e had looked a up during the lab's convergence check, when a still hung off b. For five minutes after that, e would hold on to <code>a › b › c</code> whatever a did, and nothing in the forwarding path makes e look again.</p>
-  <p>That fits everything above. A warm mesh is past every start-up lookup's five minutes, so hints flow and caches follow the tree. After a fresh start, every node has just verified every other, so the first cut that moves a node in the tree leaves verified, stale entries along the new path. Whether that strands the reply depends on which node holds one. And the 90 s case is worse than the 15 s case because by then the sessions from the check have been dropped, and a new handshake has to cross the loop.</p>
+  <p>e refuses them on purpose. Coordinates in a passing packet are a claim anyone can make, and a node that believed them blindly could be tricked into routing a destination's traffic anywhere. So FIPS ranks sources: when a node looks a destination up itself and verifies the answer's proof, that entry is <em>verified</em>, and for <code>VERIFIED_TTL_MS</code>, five minutes, it outranks anything passing traffic says. e had looked a up during the lab's convergence check, when a still hung off b. For five minutes after that, e would hold on to <code>a › b › c</code> whatever a did, and nothing in the forwarding path makes e look again.</p>
+  <p>This explains the earlier results. A warm mesh is past every start-up lookup's five minutes, so hints flow and caches follow the tree. After a fresh start, every node has just verified every other, so the first cut that moves a node in the tree leaves verified, stale entries along the new path. Whether that strands the reply depends on which node holds one. And the 90 s case is worse than the 15 s case because by then the sessions from the check have been dropped, and a new handshake has to cross the loop.</p>
   <h3>Testing the five minutes</h3>
-  <p>If that is the whole story, it makes two predictions. A cut more than five minutes after start-up should behave like one in a warm mesh. And a stuck cut, left alone, should recover by itself once e's entry expires, about 300 s after the check, whenever the cut was.</p>
-  <p>Both held. Cut 310 s after a fresh start, <span data-fill="fresh-310-k">–</span> of <span data-fill="fresh-310-n">–</span> got stuck, and they rerouted in a median of <span data-fill="fresh-310-median">–</span> s, as in a warm mesh (the bottom row of the chart above). Then I cut 90 s after start-up again and waited up to 330 s instead of 45. <span data-fill="unlock-n">–</span> of <span data-fill="unlock-n">–</span> cuts got stuck, and every one came back on its own between <span data-fill="unlock-min">–</span> and <span data-fill="unlock-max">–</span> s after start-up, not after the cut: just after the five-minute mark.</p>
+  <p>If this explanation is right, it makes two predictions. A cut more than five minutes after start-up should behave like one in a warm mesh. And a stuck cut, left alone, should recover by itself once e's entry expires, about 300 s after the check, whenever the cut was.</p>
+  <p>Both predictions held. Cut 310 s after a fresh start, <span data-fill="fresh-310-k">–</span> of <span data-fill="fresh-310-n">–</span> got stuck, and they rerouted in a median of <span data-fill="fresh-310-median">–</span> s, as in a warm mesh (the bottom row of the chart above). Then I cut 90 s after start-up again and waited up to 330 s instead of 45. <span data-fill="unlock-n">–</span> of <span data-fill="unlock-n">–</span> cuts got stuck, and every one came back on its own between <span data-fill="unlock-min">–</span> and <span data-fill="unlock-max">–</span> s after start-up, whenever the cut was made. That is just after the five-minute mark.</p>
   <div class="callout"><p>The same thing can happen without a cut. Twice, right after the last heal of a run moved the tree back, a few pairs involving f stayed unreachable for the full 90 s of the next convergence check, on a mesh a few minutes old. Healing a link moves coordinates just as cutting one does.</p></div>
-  <p>A five-minute window in which one link change can strand traffic is a long time for a mesh meant to heal itself. The anti-poisoning rule is sound, so the fix is probably not to drop it but to let a verified entry be questioned: look the destination up again when a node keeps rejecting hints for it, or when a packet for it runs out of hops. That is the first thing I'll take upstream, with <a href="evidence/">the logs and captures</a> from a stuck cut.</p>
+  <p>A five-minute window in which one link change can strand traffic is a long time for a mesh meant to heal itself. The anti-poisoning rule is sound, so a fix should probably keep it and allow a verified entry to be questioned: look the destination up again when a node keeps rejecting hints for it, or when a packet for it runs out of hops. That is the first thing I'll take upstream, with <a href="evidence/">the logs and captures</a> from a stuck cut.</p>
 
-  <h2>Coming back</h2>
-  <p>Healing the link usually brings it back within a few seconds (median <span data-fill="relink-median">–</span> s), but not because FIPS notices the cable is back. It doesn't look. Once a link is declared dead, the node schedules reconnect attempts: the first <code>retry.base_interval_secs</code> (5 s) after the verdict, each next one twice as far out, at 5, 15, 35, 75 and 155 s. A link that heals between attempts sits there, working and unused, until the next one.</p>
+  <h2>Reconnecting after a heal</h2>
+  <p>Healing the link usually brings it back within a few seconds (median <span data-fill="relink-median">–</span> s), although FIPS does not watch for the link to return. Once a link is declared dead, the node schedules reconnect attempts: the first <code>retry.base_interval_secs</code> (5 s) after the verdict, each next one twice as far out, at 5, 15, 35, 75 and 155 s. A link that heals between attempts stays unused until the next attempt, even though it works.</p>
 
   <figure>
     <h4>When a healed link comes back</h4>
@@ -130,13 +130,13 @@
   </figure>
 
   <p>Every one of the <span data-fill="relink-n">–</span> heals lands on a step. <span data-fill="relink-first">–</span> came before the first attempt and waited for it, a handful just missed it and waited for the second, and the two long cuts from the first runs of this project, healed 83 s after the verdict, missed the fourth attempt by 8 s and waited <span data-fill="relink-max">–</span> s for the fifth, 155 s after it.</p>
-  <p>That is the cost of the doubling: after an outage of a few minutes, a repaired link can sit idle for about as long again. In these runs the schedule shows no ceiling up to 80 s between attempts. A link that announces itself when it comes back, or a cap on the backoff, would turn that wait into seconds; that is worth taking upstream.</p>
+  <p>Because the interval doubles, after an outage of a few minutes a repaired link can sit idle for about as long again. In these runs the schedule shows no ceiling up to 80 s between attempts. A link that announces itself when it comes back, or a cap on the backoff, would turn that wait into seconds; that is worth taking upstream.</p>
 
   <h2>Setup</h2>
   <p><a href="https://github.com/jmcorgan/fips">FIPS</a> is a self-organizing mesh network whose nodes are identified by Nostr keypairs. Nodes build a spanning tree, find each other through bloom-filter announcements and discovery requests, and route along tree coordinates, with no central authority.</p>
-  <p>FIPS Lab runs FIPS nodes in Docker containers, one container per node and one Docker network per link, so a single link can be impaired or cut without touching the others. Here the mesh is a ring of six nodes, every link 5 ms ± 1 ms. Every pair of nodes has exactly two paths, so when link a—b is cut, traffic from a to b has to go the long way: a → f → e → d → c → b.</p>
+  <p>FIPS Lab runs FIPS nodes in Docker containers, one container per node and one Docker network per link, so a single link can be impaired or cut without touching the others. Here the mesh is a ring of six nodes, every link 5 ms ± 1 ms. Every pair of nodes has exactly two paths, so when link a–b is cut, traffic from a to b has to go the long way: a → f → e → d → c → b.</p>
   <ul>
-    <li><strong>Fault:</strong> both ends of a—b are taken down (<code>ip link set down</code>), like a pulled cable.</li>
+    <li><strong>Fault:</strong> both ends of a–b are taken down (<code>ip link set down</code>), like a pulled cable.</li>
     <li><strong>Reroute time:</strong> from the cut until <code>ping b.fips</code> on a gets a reply, probing every ~0.25 s.</li>
     <li><strong>Declared dead:</strong> from the cut until a and b stop listing each other as peers, read from the control sockets once a second.</li>
     <li><strong>Settings:</strong> <code>link_dead_timeout_secs</code> with the heartbeat at a third of it, the ratio of the defaults (10 s / 30 s). Every setting runs on the same node identities, so the spanning tree is the same in every run.</li>
