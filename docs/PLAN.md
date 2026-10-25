@@ -6,6 +6,9 @@ The missing layer on top of FIPS's own `testing/` harness: live visualization, p
 
 ## Milestones
 
+Status (2026-10-25): 1 to 5 are done, with two write-ups. Of 6, the portfolio
+site is done; the demo video, the upstream issue and the physical device are not.
+
 1. **Spike** — build FIPS (v0.5.2) in Docker, 3 nodes pinging over the mesh, read their control sockets. Answers the open questions below.
 2. **Testbed** — topology file → N nodes (chain, ring, random), tc/netem per link.
 3. **Collector + live visualization v1** — control sockets → WebSocket → browser graph.

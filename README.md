@@ -4,7 +4,7 @@ A visual chaos lab for [FIPS](https://github.com/jmcorgan/fips), the self-organi
 
 Spin up a mesh of FIPS nodes in Docker, break it (cut links, kill nodes, partition the network, degrade links), and watch it heal live in the browser. Every experiment is measured and reproducible.
 
-> Status: early development. First experiment write-up: [Thirty seconds of silence](experiments/writeups/01-reroute/).
+> Status: the lab, the live view and two experiment write-ups are done; see [Write-ups](#write-ups).
 
 ## Quickstart
 
@@ -79,6 +79,13 @@ scenarios/    Scripted fault-injection scenarios
 experiments/  Measurements, notebooks, write-ups
 docs/         Plan and design notes
 ```
+
+## How it was built
+
+With Claude Code as a pair programmer. The questions, the design decisions and
+the review of every change are mine; commits it helped with carry a
+`Co-Authored-By` line. [docs/PLAN.md](docs/PLAN.md) is the lab notebook: the
+plan, the findings per milestone and the decisions, in the order they came.
 
 ## License
 

@@ -145,7 +145,7 @@
   <p class="dim">FIPS <span data-fill="image">–</span>, lab commit <span data-fill="git">–</span>.</p>
 
   <h2>Reproduce it</h2>
-<pre><code>git clone &lt;this repo&gt; &amp;&amp; cd fips-lab
+<pre><code>git clone https://github.com/jmevanvalkenhoef/fips-lab.git &amp;&amp; cd fips-lab
 docker build -t fips-lab-node:v0.5.3 docker/
 ./experiments/sweep-dead-timeout.sh     # the timeout sweep
 ./experiments/stuck-reroute.sh          # warm mesh, fast timeouts
